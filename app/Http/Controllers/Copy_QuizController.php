@@ -18,6 +18,7 @@ class Copy_QuizController extends Controller
       $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
+      return $questions;
       // return response()->json(Auth::user());
     }
 
@@ -103,6 +104,8 @@ class Copy_QuizController extends Controller
       // dd($user);
       $question = new Questions;
       $question->question = $request->input('question');
+      $question->category = $request->input('category');
+      echo($question);
       // $question->save();
       $options = $request->input('options');
       foreach ($options as $option) {
@@ -110,6 +113,7 @@ class Copy_QuizController extends Controller
         $new_option->option = $option;
         $new_option->questions_id = $question->id;
         // $new_option->save();
+        echo($new_option->option);
       }
       // add correct answer
       $answer = new Answers;

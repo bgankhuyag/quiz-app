@@ -28,8 +28,8 @@ Route::post('/add_categories', [Copy_QuizController::class, 'addCategories'])->n
 Route::post('/remove_category', [Copy_QuizController::class, 'removeCategory'])->name('removeCategory');
 
 Route::post('/check', [Copy_QuizController::class, 'check'])->name('check');
-Route::post('/remove_question', [Copy_QuizController::class, 'removeQuestion'])->name('removeQuestion');
 Route::post('/add_question', [Copy_QuizController::class, 'addQuestion'])->name('addQuestion');
+Route::post('/remove_question', [Copy_QuizController::class, 'removeQuestion'])->name('removeQuestion');
 Route::post('/add_options', [Copy_QuizController::class, 'addOptions'])->name('addOptions');
 Route::post('/remove_option', [Copy_QuizController::class, 'removeOption'])->name('removeOption');
 
