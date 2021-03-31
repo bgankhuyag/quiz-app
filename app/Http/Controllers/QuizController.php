@@ -16,7 +16,7 @@ class QuizController extends Controller
     public function getQuiz() {
       $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question']);
       $result  = ['data' => $questions,'succces' => true];
-      return $questions;
+      return response()->json($questions);
       // return response()->json(Auth::user());
     }
 

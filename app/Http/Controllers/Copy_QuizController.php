@@ -17,7 +17,7 @@ class Copy_QuizController extends Controller
     public function getQuiz() {
       $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question']);
       $result  = ['data' => $questions,'succces' => true];
-      return $questions;
+      return response()->json($questions);
       // return response()->json(Auth::user());
     }
 
@@ -58,7 +58,7 @@ class Copy_QuizController extends Controller
         }
         array_push($checked, (object)["question_id" => $question->question, "correct" => $correct]);
       }
-      return $checked;
+      return response()->json($checked);
     }
 
     public function removeQuestion(Request $request) {
