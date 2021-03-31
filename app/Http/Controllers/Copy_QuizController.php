@@ -27,21 +27,38 @@ class Copy_QuizController extends Controller
       return $categories;
     }
 
+    public function addCategories(Request $request) {
+      $categories = $request->input('categories');
+      foreach ($categories as $category) {
+        $new_category = new Categories;
+        $new_category->category = $category;
+        // $new_category->save();
+        echo ($category);
+      }
+    }
+
+    public function removeCategory(Request $request) {
+      $category_id = $request->input("category_id");
+      $category = Categories::firstWhere('id', $category_id);
+      echo ($category->category);
+      // $category->delete();
+    }
+
     public function check(Request $request) {
       $checked = [];
       $submitted_answers = $request->input('data');
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
         $question = Questions::firstWhere('id', $question_id);
-        $option_id = $submitted_answer['option_id'];
         $answer = Answers::firstWhere('questions_id', $question_id);
+        $option_id = $submitted_answer['option_id'];
         $correct = false;
         if ($answer->options_id == $option_id) {
           $correct = true;
         }
         array_push($checked, (object)["question_id" => $question->question, "correct" => $correct]);
       }
-      dd($checked);
+      return $checked;
     }
 
     public function removeQuestion(Request $request) {
@@ -94,7 +111,7 @@ class Copy_QuizController extends Controller
         $new_option->questions_id = $question->id;
         // $new_option->save();
       }
-      // correct answer
+      // add correct answer
       $answer = new Answers;
     }
 }

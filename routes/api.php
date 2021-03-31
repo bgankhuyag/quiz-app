@@ -22,9 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/get_quiz', [QuizController::class, 'getQuiz'])->name('getQuiz');
+
 Route::get('/get_categories', [Copy_QuizController::class, 'getCategories'])->name('getCategories');
+Route::post('/add_categories', [Copy_QuizController::class, 'addCategories'])->name('addCategories');
+Route::post('/remove_category', [Copy_QuizController::class, 'removeCategory'])->name('removeCategory');
+
 Route::post('/check', [Copy_QuizController::class, 'check'])->name('check');
-Route::post('/remove', [Copy_QuizController::class, 'removeQuestion'])->name('remove');
+Route::post('/remove_question', [Copy_QuizController::class, 'removeQuestion'])->name('removeQuestion');
 Route::post('/add_question', [Copy_QuizController::class, 'addQuestion'])->name('addQuestion');
 Route::post('/add_options', [Copy_QuizController::class, 'addOptions'])->name('addOptions');
 Route::post('/remove_option', [Copy_QuizController::class, 'removeOption'])->name('removeOption');
