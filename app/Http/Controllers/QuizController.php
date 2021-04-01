@@ -21,18 +21,28 @@ class QuizController extends Controller
     }
 
     public function check(Request $request) {
-      // dd('here');
-      $correct = false;
-      $question_id = $request->input('question_id');
-      $option_id = $request->input('option_id');
-      // $question_id = 2;
-      // $option_id = 8;
-      $answer = Answers::firstWhere('questions_id', $question_id);
-      if ($answer->options_id == $option_id) {
-        $correct = true;
+      $checked = [];
+      // $submitted_answers = json_decode($request->getContent());
+      $submitted_answers = json_decode($request->getContent(), true)['data'];
+      // return $this->test($submitted_answers);
+      foreach ($submitted_answers as $submitted_answer) {
+        $question_id = $submitted_answer['question_id'];
+        $question = Questions::firstWhere('id', $question_id);
+        $answer = Answers::firstWhere('questions_id', $question_id);
+        $option_id = $submitted_answer['option_id'];
+        $option = Options::firstWhere('id', $option_id);
+        $correct = false;
+        if ($answer->options_id == $option_id) {
+          $correct = true;
+        }
+        if ($correct) {
+          array_push($checked, (object)["question" => $question->question, "correct" => $correct, "correct_option" => $option->option]);
+        } else {
+          $correct_option = Options::firstWhere('id', $answer->options_id);
+          array_push($checked, (object)["question" => $question->question, "correct" => $correct, "selected_option" => $option->option, "correct_option" => $correct_option->option]);
+        }
       }
-      return response()->json($correct);
-      return ($request->input('option_id'));
+      return response()->json($checked);
     }
 
     public function removeQuestion(Request $request, $id) {

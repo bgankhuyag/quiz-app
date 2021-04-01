@@ -29,7 +29,7 @@ class Copy_QuizController extends Controller
     }
 
     public function addCategories(Request $request) {
-      $categories = $request->input('categories');
+      $categories = json_decode($request->getContent(), true)['categories'];
       foreach ($categories as $category) {
         $new_category = new Categories;
         $new_category->category = $category;
@@ -53,9 +53,10 @@ class Copy_QuizController extends Controller
 
     public function check(Request $request) {
       $checked = [];
-      // $submitted_answers = json_decode(response()->getContents());
-      $submitted_answers = $request->input('data');
+      $submitted_answers = json_decode($request->getContent(), true)['data'];
+      // $submitted_answers = $request->input('data');
       // return $this->test($submitted_answers);
+      // dd($submitted_answers["data"]);
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
         $question = Questions::firstWhere('id', $question_id);
@@ -92,9 +93,11 @@ class Copy_QuizController extends Controller
     }
 
     public function addOptions(Request $request) {
-      $question_id = $request->input('question_id');
+      $question_id = json_decode($request->getContent(), true)['question_id'];
+      // $question_id = $request->input('question_id');
       echo ($question_id);
-      $options = $request->input('options');
+      $options = json_decode($request->getContent(), true)['options'];
+      // $options = $request->input('options');
       foreach ($options as $option) {
         $new_option = new Options;
         $new_option->option = $option;
@@ -105,6 +108,7 @@ class Copy_QuizController extends Controller
     }
 
     public function removeOption(Request $request) {
+      // json_decode($request->getContent(), true)['option_id']
       $option_id = $request->input("option_id");
       $option = Options::firstWhere('id', $option_id);
       echo ($option->option);
