@@ -15,8 +15,8 @@ class CreateSelectedsTable extends Migration
     {
         Schema::create('selecteds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('questions_id')->constrained('questions');
-            $table->integer('options_id');
+            $table->foreignId('questions_id')->constrained('questions')->nullable(false);
+            $table->unsignedInteger('options_id')->nullable(false);
             $table->timestamps();
         });
     }

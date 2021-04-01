@@ -9,4 +9,6 @@ class Selected extends Model
 {
     use HasFactory;
     protected $table = 'selecteds';
+
+    protected $fillable = ['questions_id', 'options_id'];
 }

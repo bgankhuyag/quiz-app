@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Answers;
 use App\Models\User;
 use App\Models\Questions;
+use App\Models\Selected;
 use App\Models\Options;
 use Illuminate\Support\Facades\Auth;
 // use DB, Auth;
@@ -14,7 +15,7 @@ class QuizController extends Controller
 {
     //
     public function getQuiz() {
-      $questions = Questions::with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question', 'category']);
+      $questions = Questions::with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       // return response()->json(Auth::user());
@@ -22,11 +23,6 @@ class QuizController extends Controller
 
     public function check(Request $request) {
       $checked = [];
-      // $data = $request->body;
-      // dd($data);
-      // dd(json_decode($data));
-      // dd(json_decode($request->input('body')));
-      // $submitted_answers = json_decode($request->getContent(), true)['body'];
       $submitted_answers = json_decode($request->body, true);
       // dd($submitted_answers);
       // return $this->test($submitted_answers);
@@ -46,6 +42,10 @@ class QuizController extends Controller
           $correct_option = Options::firstWhere('id', $answer->options_id);
           array_push($checked, (object)["question" => $question->question, "correct" => $correct, "selected_option" => $option->option, "correct_option" => $correct_option->option]);
         }
+        $selected = Selected::updateOrCreate(
+          ['questions_id' => $question_id],
+          ['options_id' => $option_id]
+        );
       }
       return response()->json($checked);
     }
