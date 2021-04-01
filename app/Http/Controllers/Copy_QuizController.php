@@ -15,7 +15,7 @@ class Copy_QuizController extends Controller
 {
     //
     public function getQuiz() {
-      $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question', 'category']);
+      $questions = Questions::with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question', 'category']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       return $questions;
@@ -39,7 +39,7 @@ class Copy_QuizController extends Controller
     }
 
     public function removeCategory(Request $request) {
-      $category_id = $request->input("category_id");
+      $category_id = $request->category_id;
       $category = Categories::firstWhere('id', $category_id);
       echo ($category->category);
       // $category->delete();
@@ -78,7 +78,7 @@ class Copy_QuizController extends Controller
     }
 
     public function removeQuestion(Request $request) {
-      $question_id = $request->input('question_id');
+      $question_id = $request->question_id;
       $question = Questions::firstWhere('id', $question_id);
       echo ($question);
       $options = Options::where('questions_id', $question_id)->get();
@@ -93,6 +93,7 @@ class Copy_QuizController extends Controller
     }
 
     public function addOptions(Request $request) {
+      // $json = $request->body;
       $question_id = json_decode($request->getContent(), true)['question_id'];
       // $question_id = $request->input('question_id');
       echo ($question_id);
@@ -109,7 +110,7 @@ class Copy_QuizController extends Controller
 
     public function removeOption(Request $request) {
       // json_decode($request->getContent(), true)['option_id']
-      $option_id = $request->input("option_id");
+      $option_id = $request->option_id;
       $option = Options::firstWhere('id', $option_id);
       echo ($option->option);
       // $option->delete();
@@ -121,8 +122,8 @@ class Copy_QuizController extends Controller
       }
       // dd($user);
       $question = new Questions;
-      $question->question = $request->input('question');
-      $question->category = $request->input('category');
+      $question->question = $request->question;
+      $question->category = $request->category;
       echo($question);
       // $question->save();
       $options = $request->input('options');

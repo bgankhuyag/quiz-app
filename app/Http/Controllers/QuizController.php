@@ -14,7 +14,7 @@ class QuizController extends Controller
 {
     //
     public function getQuiz() {
-      $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question', 'category']);
+      $questions = Questions::with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question', 'category']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       // return response()->json(Auth::user());
@@ -22,8 +22,13 @@ class QuizController extends Controller
 
     public function check(Request $request) {
       $checked = [];
-      // $submitted_answers = json_decode($request->getContent());
-      $submitted_answers = json_decode($request->getContent(), true)['data'];
+      // $data = $request->body;
+      // dd($data);
+      // dd(json_decode($data));
+      // dd(json_decode($request->input('body')));
+      // $submitted_answers = json_decode($request->getContent(), true)['body'];
+      $submitted_answers = json_decode($request->body, true);
+      // dd($submitted_answers);
       // return $this->test($submitted_answers);
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];

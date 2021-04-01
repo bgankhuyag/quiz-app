@@ -16,4 +16,8 @@ class Questions extends Model
     public function answer() {
         return $this->hasOne(Answers::class);
     }
+
+    public function selected() {
+        return $this->hasOne(Selected::class);
+    }
 }
