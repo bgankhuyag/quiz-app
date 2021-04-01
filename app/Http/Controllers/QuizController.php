@@ -7,6 +7,7 @@ use App\Models\Answers;
 use App\Models\User;
 use App\Models\Questions;
 use App\Models\Selected;
+use App\Models\Categories;
 use App\Models\Options;
 use Illuminate\Support\Facades\Auth;
 // use DB, Auth;
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Auth;
 class QuizController extends Controller
 {
     //
-    public function getQuiz() {
-      $questions = Questions::with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question']);
+    public function getQuiz($id) {
+      // dd($id);
+      $category = Categories::firstWhere('id', $id);
+      $questions = Questions::where('category', $category->category)->with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       // return response()->json(Auth::user());
@@ -28,9 +31,9 @@ class QuizController extends Controller
       // return $this->test($submitted_answers);
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
+        $option_id = $submitted_answer['option_id'];
         $question = Questions::firstWhere('id', $question_id);
         $answer = Answers::firstWhere('questions_id', $question_id);
-        $option_id = $submitted_answer['option_id'];
         $option = Options::firstWhere('id', $option_id);
         $correct = false;
         if ($answer->options_id == $option_id) {

@@ -14,22 +14,24 @@ use Illuminate\Support\Facades\Auth;
 class Copy_QuizController extends Controller
 {
     //
-    public function getQuiz() {
-      $questions = Questions::with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question', 'category']);
+    public function getQuiz($id) {
+      $category = Categories::firstWhere('id', $id);
+      $questions = Questions::where('category', $category->category)->with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
-      return $questions;
+      // return $questions;
       // return response()->json(Auth::user());
     }
 
     public function getCategories() {
       $categories = Categories::all('id', 'category');
       // dd($categories);
-      return $categories;
+      return response()->json($categories);
     }
 
     public function addCategories(Request $request) {
-      $categories = json_decode($request->getContent(), true)['categories'];
+      $categories = json_decode($request->body, true);
+      dd($categories);
       foreach ($categories as $category) {
         $new_category = new Categories;
         $new_category->category = $category;
@@ -53,7 +55,7 @@ class Copy_QuizController extends Controller
 
     public function check(Request $request) {
       $checked = [];
-      $submitted_answers = json_decode($request->getContent(), true)['data'];
+      $submitted_answers = json_decode($request->body, true);
       // $submitted_answers = $request->input('data');
       // return $this->test($submitted_answers);
       // dd($submitted_answers["data"]);
