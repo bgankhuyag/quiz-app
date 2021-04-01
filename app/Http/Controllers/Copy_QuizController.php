@@ -15,7 +15,7 @@ class Copy_QuizController extends Controller
 {
     //
     public function getQuiz() {
-      $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question']);
+      $questions = Questions::with('options:id,questions_id,option')->get(['id', 'question', 'category']);
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       return $questions;
