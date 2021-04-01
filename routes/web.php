@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuizController;
+use App\Http\Controllers\Copy_QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/get_quiz', [QuizController::class, 'getQuiz'])->name('getQuiz');
+Route::get('/test', [Copy_QuizController::class, 'test'])->name('test');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

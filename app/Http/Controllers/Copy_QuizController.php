@@ -45,19 +45,33 @@ class Copy_QuizController extends Controller
       // $category->delete();
     }
 
+    public function test($item) {
+      // dd($item);
+      return view('test', ["item"=>$item]);
+
+    }
+
     public function check(Request $request) {
       $checked = [];
+      // $submitted_answers = json_decode(response()->getContents());
       $submitted_answers = $request->input('data');
+      // return $this->test($submitted_answers);
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
         $question = Questions::firstWhere('id', $question_id);
         $answer = Answers::firstWhere('questions_id', $question_id);
         $option_id = $submitted_answer['option_id'];
+        $option = Options::firstWhere('id', $option_id);
         $correct = false;
         if ($answer->options_id == $option_id) {
           $correct = true;
         }
-        array_push($checked, (object)["question_id" => $question->question, "correct" => $correct]);
+        if ($correct) {
+          array_push($checked, (object)["question" => $question->question, "correct" => $correct, "correct_option" => $option->option]);
+        } else {
+          $correct_option = Options::firstWhere('id', $answer->options_id);
+          array_push($checked, (object)["question" => $question->question, "correct" => $correct, "selected_option" => $option->option, "correct_option" => $correct_option->option]);
+        }
       }
       return response()->json($checked);
     }
