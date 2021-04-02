@@ -28,19 +28,21 @@ class AuthController extends Controller
      */
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 422);
-        }
-
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->createNewToken($token);
+        'email' => 'required|email',
+        'password' => 'required|string|min:6',
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        // dd($data);
+        return response()->json($data, 422);
+      }
+      if (! $token = auth()->attempt($validator->validated())) {
+        return response()->json(['error' => 'Invalid email or password', 'success' => false], 401);
+      }
+      $data = ['data' => $this->createNewToken($token), 'success' => true];
+      // dd($data);
+      // return response()->json($data);
+      return $this->createNewToken($token);
     }
 
     /**
@@ -49,25 +51,24 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' => bcrypt($request->password)]
-                ));
-
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|between:2,100',
+        'email' => 'required|string|email|max:100|unique:users',
+        'password' => 'required|string|confirmed|min:6',
+      ]);
+      if($validator->fails()){
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 400);
+      }
+      $user = User::create(array_merge(
+                  $validator->validated(),
+                  ['password' => bcrypt($request->password)]
+              ));
+      return response()->json([
+        'message' => 'User successfully registered',
+        'user' => $user,
+        'success' => true
+      ], 201);
     }
 
 

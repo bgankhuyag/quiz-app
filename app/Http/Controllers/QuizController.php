@@ -9,7 +9,6 @@ use App\Models\Questions;
 use App\Models\Selected;
 use App\Models\Categories;
 use App\Models\Options;
-use Illuminate\Support\Facades\Auth;
 // use DB, Auth;
 
 class QuizController extends Controller
@@ -25,32 +24,33 @@ class QuizController extends Controller
     }
 
     public function check(Request $request) {
-      $checked = [];
+      // $checked = [];
       $submitted_answers = json_decode($request->body, true);
       // dd($submitted_answers);
       // return $this->test($submitted_answers);
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
         $option_id = $submitted_answer['option_id'];
-        $question = Questions::firstWhere('id', $question_id);
-        $answer = Answers::firstWhere('questions_id', $question_id);
-        $option = Options::firstWhere('id', $option_id);
-        $correct = false;
-        if ($answer->options_id == $option_id) {
-          $correct = true;
-        }
-        if ($correct) {
-          array_push($checked, (object)["question" => $question->question, "correct" => $correct, "correct_option" => $option->option]);
-        } else {
-          $correct_option = Options::firstWhere('id', $answer->options_id);
-          array_push($checked, (object)["question" => $question->question, "correct" => $correct, "selected_option" => $option->option, "correct_option" => $correct_option->option]);
-        }
+        $question = Questions::where('id', $question_id)->firstOrFail();
+        $option = Options::where('id', $option_id)->firstOrFail();
+        // $answer = Answers::firstWhere('questions_id', $question_id);
+
+        // $correct = false;
+        // if ($answer->options_id == $option_id) {
+        //   $correct = true;
+        // }
+        // if ($correct) {
+        //   array_push($checked, (object)["question" => $question->question, "correct" => $correct, "correct_option" => $option->option]);
+        // } else {
+        //   $correct_option = Options::firstWhere('id', $answer->options_id);
+        //   array_push($checked, (object)["question" => $question->question, "correct" => $correct, "selected_option" => $option->option, "correct_option" => $correct_option->option]);
+        // }
         $selected = Selected::updateOrCreate(
-          ['questions_id' => $question_id],
-          ['options_id' => $option_id]
+          ['questions_id' => $question->id],
+          ['options_id' => $option->id]
         );
       }
-      return response()->json($checked);
+      return response()->json("Check Complete!");
     }
 
     public function removeQuestion(Request $request, $id) {

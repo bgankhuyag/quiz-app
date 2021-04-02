@@ -24,6 +24,7 @@ class Copy_QuizController extends Controller
     }
 
     public function getCategories() {
+      // dd(Auth::user());
       $categories = Categories::all('id', 'category');
       // dd($categories);
       return response()->json($categories);
