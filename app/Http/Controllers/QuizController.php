@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Questions;
 use App\Models\Selected;
 use App\Models\Categories;
+use App\Models\SubCategories;
 use App\Models\Options;
 // use DB, Auth;
 
@@ -16,11 +17,40 @@ class QuizController extends Controller
     //
     public function getQuiz($id) {
       // dd($id);
-      $category = Categories::firstWhere('id', $id);
-      $questions = Questions::where('category', $category->category)->with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question']);
+      // $category = Categories::firstWhere('id', $id);
+      $category = SubCategories::firstWhere('id', $id);
+      // return $category;
+      // $categories = SubCategories::where('parent_category', $category->category)->get(['id', 'category']);
+      // if (!$categories->isEmpty()) {
+      //   $result  = ['data' => $categories,'quiz_start' => false];
+      //   return response()->json($result);
+      // }
+      // $result  = ['data' => $category->category,'quiz_start' => true];
+      // return response()->json($result);
+      //
+      // if (!empty($categories)) {
+      //   return $categories;
+      // }
+      // $questions = Questions::where('category', $category->category)->join('answers', 'answers.questions_id', '=', 'questions.id')->join('options', 'options.id', '=', 'answers.options_id')->join('options', 'options.questions_id', '=', 'questions.id')->get();
+      $questions = Questions::where('categories_id', $category->categories_id)->where('sub_categories_id', $category->id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
+      // $questions = Questions::where('category', "IELTS")->get();
+      // dd($questions->isEmpty());
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       // return response()->json(Auth::user());
+    }
+
+    public function selectCategory($id) {
+      // $category = Categories::firstWhere('id', $id);
+      $categories = SubCategories::where('categories_id', $id)->get(['id', 'sub_category']);
+      // return $categories;
+      if ($categories->isEmpty()){
+        $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
+        $result  = ['start_quiz' => true, 'data' => $questions];
+        return response()->json($result);
+      }
+      $result  = ['start_quiz' => false, 'data' => $categories];
+      return response()->json($result);
     }
 
     public function check(Request $request) {

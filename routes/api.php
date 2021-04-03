@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/get_quiz/{id}', [QuizController::class, 'getQuiz'])->name('getQuiz');
+Route::get('/select_category/{id}', [QuizController::class, 'selectCategory'])->name('selectCategory');
 Route::get('/get/{id}', [Copy_QuizController::class, 'getQuiz'])->name('get');
 
 Route::get('/get_categories', [Copy_QuizController::class, 'getCategories'])->name('getCategories');

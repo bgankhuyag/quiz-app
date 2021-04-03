@@ -14,7 +14,7 @@ class Questions extends Model
     }
 
     public function answer() {
-        return $this->hasOne(Answers::class);
+        return $this->hasOne(Answers::class)->select(['options_id', 'questions_id']);
     }
 
     public function selected() {
