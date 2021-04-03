@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -13,14 +14,17 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
-    {
-      if (! $request->expectsJson()) {
-        return route('getQuiz');
-      }
-    }
+    // protected function redirectTo($request)
+    // {
+    //   if (! $request->expectsJson()) {
+    //     return route('getQuiz');
+    //   }
+    // }
 
     public function handle($request, Closure $next) {
-      return response()->json(['error' => 'Unauthorized'], 401);
+      if (!Auth::guard('api')->check()) {
+        return response()->json(['error' => 'Please login first'], 401);
+      }
+      return $next($request);
     }
 }
