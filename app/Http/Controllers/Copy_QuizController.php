@@ -11,13 +11,16 @@ use App\Models\Questions;
 use App\Models\Options;
 use Illuminate\Support\Facades\Auth;
 // use DB, Auth;
+use Illuminate\Support\Facades\DB;
 
 class Copy_QuizController extends Controller
 {
     //
     public function getQuiz($id) {
-      $category = Categories::firstWhere('id', $id);
-      $questions = Questions::where('category', $category->category)->with(['options:id,questions_id,option', 'answer:questions_id,options_id'])->get(['id', 'question']);
+      $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'answer', 'image:questions_id,name'])->get(['id', 'question']);
+      // $questions = Questions::where('category', "IELTS")->get();
+      // dd($questions->isEmpty());
+      // return response()->json(url(asset('images/spiderman.jpeg')));
       $result  = ['data' => $questions,'succces' => true];
       return response()->json($questions);
       // return $questions;
@@ -28,7 +31,8 @@ class Copy_QuizController extends Controller
       // dd(Auth::user());
       // $categories = Categories::all('id', 'category');
       // $categories = Categories::with('sub_category:id,categories_id,sub_category')->join('sub_categories', 'categories.id', '=', 'sub_categories.categories_id')->get(['id', 'category']);
-      $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
+      // $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
+      $categories = Questions::distinct('categories_id')->with('category:id,category', 'category.sub_category:id,categories_id,sub_category')->get(['categories_id']);
       // dd($categories);
       return response()->json($categories);
     }

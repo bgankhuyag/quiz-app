@@ -21,7 +21,15 @@ class Questions extends Model
         return $this->hasOne(Selected::class);
     }
 
+    public function category() {
+      return $this->belongsTo(Categories::class, 'categories_id');
+    }
+
     public function subcategory() {
       return $this->belongsTo(SubCategories::class, 'sub_categories_id');
+    }
+
+    public function image() {
+      return $this->hasOne(Images::class);
     }
 }

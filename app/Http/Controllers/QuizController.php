@@ -32,7 +32,7 @@ class QuizController extends Controller
       //   return $categories;
       // }
       // $questions = Questions::where('category', $category->category)->join('answers', 'answers.questions_id', '=', 'questions.id')->join('options', 'options.id', '=', 'answers.options_id')->join('options', 'options.questions_id', '=', 'questions.id')->get();
-      $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
+      $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'answer', 'image:questions_id,name'])->get(['id', 'question']);
       // $questions = Questions::where('category', "IELTS")->get();
       // dd($questions->isEmpty());
       $result  = ['data' => $questions,'succces' => true];
