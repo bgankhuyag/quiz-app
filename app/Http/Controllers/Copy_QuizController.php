@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Answers;
 use App\Models\Categories;
+use App\Models\SubCategories;
 use App\Models\User;
 use App\Models\Questions;
 use App\Models\Options;
@@ -25,14 +26,16 @@ class Copy_QuizController extends Controller
 
     public function getCategories() {
       // dd(Auth::user());
-      $categories = Categories::all('id', 'category');
+      // $categories = Categories::all('id', 'category');
+      // $categories = Categories::with('sub_category:id,categories_id,sub_category')->join('sub_categories', 'categories.id', '=', 'sub_categories.categories_id')->get(['id', 'category']);
+      $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
       // dd($categories);
       return response()->json($categories);
     }
 
     public function addCategories(Request $request) {
       $categories = json_decode($request->body, true);
-      dd($categories);
+      // dd($categories);
       foreach ($categories as $category) {
         $new_category = new Categories;
         $new_category->category = $category;
@@ -42,7 +45,14 @@ class Copy_QuizController extends Controller
     }
 
     public function removeCategory(Request $request) {
-      $category_id = $request->category_id;
+      $category_id = ($request->category_id);
+      // dd($category_id);
+      $sub_categories = SubCategories::where('categories_id', $category_id)->get();
+      // dd( $sub_categories);
+      foreach ($sub_categories as $sub_category) {
+        echo ($sub_category->sub_category);
+        // $sub_category->delete();
+      }
       $category = Categories::firstWhere('id', $category_id);
       echo ($category->category);
       // $category->delete();
@@ -81,10 +91,7 @@ class Copy_QuizController extends Controller
     }
 
     public function removeQuestion(Request $request) {
-      $question_id = $request->question_id;
-      $question = Questions::firstWhere('id', $question_id);
-      echo ($question);
-      $options = Options::where('questions_id', $question_id)->get();
+      $options = Options::where('questions_id', $request->question_id)->get();
       foreach ($options as $option) {
         // $option->delete();
         echo ($option);
@@ -92,6 +99,8 @@ class Copy_QuizController extends Controller
       $answer = Answers::firstWhere('questions_id', $question_id);
       echo ($answer);
       // $answer->delete();
+      $question = Questions::firstWhere('id', $request->question_id);
+      echo ($question);
       // $question->delete();
     }
 
@@ -126,10 +135,10 @@ class Copy_QuizController extends Controller
       // dd($user);
       $question = new Questions;
       $question->question = $request->question;
-      $question->category = $request->category;
+      $question->categories_id = $request->category_id;
       echo($question);
       // $question->save();
-      $options = $request->input('options');
+      $options = json_decode($request->options, true);
       foreach ($options as $option) {
         $new_option = new Options;
         $new_option->option = $option;

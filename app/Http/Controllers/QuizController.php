@@ -18,7 +18,7 @@ class QuizController extends Controller
     public function getQuiz($id) {
       // dd($id);
       // $category = Categories::firstWhere('id', $id);
-      $category = SubCategories::firstWhere('id', $id);
+      // $sub_category = SubCategories::firstWhere('id', $id);
       // return $category;
       // $categories = SubCategories::where('parent_category', $category->category)->get(['id', 'category']);
       // if (!$categories->isEmpty()) {
@@ -32,7 +32,7 @@ class QuizController extends Controller
       //   return $categories;
       // }
       // $questions = Questions::where('category', $category->category)->join('answers', 'answers.questions_id', '=', 'questions.id')->join('options', 'options.id', '=', 'answers.options_id')->join('options', 'options.questions_id', '=', 'questions.id')->get();
-      $questions = Questions::where('categories_id', $category->categories_id)->where('sub_categories_id', $category->id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
+      $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
       // $questions = Questions::where('category', "IELTS")->get();
       // dd($questions->isEmpty());
       $result  = ['data' => $questions,'succces' => true];
@@ -43,14 +43,25 @@ class QuizController extends Controller
     public function selectCategory($id) {
       // $category = Categories::firstWhere('id', $id);
       $categories = SubCategories::where('categories_id', $id)->get(['id', 'sub_category']);
-      // return $categories;
+      // $categories = Questions::where('questions.categories_id', $id)->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->distinct('id')->pluck('sub_category');
+
+      // dd($categories);
+      $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
+      return response()->json($questions);
+      $result  = ['start_quiz' => true, 'data' => $questions];
       if ($categories->isEmpty()){
-        $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
-        $result  = ['start_quiz' => true, 'data' => $questions];
-        return response()->json($result);
       }
       $result  = ['start_quiz' => false, 'data' => $categories];
       return response()->json($result);
+    }
+
+    public function getCategories() {
+      // dd(Auth::user());
+      // $categories = Categories::all('id', 'category');
+      $categories = Categories::with('sub_category:id,categories_id,sub_category')->get(['id', 'category']);
+      // $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
+      // dd($categories);
+      return response()->json($categories);
     }
 
     public function check(Request $request) {

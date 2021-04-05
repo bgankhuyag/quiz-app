@@ -25,7 +25,8 @@ Route::get('/get_quiz/{id}', [QuizController::class, 'getQuiz'])->name('getQuiz'
 Route::get('/select_category/{id}', [QuizController::class, 'selectCategory'])->name('selectCategory');
 Route::get('/get/{id}', [Copy_QuizController::class, 'getQuiz'])->name('get');
 
-Route::get('/get_categories', [Copy_QuizController::class, 'getCategories'])->name('getCategories');
+Route::get('/get_categories', [QuizController::class, 'getCategories'])->name('getCategories');
+Route::get('/check_get_categories', [Copy_QuizController::class, 'getCategories'])->name('checkGetCategories');
 Route::post('/add_categories', [Copy_QuizController::class, 'addCategories'])->name('addCategories');
 Route::post('/remove_category', [Copy_QuizController::class, 'removeCategory'])->name('removeCategory');
 

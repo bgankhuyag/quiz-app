@@ -20,4 +20,8 @@ class Questions extends Model
     public function selected() {
         return $this->hasOne(Selected::class);
     }
+
+    public function subcategory() {
+      return $this->belongsTo(SubCategories::class, 'sub_categories_id');
+    }
 }
