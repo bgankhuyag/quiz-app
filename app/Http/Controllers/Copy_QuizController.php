@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Questions;
 use App\Models\Options;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 // use DB, Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -137,6 +138,19 @@ class Copy_QuizController extends Controller
         // return response()->json(['error' => 'Unauthorized'], 401);
       }
       // dd($user);
+      $validator = Validator::make($request->all(), [
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'question' => 'required|string|between:1,255',
+        'options' => 'required|string'
+        // 'email' => 'required|string|email|max:100|unique:users',
+        // 'password' => 'required|string|confirmed|min:6',
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
+      }
+      $image = $request->image->getClientOriginalName();
+      echo $image;
       $question = new Questions;
       $question->question = $request->question;
       $question->categories_id = $request->category_id;

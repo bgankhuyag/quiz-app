@@ -13,7 +13,6 @@ class Images extends Model
     protected $appends = ['name'];
 
     public function getNameAttribute() {
-      // dd($this->attributes['name']);
       return url(asset('images')) . '/' . $this->attributes['name'];
     }
 }

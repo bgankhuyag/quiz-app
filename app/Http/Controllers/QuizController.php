@@ -42,17 +42,17 @@ class QuizController extends Controller
 
     public function selectCategory($id) {
       // $category = Categories::firstWhere('id', $id);
-      $categories = SubCategories::where('categories_id', $id)->get(['id', 'sub_category']);
+      // $categories = SubCategories::where('categories_id', $id)->get(['id', 'sub_category']);
       // $categories = Questions::where('questions.categories_id', $id)->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->distinct('id')->pluck('sub_category');
 
       // dd($categories);
       $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
       return response()->json($questions);
-      $result  = ['start_quiz' => true, 'data' => $questions];
-      if ($categories->isEmpty()){
-      }
-      $result  = ['start_quiz' => false, 'data' => $categories];
-      return response()->json($result);
+      // $result  = ['start_quiz' => true, 'data' => $questions];
+      // if ($categories->isEmpty()){
+      // }
+      // $result  = ['start_quiz' => false, 'data' => $categories];
+      // return response()->json($result);
     }
 
     public function getCategories() {
