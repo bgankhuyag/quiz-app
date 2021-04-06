@@ -31,14 +31,17 @@ Route::group(['middleware' => 'auth:api'], function () {
 
   Route::post('/check_test', [Copy_QuizController::class, 'check']);
   Route::post('/check', [QuizController::class, 'check'])->name('check');
-  Route::group(['middleware' => 'checkAdmin:api'], function () {
-    Route::post('/add_categories', [Copy_QuizController::class, 'addCategories'])->name('addCategories');
-    Route::post('/remove_category', [Copy_QuizController::class, 'removeCategory'])->name('removeCategory');
 
-    Route::post('/add_question', [Copy_QuizController::class, 'addQuestion'])->name('addQuestion');
-    Route::post('/remove_question', [Copy_QuizController::class, 'removeQuestion'])->name('removeQuestion');
-    Route::post('/add_options', [Copy_QuizController::class, 'addOptions'])->name('addOptions');
-    Route::post('/remove_option', [Copy_QuizController::class, 'removeOption'])->name('removeOption');
+  Route::group(['middleware' => 'checkAdmin:api'], function () {
+    // add and remove categories
+    Route::post('/add_categories', [QuizController::class, 'addCategories'])->name('addCategories');
+    Route::post('/remove_category', [QuizController::class, 'removeCategory'])->name('removeCategory');
+    // add and remove questions
+    Route::post('/add_question', [QuizController::class, 'addQuestion'])->name('addQuestion');
+    Route::post('/remove_question', [QuizController::class, 'removeQuestion'])->name('removeQuestion');
+    // add and remove options
+    Route::post('/add_options', [QuizController::class, 'addOptions'])->name('addOptions');
+    Route::post('/remove_option', [QuizController::class, 'removeOption'])->name('removeOption');
   });
 });
 

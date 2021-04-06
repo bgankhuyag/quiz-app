@@ -9,7 +9,9 @@ use App\Models\Questions;
 use App\Models\Selected;
 use App\Models\Categories;
 use App\Models\SubCategories;
+use App\Models\Images;
 use App\Models\Options;
+use Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 // use DB, Auth;
@@ -69,11 +71,53 @@ class QuizController extends Controller
       return response()->json($result);
     }
 
+    public function addCategories(Request $request) {
+      $validator = Validator::make($request->all(), [
+        // 'question' => 'required|string|between:1,255',
+        'body' => 'required|string|between:1,255',
+        // 'email' => 'required|string|email|max:100|unique:users',
+        // 'password' => 'required|string|confirmed|min:6',
+      ]);
+      if ($validator->fails()) {
+        $result = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($result, 422);
+      }
+      $categories = json_decode($request->body, true);
+      // dd($categories);
+      foreach ($categories as $category) {
+        $new_category = new Categories;
+        $new_category->category = $category;
+        $new_category->save();
+      }
+      return response()->json(['success' => true]);
+    }
+
+    public function removeCategory(Request $request) {
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
+      }
+      $category_id = $request->category_id;
+      if (!$category = Categories::firstWhere('id', $category_id)) {
+        return response()->json(['error' => 'Invalid category id', 'success' => false]);
+      }
+      $sub_categories = SubCategories::where('categories_id', $category_id)->get();
+      foreach ($sub_categories as $sub_category) {
+        $sub_category->delete();
+      }
+      $category->delete();
+      return response()->json(['success' => true]);
+    }
+
     public function check(Request $request) {
       // $checked = [];
       $submitted_answers = json_decode($request->body, true);
       // dd($submitted_answers);
       // return $this->test($submitted_answers);
+      // return (auth()->id());
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
         $option_id = $submitted_answer['option_id'];
@@ -92,26 +136,116 @@ class QuizController extends Controller
         //   array_push($checked, (object)["question" => $question->question, "correct" => $correct, "selected_option" => $option->option, "correct_option" => $correct_option->option]);
         // }
         $selected = Selected::updateOrCreate(
-          ['questions_id' => $question->id],
+          ['users_id' => auth()->id(), 'questions_id' => $question->id],
           ['options_id' => $option->id]
         );
       }
-      return response()->json("Check Complete!");
-    }
-
-    public function removeQuestion(Request $request, $id) {
-
+      return response()->json(['success' => true]);
     }
 
     public function addQuestion(Request $request) {
-      if (! $user = Auth::user()) {
-        // return response()->json(['error' => 'Unauthorized'], 401);
+      $validator = Validator::make($request->all(), [
+        'question' => 'required|string|between:1,255',
+        'options' => 'required|string',
+        'category_id' => 'required|integer|min:1',
+        'answer' => 'required|string',
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
       }
-      dd($user);
-      $question = new Question;
-      $question->question = $request->input('question');
-      $options = $request->input('options');
-      $answer = new Answer;
-      // add answer
+      $question = new Questions;
+      $question->question = $request->question;
+      $question->categories_id = $request->category_id;
+      if(!empty($request->sub_category_id)){
+        $question->sub_categories_id = $request->sub_category_id;
+      }
+      $question->save();
+      if (!empty($request->image)) {
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
+        $image = new Images;
+        $image->name = $image_name;
+        $image->questions_id = $question->id;
+        $image->save();
+        $request->image->move(public_path('images'), $image_name);
+      }
+      $options = json_decode($request->options, true);
+      foreach ($options as $option) {
+        $new_option = new Options;
+        $new_option->option = $option;
+        $new_option->questions_id = $question->id;
+        $new_option->save();
+      }
+      $new_option = new Options;
+      $new_option->questions_id = $question->id;
+      $new_option->option = $request->answer;
+      $new_option->save();
+      $answer = new Answers;
+      $answer->questions_id = $question->id;
+      $answer->options_id = $new_option->id;
+      $answer->save();
+      return response()->json(['success' => true]);
     }
+
+    public function removeQuestion(Request $request) {
+      $validator = Validator::make($request->all(), [
+        'question_id' => 'required|integer|min:1',
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
+      }
+      if (!$question = Questions::firstWhere('id', $request->question_id)) {
+        return response()->json(['error' => 'Invalid question id', 'success' => false]);
+      }
+      $answer = Answers::firstWhere('questions_id', $request->question_id);
+      $answer->delete();
+      $options = Options::where('questions_id', $request->question_id)->get();
+      foreach ($options as $option) {
+        $option->delete();
+      }
+      $image = Images::firstWhere('questions_id', $request->question_id);
+      if (!empty($images)) {
+        $image_path = public_path('images/') . $image->getRawOriginal('name');
+        unlink($image_path);
+        $image->delete();
+      }
+      $question->delete();
+      return response()->json(['success' => true]);
+    }
+
+    public function addOptions(Request $request) {
+      $validator = Validator::make($request->all(), [
+        'options' => 'required|string',
+        'question_id' => 'required|integer|min:1'
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
+      }
+      $options = json_decode($request->options, true);
+      foreach ($options as $option) {
+        $new_option = new Options;
+        $new_option->option = $option;
+        $new_option->questions_id = $request->question_id;
+        $new_option->save();
+      }
+      return response()->json(['success' => true]);
+    }
+
+    public function removeOption(Request $request) {
+      $validator = Validator::make($request->all(), [
+        'option_id' => 'required|integer|min:1'
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
+      }
+      if (!$option = Options::firstWhere('id', $request->option_id)) {
+        return response()->json(['error' => 'Invalid option id', 'success' => false]);
+      }
+      $option->delete();
+      return response()->json(['success' => true]);
+    }
+
 }
