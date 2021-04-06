@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     // add and remove options
     Route::post('/add_options', [QuizController::class, 'addOptions'])->name('addOptions');
     Route::post('/remove_option', [QuizController::class, 'removeOption'])->name('removeOption');
+
+    Route::post('/edit_question', [Copy_QuizController::class, 'editQuestion'])->name('editQuestion');
   });
 });
 
@@ -50,7 +52,7 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);

@@ -222,4 +222,44 @@ class Copy_QuizController extends Controller
       return response()->json(['success' => true]);
     }
 
+    public function editQuestion(Request $request) {
+      $validator = Validator::make($request->all(), [
+        'question_id' => 'required|integer|min:1',
+      ]);
+      if ($validator->fails()) {
+        $data = ['error' => $validator->errors()->toJson(), 'success' => false];
+        return response()->json($data, 422);
+      }
+      if (!$question = Questions::firstWhere('id', $request->question_id)) {
+        return response()->json(['data' => 'Invalid question id', 'success' => false]);
+      }
+      if (!empty($request->question)) {
+        $question->question = $request->question;
+      }
+      if (!empty($request->category_id)) {
+        $question->categories_id = $request->category_id;
+      }
+      if (!empty($request->sub_category_id)) {
+        $question->sub_categories_id = $request->sub_category_id;
+      }
+      if (!empty($request->answer_id)) {
+        $answer = Answers::firstWhere('questions_id', $question->id);
+        $answer->options_id = $request->answer_id;
+      }
+      if (!empty($request->image)) {
+        $image = Images::firstWhere('questions_id', $question->id);
+        $image_path = public_path('images/') . $image->getRawOriginal('name');
+        // unlink($image_path);
+        // $image->delete();
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
+        $image = new Images;
+        $image->name = $image_name;
+        $image->questions_id = $question->id;
+        // $image->save();
+        // $request->image->move(public_path('images'), $image_name);
+      }
+      // $question->save();
+      return response()->json(['success' => true]);
+    }
+
 }
