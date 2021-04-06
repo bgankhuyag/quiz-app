@@ -100,6 +100,7 @@ class QuizController extends Controller
         $data = ['error' => $validator->errors()->toJson(), 'success' => false];
         return response()->json($data, 422);
       }
+      // remove questions
       $category_id = $request->category_id;
       if (!$category = Categories::firstWhere('id', $category_id)) {
         return response()->json(['error' => 'Invalid category id', 'success' => false]);
