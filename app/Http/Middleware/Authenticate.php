@@ -23,7 +23,7 @@ class Authenticate extends Middleware
 
     public function handle($request, Closure $next) {
       if (!Auth::guard('api')->check()) {
-        return response()->json(['error' => 'Please login first'], 401);
+        return response()->json(['error' => 'Please login first', 'success' => false], 401);
       }
       return $next($request);
     }

@@ -11,6 +11,7 @@ use App\Models\Categories;
 use App\Models\SubCategories;
 use App\Models\Options;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 // use DB, Auth;
 
 class QuizController extends Controller
@@ -36,9 +37,9 @@ class QuizController extends Controller
       $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'answer', 'image:questions_id,name'])->get(['id', 'question']);
       // $questions = Questions::where('category', "IELTS")->get();
       // dd($questions->isEmpty());
-      $result  = ['data' => $questions,'succces' => true];
-      Log::info(json_encode($questions));
-      return response()->json($questions);
+      $result  = ['succces' => true, 'data' => $questions];
+      // Log::info(json_encode($this));
+      return response()->json($result);
       // return response()->json(Auth::user());
     }
 
@@ -49,7 +50,8 @@ class QuizController extends Controller
 
       // dd($categories);
       $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
-      return response()->json($questions);
+      $result  = ['succces' => true, 'data' => $questions];
+      return response()->json($result);
       // $result  = ['start_quiz' => true, 'data' => $questions];
       // if ($categories->isEmpty()){
       // }
@@ -63,7 +65,8 @@ class QuizController extends Controller
       $categories = Categories::with('sub_category:id,categories_id,sub_category')->get(['id', 'category']);
       // $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
       // dd($categories);
-      return response()->json($categories);
+      $result  = ['succces' => true, 'data' => $categories];
+      return response()->json($result);
     }
 
     public function check(Request $request) {
