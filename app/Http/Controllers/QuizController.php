@@ -10,6 +10,7 @@ use App\Models\Selected;
 use App\Models\Categories;
 use App\Models\SubCategories;
 use App\Models\Options;
+use Illuminate\Support\Facades\Log;
 // use DB, Auth;
 
 class QuizController extends Controller
@@ -36,6 +37,7 @@ class QuizController extends Controller
       // $questions = Questions::where('category', "IELTS")->get();
       // dd($questions->isEmpty());
       $result  = ['data' => $questions,'succces' => true];
+      Log::info(json_encode($questions));
       return response()->json($questions);
       // return response()->json(Auth::user());
     }
