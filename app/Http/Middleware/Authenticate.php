@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Exception;
+use JWTAuth;
 
 class Authenticate extends Middleware
 {
@@ -22,9 +24,29 @@ class Authenticate extends Middleware
     // }
 
     public function handle($request, Closure $next) {
-      if (!Auth::guard('api')->check()) {
-        return response()->json(['error' => 'Please login first', 'success' => false], 401);
+      try {
+        // $response = $next($request);
+        // $request->headers->set('Authorization', JWTAuth::getToken());
+        // $headers = apache_request_headers(); //get header
+        // $request->headers->set('Authorization', $headers['authorization']);// set header in request
+        // dd(auth()->check());
+
+      // dd(JWTAuth::getToken());
+      // dd('here');
+        $user = JWTAuth::parseToken()->authenticate();
+      } catch (Exception $e) {
+        // dd('here');
+        if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+          return response()->json(['error' => 'Token is Invalid', 'success' => false]);
+        } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+          return response()->json(['error' => 'Token is Expired', 'success' => false]);
+        } else {
+          return response()->json(['error' => 'Authorization Token not found', 'success' => false]);
+        }
       }
+      // if (!Auth::guard('api')->check()) {
+      //   return response()->json(['error' => 'Please login first!', 'success' => false], 401);
+      // }
       return $next($request);
     }
 }

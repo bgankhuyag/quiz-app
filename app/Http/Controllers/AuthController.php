@@ -32,6 +32,7 @@ class AuthController extends Controller
         'email' => 'required|email',
         'password' => 'required|string|min:6',
       ]);
+      // return($request->all());
       if ($validator->fails()) {
         $data = ['error' => $validator->errors()->toJson(), 'success' => false];
         // dd($data);
@@ -119,7 +120,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 10080,
             'user' => auth()->user()
         ]);
     }

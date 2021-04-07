@@ -61,7 +61,7 @@ class QuizController extends Controller
       // return response()->json($result);
     }
 
-    public function getCategories() {
+    public function getCategories(Request $request) {
       // dd(Auth::user());
       // $categories = Categories::all('id', 'category');
       $categories = Categories::with('sub_category:id,categories_id,sub_category')->get(['id', 'category']);

@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::get('/get_quiz/{id}', [QuizController::class, 'getQuiz'])->name('getQuiz');
   Route::get('/select_category/{id}', [QuizController::class, 'selectCategory'])->name('selectCategory');
 
-  Route::get('/get_categories', [QuizController::class, 'getCategories'])->name('getCategories');
+  Route::post('/get_categories', [QuizController::class, 'getCategories'])->name('getCategories');
   Route::get('/check_get_categories', [Copy_QuizController::class, 'getCategories'])->name('checkGetCategories');
 
   Route::post('/check_test', [Copy_QuizController::class, 'check']);
@@ -56,5 +56,5 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+    Route::post('/user-profile', [AuthController::class, 'userProfile']);
 });
