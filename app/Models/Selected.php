@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Selected extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
     protected $table = 'selecteds';
 
-    protected $fillable = ['questions_id', 'options_id'];
+    protected $guarded = ['id'];
+
+    protected $fillable = ['questions_id', 'options_id', 'users_id'];
 }

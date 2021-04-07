@@ -26,7 +26,7 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next) {
       try {
         // $response = $next($request);
-        // $request->headers->set('Authorization', JWTAuth::getToken());
+        $request->headers->set('Authorization', JWTAuth::getToken());
         // $headers = apache_request_headers(); //get header
         // $request->headers->set('Authorization', $headers['authorization']);// set header in request
         // dd(auth()->check());
