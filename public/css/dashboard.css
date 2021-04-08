@@ -1,4 +1,13 @@
 .links{
+  float: left;
   width: 300px;
   margin: 20px;
+}
+
+table{
+  font-size: 14px;
+}
+
+a{
+  text-decoration: none;
 }
