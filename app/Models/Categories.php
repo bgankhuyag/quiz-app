@@ -17,4 +17,13 @@ class Categories extends Model
     public function sub_category() {
       return $this->hasMany(SubCategories::class);
     }
+
+    protected $appends = ['image'];
+
+    public function getImageAttribute() {
+      // dd($this);
+      if ($this->attributes['image'] != null) {
+        return url(asset('images')) . '/' . $this->attributes['image'];
+      }
+    }
 }

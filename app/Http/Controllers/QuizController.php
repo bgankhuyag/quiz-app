@@ -64,7 +64,7 @@ class QuizController extends Controller
     public function getCategories(Request $request) {
       // dd(Auth::user());
       // $categories = Categories::all('id', 'category');
-      $categories = Categories::with('sub_category:id,categories_id,sub_category')->get(['id', 'category']);
+      $categories = Categories::with('sub_category:id,categories_id,sub_category')->get(['id', 'category', 'image']);
       // $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
       // dd($categories);
       $result  = ['succces' => true, 'data' => $categories];

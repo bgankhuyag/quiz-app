@@ -34,7 +34,9 @@ class Image extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    // public function questionRelation() {
+    //   $this->belongsTo(Questions::class);
+    // }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -1,9 +1,23 @@
-<!DOCTYPE html>
-<html>
-<body>
-  <div style="width: 500px; margin: auto; text-align: center;">
-    <h3> You are not authorized to view this </h3>
-    <a class="btn btn-primary" href="http://192.168.1.103/admin/logout" role="button">Logout</a>
-  </div>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    {{ __('You are logged in!') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

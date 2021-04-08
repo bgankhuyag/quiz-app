@@ -18,9 +18,9 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-      // dd(auth()->user());
-      if (auth()->user()['roles_id'] != Roles::firstWhere('role', 'admin')['id']) {
-        return response()->json(['error' => 'You do not have access to this', 'success' => false], 401);
+      dd(Auth::user());
+      if (Auth::user()['roles_id'] != Roles::firstWhere('role', 'admin')['id']) {
+        return route('login');
       }
       return $next($request);
     }

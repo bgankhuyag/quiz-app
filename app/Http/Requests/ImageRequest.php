@@ -42,6 +42,11 @@ class ImageRequest extends FormRequest
         ];
     }
 
+    public function store(Request $request)
+    {
+      dd($request);
+    }
+
     /**
      * Get the validation messages that apply to the request.
      *
