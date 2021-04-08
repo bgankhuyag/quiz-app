@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Answers;
+use App\Models\User;
+use App\Models\Questions;
+use App\Models\Selected;
+use App\Models\Categories;
+use App\Models\SubCategories;
+use App\Models\Images;
+use App\Models\Options;
 
 class HomeController extends Controller
 {
@@ -14,7 +21,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('checkAdmin');
+        // $this->middleware('checkAdmin:web');
     }
 
     /**
@@ -24,7 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-      // dd(Auth::user());
         return view('home');
+    }
+
+    public function dashboard() {
+      return view('dashboard');
     }
 }

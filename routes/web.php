@@ -41,6 +41,7 @@ Route::get('/test', function () {
   return view('test', ['users' => $users, 'answers' => $answers, 'questions' => $questions, 'selecteds' => $selected, 'categories' => $categories, 'sub_categories' => $sub_categories, 'images' => $images, 'options' => $options]);
 });
 
+
 // Route::get('/test', [Copy_QuizController::class, 'test'])->name('test');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -55,6 +56,11 @@ Route::get('/test', function () {
 //     'namespace'  => 'App\Http\Controllers\Admin',
 // ], function () { // custom admin routes
 // }); // this should be the absolute last line of this file
+
+// Auth::routes();
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

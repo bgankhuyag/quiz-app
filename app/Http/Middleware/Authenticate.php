@@ -24,6 +24,7 @@ class Authenticate extends Middleware
     // }
 
     public function handle($request, Closure $next) {
+      // dd(Auth::check('guest'));
       try {
         // $response = $next($request);
         $request->headers->set('Authorization', JWTAuth::getToken());

@@ -81,10 +81,11 @@ class ImageCrudController extends CrudController
         //   //   return $query->orderBy('id', 'ASC')->where('depth', 1)->get();
         //   // }),
         // ]);
-        $questions = Questions::all('id', 'question');
+        $questions = Questions::all(['id', 'question']);
         CRUD::addField([
           'name'        => 'questions_id',
           'label'       => "Question",
+          // 'entity'      => 'questionRelation',
           'type'        => 'select_from_array',
           'options'     => $questions,
           'allows_null' => false,
@@ -110,5 +111,10 @@ class ImageCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function store(ImageRequest $request) {
+      // dd($request->image->getClientOriginalName());
+      if ($request->image) dd($this);
     }
 }
