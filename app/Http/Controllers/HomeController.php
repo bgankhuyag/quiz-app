@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Questions;
 use App\Models\Selected;
 use App\Models\Roles;
+use App\Models\Points;
 use App\Models\Categories;
 use App\Models\SubCategories;
 use App\Models\Images;
@@ -58,6 +59,11 @@ class HomeController extends Controller
     public function image() {
       $images = Images::paginate(10);
       return view('image', ['images' => $images]);
+    }
+
+    public function points() {
+      $points = Points::paginate(10);
+      return view('points', ['points' => $points]);
     }
 
     public function option() {

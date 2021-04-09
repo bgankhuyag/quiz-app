@@ -9,16 +9,34 @@ use App\Models\Questions;
 use App\Models\Selected;
 use App\Models\Categories;
 use App\Models\SubCategories;
+use App\Models\Points;
 use App\Models\Images;
 use App\Models\Options;
 use Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 // use DB, Auth;
 
 class QuizController extends Controller
 {
-    //
+
+    public function getPoints(Request $request) {
+      $user_id = auth()->id();
+      // dd($user_id);
+
+      // $points = Categories::with(['questions.selected' => function ($query) use ($user_id) {
+      //   $query->select('questions_id','points', 'users_id')->where('users_id', $user_id);
+      // }])->get();
+      $points = Points::where('users_id', $user_id)->get(['points', 'categories_id']);
+      // $points = Categories::join('questions', 'categories.id', '=', 'questions.categories_id')->join('selecteds', 'questions.id', '=', 'selecteds.questions_id')->where('users_id', $user_id)->groupBy('category')->select([DB::raw("SUM(points) as total_points")])->get();
+      // $points = Selected::where('users_id', $user_id)->with('question')->get();
+      // $points = Selected::where('users_id', $user_id)->join('questions', 'selecteds.questions_id', '=', 'questions.id')->rightJoin('categories', 'categories.id', '=', 'questions.categories_id')->get()->groupBy('category');
+      return response()->json($points);
+
+    }
+
     public function getQuiz($id) {
       // dd($id);
       // $category = Categories::firstWhere('id', $id);

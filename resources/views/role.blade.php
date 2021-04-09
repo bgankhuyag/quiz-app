@@ -13,6 +13,7 @@
     <a class='list-group-item list-group-item-action' href='{{ route("question") }}'><i class="fas fa-question-circle"></i> Questions</a>
     <a class='list-group-item list-group-item-action active' href='{{ route("role") }}'><i class="nav-icon fas fa-user-shield"></i> Roles</a>
     <a class='list-group-item list-group-item-action' href='{{ route("selected") }}'><i class="nav-icon fas fa-check-circle"></i> Selected Options</a>
+    <a class='list-group-item list-group-item-action' href='{{ route("points") }}'><i class="nav-icon fas fa-images"></i> Points</a>
   </div>
 </div>
 <div class="container">

@@ -14,4 +14,8 @@ class Selected extends Model
     protected $guarded = ['id'];
 
     protected $fillable = ['questions_id', 'options_id', 'users_id'];
+
+    public function question() {
+      return $this->belongsTo(Questions::class, 'questions_id');
+    }
 }

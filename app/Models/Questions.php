@@ -22,7 +22,7 @@ class Questions extends Model
     }
 
     public function selected() {
-        return $this->hasOne(Selected::class);
+        return $this->hasMany(Selected::class);
     }
 
     public function category() {

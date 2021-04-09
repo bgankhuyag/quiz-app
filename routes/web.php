@@ -42,6 +42,7 @@ Route::group([
   Route::get('/answer', [HomeController::class, 'answer'])->name('answer');
   Route::get('/category', [HomeController::class, 'category'])->name('category');
   Route::get('/image', [HomeController::class, 'image'])->name('image');
+  Route::get('/points', [HomeController::class, 'points'])->name('points');
   Route::get('option', [HomeController::class, 'option'])->name('option');
   Route::get('question', [HomeController::class, 'question'])->name('question');
   Route::get('role', [HomeController::class, 'role'])->name('role');

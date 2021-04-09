@@ -21,9 +21,13 @@ class Categories extends Model
     protected $appends = ['image'];
 
     public function getImageAttribute() {
-      // dd($this);
+      // dd(in_array('image', $this->attributes));
       if ($this->attributes['image'] != null) {
         return url(asset('images')) . '/' . $this->attributes['image'];
       }
+    }
+
+    public function questions() {
+      return $this->hasMany(Questions::class);
     }
 }
