@@ -63,9 +63,10 @@ Route::group([
   Route::get('/edit_answer_page/{id}', [HomeController::class, 'editAnswerPage'])->name('editAnswerPage');
   Route::get('/edit_category_page/{id}', [HomeController::class, 'editCategoryPage'])->name('editCategoryPage');
   Route::get('/edit_image_page/{id}', [HomeController::class, 'editImagePage'])->name('editImagePage');
+  Route::get('/edit_point_page/{id}', [HomeController::class, 'editPointPage'])->name('editPointPage');
   Route::get('/edit_option_page/{id}', [HomeController::class, 'editOptionPage'])->name('editOptionPage');
-  Route::get('/edit_question_page/{id}', [HomeController::class, 'editOptionPage'])->name('editOptionPage');
-  Route::get('/edit_role_page/{id}', [HomeController::class, 'editRolePage'])->name('editRole');
+  Route::get('/edit_question_page/{id}', [HomeController::class, 'editQuestionPage'])->name('editQuestionPage');
+  Route::get('/edit_role_page/{id}', [HomeController::class, 'editRolePage'])->name('editRolePage');
   Route::get('/edit_selected_page/{id}', [HomeController::class, 'editSelectedPage'])->name('editSelectedPage');
   Route::get('/edit_subcategory_page/{id}', [HomeController::class, 'editSubcategoryPage'])->name('editSubcategoryPage');
 });

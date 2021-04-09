@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="links">
+<!-- <div class="links">
   <div class="list-group">
     <a class="list-group-item list-group-item-action" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a>
     <a class='list-group-item list-group-item-action' href='{{ route("user") }}'><i class="nav-icon far fa-user"></i> Users</a>
@@ -14,7 +14,7 @@
     <a class='list-group-item list-group-item-action' href='{{ route("role") }}'><i class="nav-icon fas fa-user-shield"></i> Roles</a>
     <a class='list-group-item list-group-item-action' href='{{ route("selected") }}'><i class="nav-icon fas fa-check-circle"></i> Selected Options</a>
   </div>
-</div>
+</div> -->
 <div class="container">
   <form action="" method="post">
     @csrf
@@ -34,4 +34,8 @@
     <button type="submit" class="btn btn-primary btn-sm float-right">Edit Answer</button>
   </form>
 </div>
+
+<script>
+checkPage('sub_categories');
+</script>
 @endsection

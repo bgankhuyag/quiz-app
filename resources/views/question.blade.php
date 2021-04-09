@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="links">
+<!-- <div class="links">
   <div class="list-group">
     <a class="list-group-item list-group-item-action" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a>
     <a class='list-group-item list-group-item-action' href='{{ route("user") }}'><i class="nav-icon far fa-user"></i> Users</a>
@@ -15,7 +15,7 @@
     <a class='list-group-item list-group-item-action' href='{{ route("selected") }}'><i class="nav-icon fas fa-check-circle"></i> Selected Options</a>
     <a class='list-group-item list-group-item-action' href='{{ route("points") }}'><i class="nav-icon fas fa-images"></i> Points</a>
   </div>
-</div>
+</div> -->
 <div class="container">
   <h3>Questions</h3>
   <table class="table table-striped">
@@ -36,7 +36,7 @@
       <td>{{$question->categories_id}}</td>
       <td>{{$question->sub_categories_id}}</td>
       <td class="float-right">
-        <button type="button" class="btn btn-outline-primary btn-sm">Edit</button>
+        <a href="{{route('editQuestionPage', ['id' => $question->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
         <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>
       </td>
     </tr>
@@ -52,4 +52,51 @@
   </table>
   {{ $questions->links() }}
 </div>
+
+<script>
+  var questions = document.getElementById('questions');
+  if (!questions.classList.contains("active")) {
+    questions.classList.add("active");
+  }
+  var users = document.getElementById('users');
+  if (users.classList.contains("active")) {
+    users.classList.remove("active");
+  }
+  var answers = document.getElementById('answers');
+  if (answers.classList.contains("active")) {
+    answers.classList.remove("active");
+  }
+  var categories = document.getElementById('categories');
+  if (categories.classList.contains("active")) {
+    categories.classList.remove("active");
+  }
+  var sub_categories = document.getElementById('sub_categories');
+  if (sub_categories.classList.contains("active")) {
+    sub_categories.classList.remove("active");
+  }
+  var images = document.getElementById('images');
+  if (images.classList.contains("active")) {
+    images.classList.remove("active");
+  }
+  var options = document.getElementById('options');
+  if (options.classList.contains("active")) {
+    options.classList.remove("active");
+  }
+  var roles = document.getElementById('roles');
+  if (roles.classList.contains("active")) {
+    roles.classList.remove("active");
+  }
+  var selecteds = document.getElementById('selecteds');
+  if (selecteds.classList.contains("active")) {
+    selecteds.classList.remove("active");
+  }
+  var points = document.getElementById('points');
+  if (points.classList.contains("active")) {
+    points.classList.remove("active");
+  }
+  var dahsboard = document.getElementById('dashboard');
+  if (dashboard.classList.contains("active")) {
+    dashboard.classList.remove("active");
+  }
+</script>
 @endsection

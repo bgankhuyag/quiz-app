@@ -155,19 +155,55 @@ class HomeController extends Controller
 
     }
 
-    public function editOptionPage($id) {
+    public function editPointPage($id) {
+      $point = Points::firstWhere('id', $id);
+      $users = User::all();
+      $categories = Categories::all();
+      $data = [
+        'point' => $point,
+        'users' => $users,
+        'categories' => $categories
+      ];
+      return view('editPages.edit_point', $data);
+    }
 
+    public function editOptionPage($id) {
+      $option = Options::firstWhere('id', $id);
+      $questions = Questions::all();
+      return view('editPages.edit_option', ['option' => $option, 'questions' => $questions]);
     }
 
     public function editQuestionPage($id) {
-
+      $question = Questions::firstWhere('id', $id);
+      $categories = Categories::all();
+      $sub_categories = SubCategories::all();
+      $options = Options::all();
+      $data = [
+        'question' => $question,
+        'categories' => $categories,
+        'sub_categories' => $sub_categories,
+        'options' => $options
+      ];
+      // dd($sub_categories);
+      return view('editPages.edit_question', $data);
     }
 
     public function editRolePage($id) {
-
+      $role = Roles::firstWhere('id', $id);
+      return view('editPages.edit_role', ['role' => $role]);
     }
 
     public function editSelectedPage($id) {
-
+      $selected = Selected::firstWhere('id', $id);
+      $questions = Questions::all();
+      $options = Options::all();
+      $users = User::all();
+      $data = [
+        'selected' => $selected,
+        'questions' => $questions,
+        'options' => $options,
+        'users' => $users
+      ];
+      return view('editPages.edit_selected', $data);
     }
 }

@@ -54,7 +54,7 @@ class QuizController extends Controller
       //   return $categories;
       // }
       // $questions = Questions::where('category', $category->category)->join('answers', 'answers.questions_id', '=', 'questions.id')->join('options', 'options.id', '=', 'answers.options_id')->join('options', 'options.questions_id', '=', 'questions.id')->get();
-      $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'answer', 'image:questions_id,name'])->get(['id', 'question']);
+      $questions = Questions::where('sub_categories_id', $id)->with(['options:id,questions_id,option', 'image:questions_id,name'])->get(['id', 'question', 'correct_option_id']);
       // $questions = Questions::where('category', "IELTS")->get();
       // dd($questions->isEmpty());
       $result  = ['succces' => true, 'data' => $questions];
@@ -69,7 +69,7 @@ class QuizController extends Controller
       // $categories = Questions::where('questions.categories_id', $id)->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->distinct('id')->pluck('sub_category');
 
       // dd($categories);
-      $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option', 'answer'])->get(['id', 'question']);
+      $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option'])->get(['id', 'question', 'correct_option_id']);
       $result  = ['succces' => true, 'data' => $questions];
       return response()->json($result);
       // $result  = ['start_quiz' => true, 'data' => $questions];
@@ -137,6 +137,10 @@ class QuizController extends Controller
       // dd($submitted_answers);
       // return $this->test($submitted_answers);
       // return (auth()->id());
+      $point = Points::updateOrCreate(
+        ['users_id' => auth()->id(), 'categories_id' => $request->category_id],
+        ['options_id' => $option->id]
+      );
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
         $option_id = $submitted_answer['option_id'];
