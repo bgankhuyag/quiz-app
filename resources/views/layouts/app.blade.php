@@ -104,7 +104,7 @@ function checkPage(page) {
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <div class="navbar-brand" href="">
-                    {{ config('app.name', 'Laravel') }}
+                    Hippo<strong>Quiz</strong>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -119,7 +119,7 @@ function checkPage(page) {
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <a href="{{ backpack_url('logout') }}"></a>
+                        <a href="{{ backpack_url('logout') }}">Logout</a>
 
                     </ul>
                 </div>
