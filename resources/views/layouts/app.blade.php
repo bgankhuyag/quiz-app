@@ -119,8 +119,8 @@ function checkPage(page) {
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <a class="dropdown-item" href="{{ backpack_url('logout') }}"></a>
-                        <!-- @include(backpack_view('inc.menu')) -->
+                        <a href="{{ backpack_url('logout') }}"></a>
+
                     </ul>
                 </div>
             </div>
