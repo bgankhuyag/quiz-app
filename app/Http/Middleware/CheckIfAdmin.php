@@ -67,7 +67,7 @@ class CheckIfAdmin
         if (! $this->checkIfUserIsAdmin(backpack_user())) {
           // dd('here');
           return backpack_url('login');
-          return $this->respondToUnauthorizedRequest($request);
+          // return $this->respondToUnauthorizedRequest($request);
         }
         // dd("here");
         if (backpack_user()['roles_id'] != Roles::firstWhere('role', 'admin')['id']) {
