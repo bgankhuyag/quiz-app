@@ -28,7 +28,8 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-      // dd($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
+      dd($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
+
         return ($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
         return true;
     }
