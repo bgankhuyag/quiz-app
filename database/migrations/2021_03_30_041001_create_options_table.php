@@ -16,7 +16,7 @@ class CreateOptionsTable extends Migration
         Schema::create('options', function (Blueprint $table) {
             $table->id();
             $table->foreignId('questions_id')->constrained('questions');
-            $table->longText('option');
+            $table->longText('options');
             $table->timestamps();
         });
     }
