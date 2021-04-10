@@ -103,8 +103,9 @@ function checkPage(page) {
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+              hihihi
                 <div class="navbar-brand" href="">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Laravel') }} hihih
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -119,7 +120,8 @@ function checkPage(page) {
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @include(backpack_view('inc.menu'))
+                        <a class="dropdown-item" href="{{ backpack_url('logout') }}"></a>
+                        <!-- @include(backpack_view('inc.menu')) -->
                     </ul>
                 </div>
             </div>
