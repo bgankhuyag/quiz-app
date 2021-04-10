@@ -38,7 +38,7 @@ class HomeController extends Controller
     }
 
     public function dashboard() {
-      dd("here");
+      // dd("here");
       return view('dashboard');
     }
 
