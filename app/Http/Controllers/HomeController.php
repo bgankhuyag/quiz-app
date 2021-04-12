@@ -144,6 +144,11 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
+      $sub_category = SubCategories::firstWhere('id', $id);
+      $sub_categories->categories_id = $request->category_id;
+      $sub_category->sub_category = $request->subcategory;
+      $sub_category->save();
+      return redirect()->route('subcategory');
     }
 
     public function editImage($id) {
@@ -151,29 +156,105 @@ class HomeController extends Controller
     }
 
     public function editPoint($id) {
-
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+        'user_id' => 'required|integer|min:1',
+        'point' => 'required|integer|min:0',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $point = Points::firstWhere('id', $id);
+      $point->categories_id = $request->category_id;
+      $point->users_id = $request->user_id;
+      $point->save();
+      return redirect()->route('points');
     }
 
     public function editOption($id) {
-
+      $validator = Validator::make($request->all(), [
+        'question_id' => 'required|integer|min:1',
+        'option' => 'required|string',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $option = Options::firstWhere('id', $id);
+      $option->categories_id = $request->category_id;
+      $option->option = $request->option;
+      $option->save();
+      return redirect()->route('option');
     }
 
     public function editQuestion($id) {
-
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+        'subcategory_id' => 'required|integer|min:1',
+        'option_id' => 'required|integer|min:1',
+        'question' => 'required|string',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $question = Questions::firstWhere('id', $id);
+      $question->categories_id = $request->category_id;
+      $question->sub_categories_id = $request->subcategory_id;
+      $question->correct_option_id = $request->option_id;
+      $question->question = $request->question;
+      if (!empty($request->image)) {
+        $image_path = public_path('images/') . $question->getRawOriginal('image');
+        unlink($image_path);
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('images'), $image_name);
+        $question->image = $image_name;
+      }
+      $question->save();
+      return redirect()->route('question');
     }
 
     public function editRole($id) {
-
+      $validator = Validator::make($request->all(), [
+        'role' => 'required|string',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $role = Roles::firstWhere('id', $id);
+      $role->role = $request->role;
+      $role->save();
+      return redirect()->route('role');
     }
 
     public function editSelected($id) {
-
+      $validator = Validator::make($request->all(), [
+        'question_id' => 'required|integer|min:1',
+        'user_id' => 'required|integer|min:1',
+        'option_id' => 'required|integer|min:1',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $selected = Selecteds::firstWhere('id', $id);
+      $selected->categories_id = $request->category_id;
+      $selected->options_id = $request->option_id;
+      $selected->users_id = $request->user_id;
+      $selected->save();
+      return redirect()->route('selected');
     }
 
 
 
     public function addUser(Request $request) {
-      $user = User::firstWhere('id', $id);
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|between:2,100',
+        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')],
+        'role_id' => 'required|integer|min:1',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $user = new Users;
       $user->name = $request->input('name');
       $user->email = $request->input('email');
       $user->roles_id = $request->input('role_id');
@@ -186,14 +267,37 @@ class HomeController extends Controller
     }
 
     public function addCategory(Request $request) {
-      $image_path = public_path('images/') . $image->getRawOriginal('name');
-      unlink($image_path);
-      $image_name = time() . '.' . $request->image->getClientOriginalName();
-      $request->image->move(public_path('images'), $image_name);
+      $validator = Validator::make($request->all(), [
+        'category' => 'required|string',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $category = new Categories;
+      $category->category = $request->category;
+      if (!empty($request->image)) {
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('images'), $image_name);
+        $category->image = $image_name;
+      }
+      $category->save();
+      return redirect()->route('category');
     }
 
     public function addSubcategory(Request $request) {
-
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+        'subcategory' => 'required|string',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $sub_category = new SubCategories;
+      $sub_categories->categories_id = $request->category_id;
+      $sub_category->sub_category = $request->subcategory;
+      $sub_category->save();
+      return redirect()->route('subcategory');
     }
 
     public function addImage(Request $request) {
@@ -201,23 +305,89 @@ class HomeController extends Controller
     }
 
     public function addPoint(Request $request) {
-
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+        'user_id' => 'required|integer|min:1',
+        'point' => 'required|integer|min:0',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $point = new Points;
+      $point->categories_id = $request->category_id;
+      $point->users_id = $request->user_id;
+      $point->save();
+      return redirect()->route('points');
     }
 
     public function addOption(Request $request) {
-
+      $validator = Validator::make($request->all(), [
+        'question_id' => 'required|integer|min:1',
+        'option' => 'required|string',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $option = new Options;
+      $option->categories_id = $request->category_id;
+      $option->option = $request->option;
+      $option->save();
+      return redirect()->route('option');
     }
 
     public function addQuestion(Request $request) {
-
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+        'subcategory_id' => 'required|integer|min:1',
+        'option_id' => 'required|integer|min:1',
+        'question' => 'required|string',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $question = new Questions;
+      $question->categories_id = $request->category_id;
+      $question->sub_categories_id = $request->subcategory_id;
+      $question->correct_option_id = $request->option_id;
+      $question->question = $request->question;
+      if (!empty($request->image)) {
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('images'), $image_name);
+        $question->image = $image_name;
+      }
+      $question->save();
+      return redirect()->route('question');
     }
 
     public function addRole(Request $request) {
-
+      $validator = Validator::make($request->all(), [
+        'role' => 'required|string',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $role = new Roles;
+      $role->role = $request->role;
+      $role->save();
+      return redirect()->route('role');
     }
 
     public function addSelected(Request $request) {
-
+      $validator = Validator::make($request->all(), [
+        'question_id' => 'required|integer|min:1',
+        'user_id' => 'required|integer|min:1',
+        'option_id' => 'required|integer|min:1',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      $selected = new Selecteds;
+      $selected->categories_id = $request->category_id;
+      $selected->options_id = $request->option_id;
+      $selected->users_id = $request->user_id;
+      $selected->save();
+      return redirect()->route('selected');
     }
 
     public function editUserPage($id) {
