@@ -138,9 +138,11 @@ class QuizController extends Controller
       // return $this->test($submitted_answers);
       // return (auth()->id());
       // return response()->json($request->category_id);
+      $category_id = json_decode($request->category_id);
+      $points = json_decode($request->points);
       $point = Points::updateOrCreate(
-        ['users_id' => auth()->id(), 'categories_id' => json_decode($request->category_id)],
-        ['points' => json_decode($request->points)]
+        ['users_id' => auth()->id(), 'categories_id' => $category_id],
+        ['points' => $points]
       );
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
