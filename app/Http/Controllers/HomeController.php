@@ -135,7 +135,7 @@ class HomeController extends Controller
     public function editUserPage($id) {
       $user = User::firstWhere('id', $id);
       $roles = Roles::all();
-      $action = route('edit_user', ['id' => $id]);
+      $action = route('editUser', ['id' => $id]);
       return view('editPages.edit_user', ['user' => $user, 'roles' => $roles, 'action' => $action]);
     }
 
@@ -149,14 +149,14 @@ class HomeController extends Controller
 
     public function editCategoryPage($id) {
       $category = Categories::firstWhere('id', $id);
-      $action = route('edit_category', ['id' => $id]);
+      $action = route('editCategory', ['id' => $id]);
       return view('editPages.edit_category',['category' => $category, 'action' => $action]);
     }
 
     public function editSubcategoryPage($id) {
       $sub_category = SubCategories::firstWhere('id', $id);
       $categories = Categories::all();
-      $action = route('edit_subcategory', ['id' => $id]);
+      $action = route('editSubcategory', ['id' => $id]);
       return view('editPages.edit_subcategory', ['sub_category' => $sub_category, 'categories' => $categories, 'action' => $action]);
     }
 
@@ -168,7 +168,7 @@ class HomeController extends Controller
       $point = Points::firstWhere('id', $id);
       $users = User::all();
       $categories = Categories::all();
-      $action = route('edit_point', ['id' => $id]);
+      $action = route('editPoint', ['id' => $id]);
       $data = [
         'point' => $point,
         'users' => $users,
