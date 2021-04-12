@@ -126,8 +126,10 @@ class HomeController extends Controller
       $category = Categories::firstWhere('id', $id);
       $category->category = $request->category;
       if (!empty($request->image)) {
-        $image_path = public_path('images/') . $category->getRawOriginal('image');
-        unlink($image_path);
+        if (!empty($category->getRawOriginal('image'))){
+          $image_path = public_path('images/') . $category->getRawOriginal('image');
+          unlink($image_path);
+        }
         $image_name = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $image_name);
         $category->image = $image_name;
@@ -204,8 +206,10 @@ class HomeController extends Controller
       $question->correct_option_id = $request->option_id;
       $question->question = $request->question;
       if (!empty($request->image)) {
-        $image_path = public_path('images/') . $question->getRawOriginal('image');
-        unlink($image_path);
+        if (!empty($question->getRawOriginal('image'))) {
+          $image_path = public_path('images/') . $question->getRawOriginal('image');
+          unlink($image_path);
+        }
         $image_name = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $image_name);
         $question->image = $image_name;
