@@ -154,7 +154,7 @@ class HomeController extends Controller
     }
 
     public function editImagePage($id) {
-
+      $image = Images::firstWhere('id', $id);
     }
 
     public function editPointPage($id) {

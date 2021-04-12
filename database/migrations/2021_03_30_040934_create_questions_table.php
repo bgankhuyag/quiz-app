@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->longText('question');
             $table->foreignId('categories_id')->constrained('categories');
             $table->foreignId('sub_categories_id')->constrained('sub_categories');
-            // $table->foreignId('correct_option_id')->constrained('options');
+            $table->string('image');
             $table->integer('correct_option_id');
             $table->timestamps();
         });

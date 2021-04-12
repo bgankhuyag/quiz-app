@@ -32,8 +32,4 @@ class Questions extends Model
     public function subcategory() {
       return $this->belongsTo(SubCategories::class, 'sub_categories_id');
     }
-
-    public function image() {
-      return $this->hasOne(Images::class);
-    }
 }
