@@ -123,11 +123,16 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      dd($request->image);
-      $image_path = public_path('images/') . $image->getRawOriginal('name');
-      unlink($image_path);
-      $image_name = time() . '.' . $request->image->getClientOriginalName();
-      $request->image->move(public_path('images'), $image_name);
+      $category = Categories::firstWhere('id', $id);
+      $category->category = $request->category;
+      if (!empty($request->image)) {
+        $image_path = public_path('images/') . $category->getRawOriginal('image');
+        unlink($image_path);
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('images'), $image_name);
+        $category->image = $image_name;
+      }
+      $category->save();
     }
 
     public function editSubcategory($id) {
