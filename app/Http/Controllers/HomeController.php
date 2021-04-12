@@ -123,7 +123,7 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      dd($request->input('image'));
+      dd($request->image);
       $image_path = public_path('images/') . $image->getRawOriginal('name');
       unlink($image_path);
       $image_name = time() . '.' . $request->image->getClientOriginalName();
