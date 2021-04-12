@@ -183,7 +183,7 @@ class HomeController extends Controller
         return redirect()->back()->withErrors($validator->errors());
       }
       $option = Options::firstWhere('id', $id);
-      $option->categories_id = $request->category_id;
+      $option->questions_id = $request->question_id;
       $option->option = $request->option;
       $option->save();
       return redirect()->route('option');
@@ -336,7 +336,7 @@ class HomeController extends Controller
         return redirect()->back()->withErrors($validator->errors());
       }
       $option = new Options;
-      $option->categories_id = $request->category_id;
+      $option->questions_id = $request->question_id;
       $option->option = $request->option;
       $option->save();
       return redirect()->route('option');
