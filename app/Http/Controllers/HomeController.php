@@ -94,6 +94,11 @@ class HomeController extends Controller
 
     public function editUser($id) {
       $user = User::firstWhere('id', $id);
+      $user->name = $request->input('name');
+      $user->email = $request->input('email');
+      $user->roles_id = $request->input('role_id');
+      $user->save();
+      return route('user');
     }
 
     public function editAnswer($id) {
@@ -101,7 +106,10 @@ class HomeController extends Controller
     }
 
     public function editCategory($id) {
-
+      $image_path = public_path('images/') . $image->getRawOriginal('name');
+      unlink($image_path);
+      $image_name = time() . '.' . $request->image->getClientOriginalName();
+      $request->image->move(public_path('images'), $image_name);
     }
 
     public function editSubcategory($id) {

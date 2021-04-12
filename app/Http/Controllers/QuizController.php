@@ -188,11 +188,11 @@ class QuizController extends Controller
       }
       $question->save();
       if (!empty($request->image)) {
-        $image_name = time() . '.' . $request->image->getClientOriginalName();
         $image = new Images;
         $image->name = $image_name;
         $image->questions_id = $question->id;
         $image->save();
+        $image_name = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $image_name);
       }
       $options = json_decode($request->options, true);

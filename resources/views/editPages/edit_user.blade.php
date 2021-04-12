@@ -11,16 +11,16 @@
       <h3>Edit User ID-{{$user->id}}</h3>
     @endif
     <div class="form-group">
-      <label for="exampleInputEmail1">Name</label>
-      <input type="text" class="form-control" @if(!$new) value="{{$user->name}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+      <label for="name">Name</label>
+      <input type="text" name="name" class="form-control" @if(!$new) value="{{$user->name}}" @endif id="name" aria-describedby="emailHelp" placeholder="Enter Name">
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Email</label>
-      <input type="email" class="form-control" @if(!$new) value="{{$user->email}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control" @if(!$new) value="{{$user->email}}" @endif id="email" aria-describedby="emailHelp" placeholder="Enter email">
     </div>
     <div class="form-group">
-      <label for="exampleFormControlSelect2">Select Option ID</label>
-      <select multiple class="form-control" id="exampleFormControlSelect2">
+      <label for="role_id">Select Option ID</label>
+      <select multiple class="form-control" name="role_id" id="role_id">
         @foreach($roles as $role)
           <option value="{{$role->id}}" @if(!$new && $user->roles_id == $role->id) selected @endif>ID: {{$role->id}}&#160;&#160;&#160; Role: {{$role->role}}</option>
         @endforeach
