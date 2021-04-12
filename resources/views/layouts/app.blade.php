@@ -37,10 +37,6 @@ function checkPage(page) {
   if (users.classList.contains("active")) {
     users.classList.remove("active");
   }
-  var answers = document.getElementById('answers');
-  if (answers.classList.contains("active")) {
-    answers.classList.remove("active");
-  }
   var categories = document.getElementById('categories');
   if (categories.classList.contains("active")) {
     categories.classList.remove("active");
@@ -48,10 +44,6 @@ function checkPage(page) {
   var sub_categories = document.getElementById('sub_categories');
   if (sub_categories.classList.contains("active")) {
     sub_categories.classList.remove("active");
-  }
-  var images = document.getElementById('images');
-  if (images.classList.contains("active")) {
-    images.classList.remove("active");
   }
   var options = document.getElementById('options');
   if (options.classList.contains("active")) {
@@ -77,14 +69,10 @@ function checkPage(page) {
     questions.classList.add("active");
   } else if (page == 'users') {
     users.classList.add("active");
-  } else if (page == 'answers') {
-    answers.classList.add("active");
   } else if (page == 'categories') {
     categories.classList.add("active");
   } else if (page == 'sub_categories') {
     sub_categories.classList.add("active");
-  } else if (page == 'images') {
-    images.classList.add("active");
   } else if (page == 'options') {
     options.classList.add("active");
   } else if (page == 'roles') {
@@ -115,7 +103,7 @@ function checkPage(page) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                      
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -131,10 +119,10 @@ function checkPage(page) {
           <div class="list-group">
             <a id="dashboard" class="list-group-item list-group-item-action" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a>
             <a id="users" class='list-group-item list-group-item-action' href='{{ route("user") }}'><i class="nav-icon far fa-user"></i> Users</a>
-            <a id="answers" class='list-group-item list-group-item-action' href='{{ route("answer") }}'><i class="nav-icon fas fa-key"></i> Answers</a>
+            <!-- <a id="answers" class='list-group-item list-group-item-action' href='{{ route("answer") }}'><i class="nav-icon fas fa-key"></i> Answers</a> -->
             <a id="categories" class='list-group-item list-group-item-action' href='{{ route("category") }}'><i class="nav-icon fas fa-th"></i> Categories</a>
             <a id="sub_categories" class='list-group-item list-group-item-action' href='{{ route("subcategory") }}'><i class="nav-icon fas fa-layer-group"></i> Sub-Categories</a>
-            <a id="images" class='list-group-item list-group-item-action' href='{{ route("image") }}'><i class="nav-icon fas fa-images"></i> Images</a>
+            <!-- <a id="images" class='list-group-item list-group-item-action' href='{{ route("image") }}'><i class="nav-icon fas fa-images"></i> Images</a> -->
             <a id="options" class='list-group-item list-group-item-action' href='{{ route("option") }}'><i class="nav-icon fas fa-bars"></i> Options</a>
             <a id="questions" class='list-group-item list-group-item-action' href='{{ route("question") }}'><i class="fas fa-question-circle"></i> Questions</a>
             <a id="roles" class='list-group-item list-group-item-action' href='{{ route("role") }}'><i class="nav-icon fas fa-user-shield"></i> Roles</a>
