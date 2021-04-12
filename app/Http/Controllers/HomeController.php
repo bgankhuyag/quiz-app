@@ -147,7 +147,7 @@ class HomeController extends Controller
         return redirect()->back()->withErrors($validator->errors());
       }
       $sub_category = SubCategories::firstWhere('id', $id);
-      $sub_categories->categories_id = $request->category_id;
+      $sub_category->categories_id = $request->category_id;
       $sub_category->sub_category = $request->subcategory;
       $sub_category->save();
       return redirect()->route('subcategory');
@@ -301,7 +301,7 @@ class HomeController extends Controller
         return redirect()->back()->withErrors($validator->errors());
       }
       $sub_category = new SubCategories;
-      $sub_categories->categories_id = $request->category_id;
+      $sub_category->categories_id = $request->category_id;
       $sub_category->sub_category = $request->subcategory;
       $sub_category->save();
       return redirect()->route('subcategory');
