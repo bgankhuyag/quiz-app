@@ -4,7 +4,7 @@
 <div class="container">
   <form action="" method="post">
     @csrf
-    <a href="{{route('categories')}}"><button type="button" class="btn btn-outline-primary">Back</button></a>
+    <a href="{{route('category')}}"><button type="button" class="btn btn-outline-primary">Back</button></a>
     <h3>Edit Category ID-{{$category->id}}</h3>
     <div class="form-group">
       <label for="exampleInputEmail1">Category</label>
