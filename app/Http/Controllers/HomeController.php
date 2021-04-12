@@ -94,15 +94,15 @@ class HomeController extends Controller
     }
 
     public function editUser(Request $request, $id) {
+      $user = User::firstWhere('id', $id);
       $validator = Validator::make($request->all(), [
         'name' => 'required|string|between:2,100',
-        'email' => 'required|string|email|max:100|unique:users',
+        'email' => ['required|string|email|max:100', Rule::unique('users')->ignore($user->id)],
         'role_id' => 'required|integer|min:1',
       ]);
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $user = User::firstWhere('id', $id);
       $user->name = $request->input('name');
       $user->email = $request->input('email');
       $user->roles_id = $request->input('role_id');
