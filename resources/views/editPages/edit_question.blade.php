@@ -34,9 +34,11 @@
       <input type="text" class="form-control" value="{{$question->question}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Category">
     </div>
     <div>
-      <img src="{{asset($category->image)}}" width="100">
+      @if (!empty($question->image))
+        <img src="{{asset($question->image)}}" width="100">
+      @endif
       <div class="form-group">
-        <label for="exampleFormControlFile1">Example file input</label>
+        <label for="exampleFormControlFile1">Choose Image</label>
         <input type="file" class="form-control-file" id="exampleFormControlFile1">
       </div>
     </div>
