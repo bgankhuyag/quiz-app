@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
+  <a href="{{route('category')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
   <form action="" method="post">
     @csrf
-    <a href="{{route('category')}}" style="margin-bottom: 20px;"><button type="button" class="btn btn-outline-primary">Back</button></a>
     <h3>Edit Category ID-{{$category->id}}</h3>
     <div class="form-group">
       <label for="exampleInputEmail1">Category</label>
