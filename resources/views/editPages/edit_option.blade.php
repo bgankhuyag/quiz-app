@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Option</label>
-      <input type="text" class="form-control" @if(!$new) value="{{$option->option}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="text" class="form-control" @if(!$new) value="{{$option->option}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Option">
     </div>
     <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add Option @else Edit Option @endif</button>
   </form>
