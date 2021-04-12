@@ -10,7 +10,7 @@
   </div>
   @endif
   <a href="{{route('category')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
-  <form action="{{$action}}" method="post">
+  <form action="{{$action}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($new)
       <h3>Add New Category</h3>

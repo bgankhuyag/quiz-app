@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+  @if($errors->any())
+  <div class="alert alert-danger" role="alert">
+    @foreach ($errors->all() as $error)
+      <h3>{{ $error }}</h3>
+    @endforeach
+  </div>
+  @endif
   <a href="{{route('option')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
   <form action="{{$action}}" method="post">
     @csrf
@@ -11,16 +18,16 @@
       <h3>Edit Option ID-{{$option->id}}</h3>
     @endif
     <div class="form-group">
-      <label for="exampleFormControlSelect2">Select Question ID</label>
-      <select multiple class="form-control" id="exampleFormControlSelect2" style="height: 300px;">
+      <label for="question_id">Select Question ID</label>
+      <select multiple class="form-control" name="question_id" id="question_id" style="height: 300px;">
         @foreach($questions as $question)
         <option value="{{$question->id}}" @if(!$new && $option->questions_id == $question->id) selected @endif>ID: {{$question->id}}&#160;&#160;&#160; Question: {{$question->question}}</option>
         @endforeach
       </select>
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Option</label>
-      <input type="text" class="form-control" @if(!$new) value="{{$option->option}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Option">
+      <label for="option">Option</label>
+      <input type="text" name="option" class="form-control" @if(!$new) value="{{$option->option}}" @endif id="option" aria-describedby="emailHelp" placeholder="Enter Option">
     </div>
     <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add Option @else Edit Option @endif</button>
   </form>
