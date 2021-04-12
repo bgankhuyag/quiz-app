@@ -15,8 +15,10 @@
       <input type="text" class="form-control" @if(!$new) value="{{$category->category}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Category">
     </div>
     <div>
-      @if(!new and !empty($category->image))
-        <img src="{{asset($category->image)}}" width="100">
+      @if(!new)
+        @if (!empty($category->image))
+          <img src="{{asset($category->image)}}" width="100">
+        @endif
       @endif
       <div class="form-group">
         <label for="exampleFormControlFile1">Choose Image</label>
