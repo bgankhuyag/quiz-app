@@ -37,7 +37,7 @@
       <label for="option_id">Select Correct Option ID</label>
       <select multiple class="form-control" name="option_id" id="option_id" style="height: 300px;">
         @foreach($options as $option)
-        <option value="{{$option->id}}" @if(!$new && $question->correct_option_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Option: {{$option->option}}</option>
+        <option value="{{$option->id}}" @if(!$new && $question->correct_option_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Question ID: {{$option->questions_id}} &#160;&#160;&#160; Option: {{$option->option}}</option>
         @endforeach
       </select>
     </div>
