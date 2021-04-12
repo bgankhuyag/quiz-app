@@ -92,7 +92,7 @@ class HomeController extends Controller
       return view('subcategory', ['sub_categories' => $sub_categories]);
     }
 
-    public function editUser($id) {
+    public function editUser(Request $request, $id) {
       $user = User::firstWhere('id', $id);
       $user->name = $request->input('name');
       $user->email = $request->input('email');
