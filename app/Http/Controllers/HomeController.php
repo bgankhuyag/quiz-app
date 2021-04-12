@@ -100,7 +100,7 @@ class HomeController extends Controller
         'role_id' => 'required|integer|min:1',
       ]);
       if($validator->fails()){
-        return redirect()->back()->withErrors(['msg', $validator->errors()]);
+        return redirect()->back()->withErrors($validator->errors());
       }
       $user = User::firstWhere('id', $id);
       $user->name = $request->input('name');
