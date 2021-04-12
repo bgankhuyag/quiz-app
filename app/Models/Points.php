@@ -10,4 +10,5 @@ class Points extends Model
     use HasFactory;
     protected $table = 'points';
 
+    protected $fillable = ['users_id', 'points'];
 }
