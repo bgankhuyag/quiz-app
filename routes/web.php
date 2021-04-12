@@ -54,11 +54,22 @@ Route::group([
   Route::put('/edit_category/{id}', [HomeController::class, 'editCategory'])->name('editCategory');
   Route::put('/edit_image/{id}', [HomeController::class, 'editImage'])->name('editImage');
   Route::put('/edit_option/{id}', [HomeController::class, 'editOption'])->name('editOption');
-  Route::put('/edit_question/{id}', [HomeController::class, 'editOption'])->name('editOption');
+  Route::put('/edit_question/{id}', [HomeController::class, 'editQuestion'])->name('editQuestion');
   Route::put('/edit_role/{id}', [HomeController::class, 'editRole'])->name('editRole');
   Route::put('/edit_selected/{id}', [HomeController::class, 'editSelected'])->name('editSelected');
   Route::put('/edit_point/{id}', [HomeController::class, 'editPoint'])->name('editPoint');
   Route::put('/edit_subcategory/{id}', [HomeController::class, 'editSubcategory'])->name('editSubcategory');
+
+  Route::put('/add_user', [HomeController::class, 'addUser'])->name('addUser');
+  Route::put('/add_answer', [HomeController::class, 'addAnswer'])->name('addAnswer');
+  Route::put('/add_category', [HomeController::class, 'addCategory'])->name('addCategory');
+  Route::put('/add_image', [HomeController::class, 'addImage'])->name('addImage');
+  Route::put('/add_option', [HomeController::class, 'addOption'])->name('addOption');
+  Route::put('/add_question', [HomeController::class, 'addQuestion'])->name('addQuestion');
+  Route::put('/add_role', [HomeController::class, 'addRole'])->name('addRole');
+  Route::put('/add_selected', [HomeController::class, 'addSelected'])->name('addSelected');
+  Route::put('/add_point', [HomeController::class, 'addPoint'])->name('addPoint');
+  Route::put('/add_subcategory', [HomeController::class, 'addSubcategory'])->name('addSubcategory');
 
   Route::get('/edit_user_page/{id}', [HomeController::class, 'editUserPage'])->name('editUserPage');
   Route::get('/edit_answer_page/{id}', [HomeController::class, 'editAnswerPage'])->name('editAnswerPage');
