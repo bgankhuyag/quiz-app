@@ -112,6 +112,10 @@ class HomeController extends Controller
 
     }
 
+    public function editPoint($id) {
+
+    }
+
     public function editOption($id) {
 
     }
@@ -145,13 +149,15 @@ class HomeController extends Controller
 
     public function editCategoryPage($id) {
       $category = Categories::firstWhere('id', $id);
-      return view('editPages.edit_category',['category' => $category]);
+      $action = route('edit_category', ['id' => $id]);
+      return view('editPages.edit_category',['category' => $category, 'action' => $action]);
     }
 
     public function editSubcategoryPage($id) {
       $sub_category = SubCategories::firstWhere('id', $id);
       $categories = Categories::all();
-      return view('editPages.edit_subcategory', ['sub_category' => $sub_category, 'categories' => $categories]);
+      $action = route('edit_subcategory', ['id' => $id]);
+      return view('editPages.edit_subcategory', ['sub_category' => $sub_category, 'categories' => $categories, 'action' => $action]);
     }
 
     public function editImagePage($id) {
@@ -162,10 +168,12 @@ class HomeController extends Controller
       $point = Points::firstWhere('id', $id);
       $users = User::all();
       $categories = Categories::all();
+      $action = route('edit_point', ['id' => $id]);
       $data = [
         'point' => $point,
         'users' => $users,
-        'categories' => $categories
+        'categories' => $categories,
+        'action' => $action
       ];
       return view('editPages.edit_point', $data);
     }

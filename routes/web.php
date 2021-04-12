@@ -57,6 +57,7 @@ Route::group([
   Route::put('/edit_question/{id}', [HomeController::class, 'editOption'])->name('editOption');
   Route::put('/edit_role/{id}', [HomeController::class, 'editRole'])->name('editRole');
   Route::put('/edit_selected/{id}', [HomeController::class, 'editSelected'])->name('editSelected');
+  Route::put('/edit_point/{id}', [HomeController::class, 'editPoint'])->name('editPoint');
   Route::put('/edit_subcategory/{id}', [HomeController::class, 'editSubcategory'])->name('editSubcategory');
 
   Route::get('/edit_user_page/{id}', [HomeController::class, 'editUserPage'])->name('editUserPage');
