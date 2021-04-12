@@ -237,7 +237,7 @@ class HomeController extends Controller
         return redirect()->back()->withErrors($validator->errors());
       }
       $selected = Selected::firstWhere('id', $id);
-      $selected->categories_id = $request->category_id;
+      $selected->questions_id = $request->question_id;
       $selected->options_id = $request->option_id;
       $selected->users_id = $request->user_id;
       $selected->save();
@@ -386,7 +386,7 @@ class HomeController extends Controller
         return redirect()->back()->withErrors($validator->errors());
       }
       $selected = new Selected;
-      $selected->categories_id = $request->category_id;
+      $selected->questions_id = $request->question_id;
       $selected->options_id = $request->option_id;
       $selected->users_id = $request->user_id;
       $selected->save();
