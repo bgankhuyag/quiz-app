@@ -69,7 +69,7 @@ class QuizController extends Controller
       // $categories = Questions::where('questions.categories_id', $id)->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->distinct('id')->pluck('sub_category');
 
       // dd($categories);
-      $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option'])->get(['id', 'question', 'correct_option_id']);
+      $questions = Questions::where('categories_id', $id)->with(['options:id,questions_id,option'])->get(['id', 'question', 'correct_option_id', 'image']);
       $result  = ['succces' => true, 'data' => $questions];
       return response()->json($result);
       // $result  = ['start_quiz' => true, 'data' => $questions];

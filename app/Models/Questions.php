@@ -17,7 +17,6 @@ class Questions extends Model
       if ($this->attributes['image'] != NULL) {
         return url(asset('images')) . '/' . $this->attributes['image'];
       }
-      
     }
 
     protected $guarded = ['id'];
