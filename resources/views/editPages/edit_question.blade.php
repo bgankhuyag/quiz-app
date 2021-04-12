@@ -47,7 +47,7 @@
     </div>
     <div>
       @if (!$new && !empty($question->image))
-        <img src="{{asset($question->image)}}" width="100">
+        <img src="{{asset($question->image)}}" width="250">
       @endif
       <div class="form-group">
         <label for="image">Choose Image</label>
