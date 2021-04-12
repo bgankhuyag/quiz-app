@@ -18,7 +18,7 @@
       <label for="exampleFormControlSelect2">Select User ID</label>
       <select multiple class="form-control" id="exampleFormControlSelect2" style="height: 300px;">
         @foreach($users as $user)
-        <option value="{{$user->id}}" @if($option->users_id == $user->id) selected @endif>ID: {{$user->id}}&#160;&#160;&#160; Name: {{$user->name}} &#160;&#160;&#160; Email: {{$user->email}}</option>
+        <option value="{{$user->id}}" @if($point->users_id == $user->id) selected @endif>ID: {{$user->id}}&#160;&#160;&#160; Name: {{$user->name}} &#160;&#160;&#160; Email: {{$user->email}}</option>
         @endforeach
       </select>
     </div>
