@@ -118,7 +118,7 @@ class HomeController extends Controller
     public function editCategory(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'category' => 'required|string',
-        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
