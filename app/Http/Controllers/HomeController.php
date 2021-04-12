@@ -131,7 +131,8 @@ class HomeController extends Controller
     public function editUserPage($id) {
       $user = User::firstWhere('id', $id);
       $roles = Roles::all();
-      return view('editPages.edit_user', ['user' => $user, 'roles' => $roles]);
+      $action = route('edit_user', ['id' => $id]);
+      return view('editPages.edit_user', ['user' => $user, 'roles' => $roles, 'action' => $action]);
     }
 
     public function editAnswerPage($id) {

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <a href="{{route('selected')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
+  <a href="{{route('subcategory')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
   <form action="" method="post">
     @csrf
     <h3>Edit Sub-Category ID-{{$sub_category->id}}</h3>
