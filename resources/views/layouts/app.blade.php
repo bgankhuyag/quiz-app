@@ -95,6 +95,8 @@ function checkPage(page) {
     points.classList.add("active");
   } else if (page == 'dashboard') {
     dashboard.classList.add("active");
+  } else if (page == 'points') {
+    points.classList.add("active");
   }
 }
 </script>
