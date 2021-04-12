@@ -13,7 +13,7 @@ class Questions extends Model
 
     protected $appends = ['image'];
 
-    public function getNameAttribute() {
+    public function getImageAttribute() {
       return url(asset('images')) . '/' . $this->attributes['image'];
     }
 
