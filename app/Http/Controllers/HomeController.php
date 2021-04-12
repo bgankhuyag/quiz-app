@@ -15,6 +15,7 @@ use App\Models\Images;
 use App\Models\Options;
 use Illuminate\Support\Facades\Schema;
 use Validator;
+use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
 {
