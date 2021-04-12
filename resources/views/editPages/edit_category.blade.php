@@ -10,7 +10,7 @@
       <input type="text" class="form-control" value="{{$category->category}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Category">
     </div>
     <div>
-      <img src="{{asset($category->image)}}" width="300">
+      <img src="{{asset($category->image)}}" width="100">
     </div>
     <button type="submit" class="btn btn-primary btn-sm float-right">Edit Category</button>
   </form>
