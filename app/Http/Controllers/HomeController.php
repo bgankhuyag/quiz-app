@@ -14,6 +14,7 @@ use App\Models\SubCategories;
 use App\Models\Images;
 use App\Models\Options;
 use Illuminate\Support\Facades\Schema;
+use Validator;
 
 class HomeController extends Controller
 {
