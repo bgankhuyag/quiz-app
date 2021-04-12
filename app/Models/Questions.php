@@ -11,6 +11,12 @@ class Questions extends Model
     use HasFactory;
     protected $table = 'questions';
 
+    protected $appends = ['image'];
+
+    public function getNameAttribute() {
+      return url(asset('images')) . '/' . $this->attributes['image'];
+    }
+
     protected $guarded = ['id'];
 
     public function options() {
