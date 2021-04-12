@@ -113,7 +113,9 @@ function checkPage(page) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                      <a href="https://serene-fjord-29555.heroku.com/deploy">
+                        <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+                      </a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

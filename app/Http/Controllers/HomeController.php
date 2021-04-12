@@ -143,7 +143,8 @@ class HomeController extends Controller
     }
 
     public function editCategoryPage($id) {
-
+      $category = Categories::firstWhere('id', $id);
+      return view('editPages.edit_category',['category' => $category]);
     }
 
     public function editSubcategoryPage($id) {
