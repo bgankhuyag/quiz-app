@@ -98,7 +98,7 @@ class HomeController extends Controller
       $user->email = $request->input('email');
       $user->roles_id = $request->input('role_id');
       $user->save();
-      return route('user');
+      return redirect()->route('user');
     }
 
     public function editAnswer($id) {
