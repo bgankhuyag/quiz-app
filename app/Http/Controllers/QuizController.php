@@ -137,6 +137,7 @@ class QuizController extends Controller
       // dd($submitted_answers);
       // return $this->test($submitted_answers);
       // return (auth()->id());
+      return response()->json($request->category_id);
       $point = Points::updateOrCreate(
         ['users_id' => auth()->id(), 'categories_id' => $request->category_id],
         ['points' => $request->points]
