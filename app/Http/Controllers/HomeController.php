@@ -249,6 +249,7 @@ class HomeController extends Controller
       $validator = Validator::make($request->all(), [
         'name' => 'required|string|between:2,100',
         'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')],
+        'password' => 'required|string|confirmed|min:6',
         'role_id' => 'required|integer|min:1',
       ]);
       if($validator->fails()){
@@ -258,6 +259,7 @@ class HomeController extends Controller
       $user->name = $request->input('name');
       $user->email = $request->input('email');
       $user->roles_id = $request->input('role_id');
+      $user->password = bcrypt($request->password);
       $user->save();
       return redirect()->route('user');
     }

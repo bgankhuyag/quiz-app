@@ -35,12 +35,12 @@
     </div>
     @if ($new)
     <div class="form-group">
-      <label for="exampleInputEmail1">Password</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+      <label for="password">Password</label>
+      <input type="email" class="form-control" name="password" id="password" aria-describedby="emailHelp" placeholder="Enter Password">
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Confirm Password</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+      <label for="password_confirmation">Confirm Password</label>
+      <input type="email" class="form-control" name="password_confirmation" id="password_confirmation" aria-describedby="emailHelp" placeholder="Enter Password">
     </div>
     @endif
     <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Answer</button>
