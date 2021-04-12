@@ -33,6 +33,13 @@
       <label for="exampleInputEmail1">Category</label>
       <input type="text" class="form-control" value="{{$question->question}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Category">
     </div>
+    <div>
+      <img src="{{asset($category->image)}}" width="100">
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+    </div>
     <button type="submit" class="btn btn-primary btn-sm float-right">Edit Question</button>
   </form>
 </div>
