@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+  @if($errors->any())
+  <div class="alert alert-danger" role="alert">
+    @foreach ($errors->all() as $error)
+      <h3>{{ $error }}</h3>
+    @endforeach
+  </div>
+  @endif
   <a href="{{route('category')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
   <form action="{{$action}}" method="post">
     @csrf

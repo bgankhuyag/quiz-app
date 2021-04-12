@@ -116,7 +116,14 @@ class HomeController extends Controller
     }
 
     public function editCategory(Request $request, $id) {
-
+      $validator = Validator::make($request->all(), [
+        'category' => 'required|string',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      dd($request->input('image'));
       $image_path = public_path('images/') . $image->getRawOriginal('name');
       unlink($image_path);
       $image_name = time() . '.' . $request->image->getClientOriginalName();
