@@ -36,11 +36,11 @@
     @if ($new)
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="email" class="form-control" name="password" id="password" aria-describedby="emailHelp" placeholder="Enter Password">
+      <input type="password" class="form-control" name="password" id="password" aria-describedby="emailHelp" placeholder="Enter Password">
     </div>
     <div class="form-group">
       <label for="password_confirmation">Confirm Password</label>
-      <input type="email" class="form-control" name="password_confirmation" id="password_confirmation" aria-describedby="emailHelp" placeholder="Enter Password">
+      <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" aria-describedby="emailHelp" placeholder="Enter Password">
     </div>
     @endif
     <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Answer</button>
