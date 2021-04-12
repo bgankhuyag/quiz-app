@@ -9,7 +9,7 @@
       <h3>Ad New Point</h3>
     @else
       <h3>Edit Point ID-{{$point->id}}</h3>
-    @else
+    @endif
     <div class="form-group">
       <label for="exampleFormControlSelect2">Select Category ID</label>
       <select multiple class="form-control" id="exampleFormControlSelect2" style="height: 300px;">

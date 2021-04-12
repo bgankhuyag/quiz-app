@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Sub-Category</label>
-      <input type="text" class="form-control" @if (!$new) value="{{$sub_category->sub_category}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="text" class="form-control" @if (!$new) value="{{$sub_category->sub_category}}" @endif id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Sub-Category">
     </div>
     <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add $else Edit @endif Answer</button>
   </form>
