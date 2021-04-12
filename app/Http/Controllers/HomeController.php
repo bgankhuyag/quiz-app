@@ -236,7 +236,7 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $selected = Selecteds::firstWhere('id', $id);
+      $selected = Selected::firstWhere('id', $id);
       $selected->categories_id = $request->category_id;
       $selected->options_id = $request->option_id;
       $selected->users_id = $request->user_id;
@@ -385,7 +385,7 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $selected = new Selecteds;
+      $selected = new Selected;
       $selected->categories_id = $request->category_id;
       $selected->options_id = $request->option_id;
       $selected->users_id = $request->user_id;
