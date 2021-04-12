@@ -155,7 +155,7 @@ class HomeController extends Controller
 
     }
 
-    public function editPoint($id) {
+    public function editPoint(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'category_id' => 'required|integer|min:1',
         'user_id' => 'required|integer|min:1',
@@ -171,7 +171,7 @@ class HomeController extends Controller
       return redirect()->route('points');
     }
 
-    public function editOption($id) {
+    public function editOption(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'question_id' => 'required|integer|min:1',
         'option' => 'required|string',
@@ -186,7 +186,7 @@ class HomeController extends Controller
       return redirect()->route('option');
     }
 
-    public function editQuestion($id) {
+    public function editQuestion(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'category_id' => 'required|integer|min:1',
         'subcategory_id' => 'required|integer|min:1',
@@ -213,7 +213,7 @@ class HomeController extends Controller
       return redirect()->route('question');
     }
 
-    public function editRole($id) {
+    public function editRole(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'role' => 'required|string',
       ]);
@@ -226,7 +226,7 @@ class HomeController extends Controller
       return redirect()->route('role');
     }
 
-    public function editSelected($id) {
+    public function editSelected(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'question_id' => 'required|integer|min:1',
         'user_id' => 'required|integer|min:1',
