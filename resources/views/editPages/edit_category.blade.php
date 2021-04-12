@@ -11,6 +11,10 @@
     </div>
     <div>
       <img src="{{asset($category->image)}}" width="100">
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
     </div>
     <button type="submit" class="btn btn-primary btn-sm float-right">Edit Category</button>
   </form>
