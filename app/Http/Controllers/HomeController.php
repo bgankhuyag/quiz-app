@@ -263,7 +263,7 @@ class HomeController extends Controller
       $new = true;
       $categories = Categories::all();
       $action = route('addSubcategory');
-      return view('editPages.edit_subcategory', ['sub_category' => $sub_category, 'categories' => $categories, 'action' => $action]);
+      return view('editPages.edit_subcategory', ['new' => $new, 'categories' => $categories, 'action' => $action]);
     }
 
     public function addImagePage() {
