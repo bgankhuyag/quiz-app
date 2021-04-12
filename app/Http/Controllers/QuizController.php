@@ -139,7 +139,7 @@ class QuizController extends Controller
       // return (auth()->id());
       $point = Points::updateOrCreate(
         ['users_id' => auth()->id(), 'categories_id' => $request->category_id],
-        ['options_id' => $option->id]
+        ['points' => $request->points]
       );
       foreach ($submitted_answers as $submitted_answer) {
         $question_id = $submitted_answer['question_id'];
