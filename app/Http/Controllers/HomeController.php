@@ -260,7 +260,7 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $user = new Users;
+      $user = new User;
       $user->name = $request->input('name');
       $user->email = $request->input('email');
       $user->roles_id = $request->input('role_id');
