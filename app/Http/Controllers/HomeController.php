@@ -98,7 +98,7 @@ class HomeController extends Controller
       $user = User::firstWhere('id', $id);
       $validator = Validator::make($request->all(), [
         'name' => 'required|string|between:2,100',
-        'email' => ['required|string|email|max:100', Rule::unique('users')->ignore($user->id)],
+        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore($user->id)],
         'role_id' => 'required|integer|min:1',
       ]);
       if($validator->fails()){
