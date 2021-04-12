@@ -167,6 +167,7 @@ class HomeController extends Controller
       $point = Points::firstWhere('id', $id);
       $point->categories_id = $request->category_id;
       $point->users_id = $request->user_id;
+      $point->point = $request->point;
       $point->save();
       return redirect()->route('points');
     }
