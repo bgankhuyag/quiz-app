@@ -14,7 +14,10 @@ class Questions extends Model
     protected $appends = ['image'];
 
     public function getImageAttribute() {
-      return url(asset('images')) . '/' . $this->attributes['image'];
+      if ($this->attributes['image'] != NULL) {
+        return url(asset('images')) . '/' . $this->attributes['image'];
+      }
+      
     }
 
     protected $guarded = ['id'];
