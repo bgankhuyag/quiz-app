@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+  <a href="{{route('addPointPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Points</h3>
   <table class="table table-striped">
   <thead>
