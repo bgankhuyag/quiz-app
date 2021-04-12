@@ -4,7 +4,7 @@
 <div class="container">
   @if($errors->any())
   <div class="alert alert-danger" role="alert">
-    <h4>{{$errors->first()}}</h4>
+    <h4>{{$errors}}</h4>
   </div>
   @endif
   <a href="{{route('user')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>

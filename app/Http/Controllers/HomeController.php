@@ -114,7 +114,8 @@ class HomeController extends Controller
 
     }
 
-    public function editCategory($id) {
+    public function editCategory(Request $request, $id) {
+
       $image_path = public_path('images/') . $image->getRawOriginal('name');
       unlink($image_path);
       $image_name = time() . '.' . $request->image->getClientOriginalName();
