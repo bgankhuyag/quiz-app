@@ -93,7 +93,7 @@ class HomeController extends Controller
     }
 
     public function editUser($id) {
-
+      $user = User::firstWhere('id', $id);
     }
 
     public function editAnswer($id) {
