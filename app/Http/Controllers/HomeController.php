@@ -133,10 +133,17 @@ class HomeController extends Controller
         $category->image = $image_name;
       }
       $category->save();
+      return redirect()->route('category');
     }
 
-    public function editSubcategory($id) {
-
+    public function editSubcategory(Request $request, $id) {
+      $validator = Validator::make($request->all(), [
+        'category_id' => 'required|integer|min:1',
+        'subcategory' => 'required|string',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
     }
 
     public function editImage($id) {
