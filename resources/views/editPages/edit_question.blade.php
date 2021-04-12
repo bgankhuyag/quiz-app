@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+  <a href="{{route('question')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
   <form action="" method="post">
     @csrf
     <h3>Edit Question ID-{{$question->id}}</h3>
