@@ -93,6 +93,14 @@ class HomeController extends Controller
     }
 
     public function editUser(Request $request, $id) {
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|between:2,100',
+        'email' => 'required|string|email|max:100|unique:users',
+        'role_id' => 'required|integer|min:1',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors(['msg', 'The Message']);
+      }
       $user = User::firstWhere('id', $id);
       $user->name = $request->input('name');
       $user->email = $request->input('email');
@@ -137,6 +145,56 @@ class HomeController extends Controller
     }
 
     public function editSelected($id) {
+
+    }
+
+
+
+    public function addUser(Request $request) {
+      $user = User::firstWhere('id', $id);
+      $user->name = $request->input('name');
+      $user->email = $request->input('email');
+      $user->roles_id = $request->input('role_id');
+      $user->save();
+      return redirect()->route('user');
+    }
+
+    public function addAnswer($id) {
+
+    }
+
+    public function addCategory(Request $request) {
+      $image_path = public_path('images/') . $image->getRawOriginal('name');
+      unlink($image_path);
+      $image_name = time() . '.' . $request->image->getClientOriginalName();
+      $request->image->move(public_path('images'), $image_name);
+    }
+
+    public function addSubcategory(Request $request) {
+
+    }
+
+    public function addImage(Request $request) {
+
+    }
+
+    public function addPoint(Request $request) {
+
+    }
+
+    public function addOption(Request $request) {
+
+    }
+
+    public function addQuestion(Request $request) {
+
+    }
+
+    public function addRole(Request $request) {
+
+    }
+
+    public function addSelected(Request $request) {
 
     }
 
