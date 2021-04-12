@@ -25,6 +25,7 @@
       <th scope="col">Question</th>
       <th scope="col">Category ID</th>
       <th scope="col">Sub-Category ID</th>
+      <th scope="col">Image</th>
       <th></th>
     </tr>
   </thead>
@@ -35,6 +36,7 @@
       <td>{{$question->question}}</td>
       <td>{{$question->categories_id}}</td>
       <td>{{$question->sub_categories_id}}</td>
+      <td>{{$question->getRawOriginal('image')}}</td>
       <td class="float-right">
         <a href="{{route('editQuestionPage', ['id' => $question->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
         <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>
@@ -47,6 +49,7 @@
     <th scope="col">Question</th>
     <th scope="col">Category ID</th>
     <th scope="col">Sub-Category ID</th>
+    <th scope="col">Image</th>
     <th></th>
   </tr>
   </table>
