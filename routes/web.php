@@ -82,16 +82,16 @@ Route::group([
   Route::get('/edit_selected_page/{id}', [HomeController::class, 'editSelectedPage'])->name('editSelectedPage');
   Route::get('/edit_subcategory_page/{id}', [HomeController::class, 'editSubcategoryPage'])->name('editSubcategoryPage');
 
-  Route::get('/add_user_page/{id}', [HomeController::class, 'addUserPage'])->name('addUserPage');
-  Route::get('/add_answer_page/{id}', [HomeController::class, 'addAnswerPage'])->name('addAnswerPage');
-  Route::get('/add_category_page/{id}', [HomeController::class, 'addCategoryPage'])->name('addCategoryPage');
-  Route::get('/add_image_page/{id}', [HomeController::class, 'addImagePage'])->name('addImagePage');
-  Route::get('/add_point_page/{id}', [HomeController::class, 'addPointPage'])->name('addPointPage');
-  Route::get('/add_option_page/{id}', [HomeController::class, 'addOptionPage'])->name('addOptionPage');
-  Route::get('/add_question_page/{id}', [HomeController::class, 'addQuestionPage'])->name('addQuestionPage');
-  Route::get('/add_role_page/{id}', [HomeController::class, 'addRolePage'])->name('addRolePage');
-  Route::get('/add_selected_page/{id}', [HomeController::class, 'addSelectedPage'])->name('addSelectedPage');
-  Route::get('/add_subcategory_page/{id}', [HomeController::class, 'addSubcategoryPage'])->name('addSubcategoryPage');
+  Route::get('/add_user_page', [HomeController::class, 'addUserPage'])->name('addUserPage');
+  Route::get('/add_answer_page', [HomeController::class, 'addAnswerPage'])->name('addAnswerPage');
+  Route::get('/add_category_page', [HomeController::class, 'addCategoryPage'])->name('addCategoryPage');
+  Route::get('/add_image_page', [HomeController::class, 'addImagePage'])->name('addImagePage');
+  Route::get('/add_point_page', [HomeController::class, 'addPointPage'])->name('addPointPage');
+  Route::get('/add_option_page', [HomeController::class, 'addOptionPage'])->name('addOptionPage');
+  Route::get('/add_question_page', [HomeController::class, 'addQuestionPage'])->name('addQuestionPage');
+  Route::get('/add_role_page', [HomeController::class, 'addRolePage'])->name('addRolePage');
+  Route::get('/add_selected_page', [HomeController::class, 'addSelectedPage'])->name('addSelectedPage');
+  Route::get('/add_subcategory_page', [HomeController::class, 'addSubcategoryPage'])->name('addSubcategoryPage');
 });
 
 Route::get('/test', function () {
