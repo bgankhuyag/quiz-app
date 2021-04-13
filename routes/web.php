@@ -72,6 +72,17 @@ Route::group([
   Route::post('/add_point', [HomeController::class, 'addPoint'])->name('addPoint');
   Route::post('/add_subcategory', [HomeController::class, 'addSubcategory'])->name('addSubcategory');
 
+  Route::post('/remove_user', [HomeController::class, 'removeUser'])->name('removeUser');
+  Route::post('/remove_answer', [HomeController::class, 'removeAnswer'])->name('removeAnswer');
+  Route::post('/remove_category', [HomeController::class, 'removeCategory'])->name('removeCategory');
+  Route::post('/remove_image', [HomeController::class, 'removeImage'])->name('removeImage');
+  Route::post('/remove_option', [HomeController::class, 'removeOption'])->name('removeOption');
+  Route::post('/remove_question', [HomeController::class, 'removeQuestion'])->name('removeQuestion');
+  Route::post('/remove_role', [HomeController::class, 'removeRole'])->name('removeRole');
+  Route::post('/remove_selected', [HomeController::class, 'removeSelected'])->name('removeSelected');
+  Route::post('/remove_point', [HomeController::class, 'removePoint'])->name('removePoint');
+  Route::post('/remove_subcategory', [HomeController::class, 'removeSubcategory'])->name('removeSubcategory');
+
   Route::get('/edit_user_page/{id}', [HomeController::class, 'editUserPage'])->name('editUserPage');
   Route::get('/edit_answer_page/{id}', [HomeController::class, 'editAnswerPage'])->name('editAnswerPage');
   Route::get('/edit_category_page/{id}', [HomeController::class, 'editCategoryPage'])->name('editCategoryPage');
