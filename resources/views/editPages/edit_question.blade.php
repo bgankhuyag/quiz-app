@@ -21,7 +21,7 @@
       <label for="category_id">Select Category ID</label>
       <select multiple class="form-control" name="category_id" id="category_id" style="height: 300px;">
         @foreach($categories as $category)
-        <option value="{{$category->id}}" @if(!$new && $question->categories_id == $category->id) selected @endif>ID: {{$category->id}}&#160;&#160;&#160; Category: {{$category->category}}</option>
+        <option onclick="clickCategory(id)" id="{{$category->id}}" value="{{$category->id}}" @if(!$new && $question->categories_id == $category->id) selected @endif>ID: {{$category->id}}&#160;&#160;&#160; Category: {{$category->category}}</option>
         @endforeach
       </select>
     </div>
@@ -71,5 +71,9 @@
 
 <script>
   checkPage('questions');
+
+  function clickCategory(id){
+    console.log(id);
+  }
 </script>
 @endsection
