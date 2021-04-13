@@ -18,6 +18,10 @@
       <h3>Edit Question ID-{{$question->id}}</h3>
     @endif
     <div class="form-group">
+      <label for="question">Question</label>
+      <input type="text" name="question" class="form-control" @if(!$new) value="{{$question->question}}" @endif id="question" aria-describedby="emailHelp" placeholder="Enter Question">
+    </div>
+    <div class="form-group">
       <label for="category_id">Select Category ID</label>
       <select multiple class="form-control" name="category_id" id="category_id" style="height: 300px;" onchange="changeCategory(this)">
         @foreach($categories as $category)
@@ -43,15 +47,11 @@
         <label for="option_id">Select Correct Option ID</label>
         <select multiple class="form-control" name="option_id" id="option_id" style="height: 300px;">
           @foreach($options as $option)
-          <option value="{{$option->id}}" @if($question->correct_option_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Question ID: {{$option->questions_id}} &#160;&#160;&#160; Option: {{$option->option}}</option>
+          <option value="{{$option->id}}" @if($question->correct_option_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Option: {{$option->option}}</option>
           @endforeach
         </select>
       </div>
     @endif
-    <div class="form-group">
-      <label for="question">Question</label>
-      <input type="text" name="question" class="form-control" @if(!$new) value="{{$question->question}}" @endif id="question" aria-describedby="emailHelp" placeholder="Enter Question">
-    </div>
     <div>
       @if (!$new && !empty($question->image))
         <img src="{{$question->image}}" width="250" style="margin-right: 20px;">
@@ -73,7 +73,16 @@
   checkPage('questions');
 
   function changeCategory(category){
-    console.log(category.value);
+    // console.log(category.value);
+    var sub_categories = document.getElementById('subcategory_id');
+    // console.log(sub_categories.length);
+    for (var i = 0; i < sub_categories.length; i++) {
+      if (!sub_categories[i].classList.contains(category.value)) {
+        sub_categories[i].style.display = "none";
+      } else {
+        sub_categories[i].style.display = "block";
+      }
+    }
   }
 </script>
 @endsection

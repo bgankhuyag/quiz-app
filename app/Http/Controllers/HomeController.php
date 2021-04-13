@@ -617,7 +617,7 @@ class HomeController extends Controller
       $question = Questions::firstWhere('id', $id);
       $categories = Categories::all();
       $sub_categories = SubCategories::all();
-      $options = Options::all();
+      $options = Options::where('questions_id', $id)->get();
       $action = route('editQuestion', ['id' => $id]);
       $data = [
         'action' => $action,
