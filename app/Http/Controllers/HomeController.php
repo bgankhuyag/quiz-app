@@ -491,7 +491,7 @@ class HomeController extends Controller
     public function addQuestion(Request $request) {
       $validator = Validator::make($request->all(), [
         'category_id' => 'required|integer|min:1',
-        'subcategory_id' => 'required|integer|min:1',
+        'subcategory_id' => 'required|integer|min:0',
         'option' => 'required|string',
         'question' => 'required|string',
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
