@@ -451,6 +451,7 @@ class HomeController extends Controller
       $point = new Points;
       $point->categories_id = $request->category_id;
       $point->users_id = $request->user_id;
+      $point->points = $request->point;
       $point->save();
       return redirect()->route('points');
     }
