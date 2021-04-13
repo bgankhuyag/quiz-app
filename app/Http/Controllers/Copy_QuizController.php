@@ -33,7 +33,11 @@ class Copy_QuizController extends Controller
     public function getCategories() {
       // dd(Auth::user());
       // $categories = Categories::all('id', 'category');
-      $categories = Categories::with('sub_category:id,categories_id,sub_category')->join('points', 'categories.id', '=', 'points.categories_id')->get();
+      // dd("here");
+      $user_id = auth()->id();
+      $categories = Categories::with('sub_category:id,categories_id,sub_category')->join('points', 'categories.id', '=', 'points.categories_id')->where(function($query) use ($user_id) {
+        $query->where('users_id', $user_id);
+      })->get();
       // $categories = Categories::with('sub_category:id,categories_id,sub_category')->join('sub_categories', 'categories.id', '=', 'sub_categories.categories_id')->get(['id', 'category']);
       // $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
       // $categories = Questions::distinct('categories_id')->with('category:id,category', 'category.sub_category:id,categories_id,sub_category')->get(['categories_id']);
