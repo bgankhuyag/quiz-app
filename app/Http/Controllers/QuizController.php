@@ -85,7 +85,8 @@ class QuizController extends Controller
       $categories = Categories::with('sub_category:id,categories_id,sub_category')->get(['id', 'category', 'image']);
       // $categories = Questions::join('categories', 'questions.categories_id', '=', 'categories.id')->join('sub_categories', 'questions.sub_categories_id', '=', 'sub_categories.id')->get();
       // dd($categories);
-      $result  = ['succces' => true, 'data' => $categories];
+      $points = Points::where('users_id', auth()->id())->get(['points', 'categories_id']);
+      $result  = ['succces' => true, 'data' => $categories, 'points' => $points];
       return response()->json($result);
     }
 
