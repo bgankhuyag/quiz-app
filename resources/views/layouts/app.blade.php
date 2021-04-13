@@ -109,7 +109,7 @@ function checkPage(page) {
                     <!-- Right Side Of Navbar -->
                     <div class="btn-group">
                       <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{auth()->user()}}
+                        {{dd(backpack_user())}}
                       </button>
                       <div class="dropdown-menu">
                         ...
