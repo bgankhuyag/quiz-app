@@ -24,10 +24,6 @@
     <div>
       @if(!$new && !empty($category->image))
         <img src="{{$category->image}}" width="100" style="margin-right: 20px;">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="removeImage" name="removeImage" value="remove">
-          <label class="form-check-label" for="removeImage">Delete Image</label>
-        </div>
       @endif
       <div class="form-group">
         <label for="image">Choose Image</label>

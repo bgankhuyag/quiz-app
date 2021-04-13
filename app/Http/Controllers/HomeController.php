@@ -257,9 +257,6 @@ class HomeController extends Controller
       }
       $category = Categories::firstWhere('id', $id);
       $category->category = $request->category;
-      if ($request->removeImage == true) {
-        dd("here");
-      }
       if (!empty($request->image)) {
         if (!empty($category->getRawOriginal('image'))){
           Storage::disk('s3')->delete($category->getRawOriginal('image'));
@@ -344,6 +341,10 @@ class HomeController extends Controller
       $question->sub_categories_id = $request->subcategory_id;
       $question->correct_option_id = $request->option_id;
       $question->question = $request->question;
+      if ($request->removeImage == true) {
+        Storage::disk('s3')->delete($question->getRawOriginal('image'));
+        $question->image = NULL;
+      }
       if (!empty($request->image)) {
         if (!empty($question->getRawOriginal('image'))) {
           Storage::disk('s3')->delete($question->getRawOriginal('image'));
@@ -419,20 +420,19 @@ class HomeController extends Controller
     public function addCategory(Request $request) {
       $validator = Validator::make($request->all(), [
         'category' => 'required|string',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
       ]);
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
       $category = new Categories;
       $category->category = $request->category;
-      if (!empty($request->image)) {
-        $file = $request->image;
-        $imageName= time() . $file->getClientOriginalName();
-        Storage::disk('s3')->put($imageName, file_get_contents($file));
-        // $image_name = time() . '.' . $request->image->getClientOriginalName();
-        // $request->image->move(public_path('images'), $image_name);
-        $category->image = $imageName;
-      }
+      $file = $request->image;
+      $imageName= time() . $file->getClientOriginalName();
+      Storage::disk('s3')->put($imageName, file_get_contents($file));
+      // $image_name = time() . '.' . $request->image->getClientOriginalName();
+      // $request->image->move(public_path('images'), $image_name);
+      $category->image = $imageName;
       $category->save();
       return redirect()->route('category');
     }
