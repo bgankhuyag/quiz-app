@@ -111,7 +111,7 @@ class HomeController extends Controller
       return redirect()->route('user');
     }
 
-    public function editAnswer($id) {
+    public function removeAnswer($id) {
       $validator = Validator::make($request->all(), [
         'name' => 'required|string|between:2,100',
         'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore($user->id)],

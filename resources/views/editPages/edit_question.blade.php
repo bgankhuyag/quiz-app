@@ -36,7 +36,7 @@
     @if ($new)
       <div class="form-group">
         <label for="option">Correct Option</label>
-        <input type="text" name="option" class="form-control" id="option" aria-describedby="emailHelp" placeholder="Enter Option">
+        <input type="text" name="option" class="form-control" id="option" aria-describedby="option" placeholder="Enter Option">
       </div>
     @else
       <div class="form-group">
