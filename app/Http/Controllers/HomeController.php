@@ -40,7 +40,7 @@ class HomeController extends Controller
     }
 
     public function dashboard() {
-      // dd("here");
+      dd("here");
       return view('dashboard');
     }
 
@@ -112,7 +112,14 @@ class HomeController extends Controller
     }
 
     public function editAnswer($id) {
-
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|between:2,100',
+        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore($user->id)],
+        'role_id' => 'required|integer|min:1',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
     }
 
     public function editCategory(Request $request, $id) {
@@ -409,7 +416,9 @@ class HomeController extends Controller
       $answer = Answers::firstWhere('id', $id);
       $questions = Questions::all();
       $options = Options::all();
-      $data = ['options' => $options, 'questions' => $questions, 'answer' => $answer];
+      $action = route('editAnswer', ['id' => $id]);
+      $new = false;
+      $data = ['options' => $options, 'questions' => $questions, 'answer' => $answer, 'action' => $action, 'new' => $new];
       return view('editPages.edit_answer', $data);
     }
 
@@ -509,10 +518,12 @@ class HomeController extends Controller
     }
 
     public function addAnswerPage() {
-      $answer = Answers::firstWhere('id', $id);
+      // $answer = Answers::firstWhere('id', $id);
       $questions = Questions::all();
       $options = Options::all();
-      $data = ['options' => $options, 'questions' => $questions, 'answer' => $answer];
+      $new = true;
+      $action = route('addQuestion');
+      $data = ['options' => $options, 'questions' => $questions, 'action' => $action, 'new' => $new];
       return view('editPages.edit_answer', $data);
     }
 
