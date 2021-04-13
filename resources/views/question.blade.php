@@ -15,11 +15,11 @@
     <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col-sm">ID</th>
+        <th scope="col-sm-1">ID</th>
         <th scope="col">Question</th>
-        <th scope="col-sm">Category ID</th>
-        <th scope="col-sm">Sub-Category ID</th>
-        <th scope="col-sm">Correct Option ID</th>
+        <th scope="col-sm-1">Category ID</th>
+        <th scope="col-sm-1">Sub Category ID</th>
+        <th scope="col-sm-1">Correct Option ID</th>
         <th scope="col">Image</th>
         <th></th>
       </tr>
@@ -44,7 +44,7 @@
       <th scope="col">ID</th>
       <th scope="col">Question</th>
       <th scope="col">Category ID</th>
-      <th scope="col">Sub-Category ID</th>
+      <th scope="col">Sub Category ID</th>
       <th scope="col">Correct Option ID</th>
       <th scope="col">Image</th>
       <th></th>
