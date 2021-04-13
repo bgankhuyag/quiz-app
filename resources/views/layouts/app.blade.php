@@ -108,9 +108,9 @@ function checkPage(page) {
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                      <p>Logged in as: {{backpack_user()['name']}}</p>
+                      <li>Logged in as: {{backpack_user()['name']}}</li>
                       <!-- Authentication Links -->
-                      <a class="logout dropdown-item" href="{{ backpack_url('logout') }}">Logout</a>
+                      <li><a class="logout dropdown-item" href="{{ backpack_url('logout') }}">Logout</a></li>
 
                     </ul>
                 </div>
