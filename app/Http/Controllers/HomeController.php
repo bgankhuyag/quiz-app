@@ -226,7 +226,7 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      if (backpack_user()->id() == $user->id && $user->roles_id != $request->role_id) {
+      if (backpack_user()->id == $user->id && $user->roles_id != $request->role_id) {
         return redirect()->back()->withErrors(['Cannot change your own role']);
       }
       $user->name = $request->input('name');
