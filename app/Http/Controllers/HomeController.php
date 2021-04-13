@@ -328,7 +328,7 @@ class HomeController extends Controller
     public function editQuestion(Request $request, $id) {
       $validator = Validator::make($request->all(), [
         'category_id' => 'required|integer|min:1',
-        'subcategory_id' => 'required|integer|min:1',
+        'subcategory_id' => 'required|integer|min:0',
         'option_id' => 'required|integer|min:1',
         'question' => 'required|string',
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
@@ -338,7 +338,11 @@ class HomeController extends Controller
       }
       $question = Questions::firstWhere('id', $id);
       $question->categories_id = $request->category_id;
-      $question->sub_categories_id = $request->subcategory_id;
+      if ($request->subcategory_id != 0) {
+        $question->sub_categories_id = $request->subcategory_id;
+      } else {
+        $question->sub_categories_id = NULL;
+      }
       $question->correct_option_id = $request->option_id;
       $question->question = $request->question;
       if ($request->removeImage == true) {
@@ -501,7 +505,9 @@ class HomeController extends Controller
       }
       $question = new Questions;
       $question->categories_id = $request->category_id;
-      $question->sub_categories_id = $request->subcategory_id;
+      if ($request->subcategory_id != 0) {
+        $question->sub_categories_id = $request->subcategory_id;
+      }
       $question->question = $request->question;
       if (!empty($request->image)) {
         $file = $request->image;
