@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  Welcome to the Admin Dashboad. Use the link to the left to view tables.
+  <h4>Welcome to the Admin Dashboad. Use the link to the left to view tables.</h4>
 </div>
 
 <script>

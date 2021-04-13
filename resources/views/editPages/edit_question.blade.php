@@ -33,14 +33,21 @@
         @endforeach
       </select>
     </div>
-    <div class="form-group">
-      <label for="option_id">Select Correct Option ID</label>
-      <select multiple class="form-control" name="option_id" id="option_id" style="height: 300px;">
-        @foreach($options as $option)
-        <option value="{{$option->id}}" @if(!$new && $question->correct_option_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Question ID: {{$option->questions_id}} &#160;&#160;&#160; Option: {{$option->option}}</option>
-        @endforeach
-      </select>
-    </div>
+    @if ($new)
+      <div class="form-group">
+        <label for="option">Correct Option</label>
+        <input type="text" name="option" class="form-control" id="option" aria-describedby="emailHelp" placeholder="Enter Option">
+      </div>
+    @else
+      <div class="form-group">
+        <label for="option_id">Select Correct Option ID</label>
+        <select multiple class="form-control" name="option_id" id="option_id" style="height: 300px;">
+          @foreach($options as $option)
+          <option value="{{$option->id}}" @if($question->correct_option_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Question ID: {{$option->questions_id}} &#160;&#160;&#160; Option: {{$option->option}}</option>
+          @endforeach
+        </select>
+      </div>
+    @endif
     <div class="form-group">
       <label for="question">Question</label>
       <input type="text" name="question" class="form-control" @if(!$new) value="{{$question->question}}" @endif id="question" aria-describedby="emailHelp" placeholder="Enter Question">

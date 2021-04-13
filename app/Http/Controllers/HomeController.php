@@ -94,6 +94,127 @@ class HomeController extends Controller
       return view('subcategory', ['sub_categories' => $sub_categories]);
     }
 
+
+
+
+    public function removeUser(Request $request, $id) {
+      $user = User::firstWhere('id', $id);
+      $selecteds = Selected::where('users_id', $id)->get();
+      if (count($selecteds) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Selected Options']);
+      }
+      $points = Points::where('users_id', $id)->get();
+      if (count($points) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Points']);
+      }
+      $user->delete();
+      return redirect()->route('user');
+    }
+
+    public function editAnswer($id) {
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|between:2,100',
+        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore($user->id)],
+        'role_id' => 'required|integer|min:1',
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+    }
+
+    public function removeCategory(Request $request, $id) {
+      $category = Categories::firstWhere('id', $id);
+      $questions = Questions::where('categories_id', $id)->get();
+      if (count($questions) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Questions']);
+      }
+      $points = Points::where('categories_id', $id)->get();
+      if (count($points) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Points']);
+      }
+      $sub_categories = SubCategories::where('categories_id', $id)->get();
+      if (count($sub_categories) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Sub-Categories']);
+      }
+      if (!empty($category->getRawOriginal('image'))){
+        $image_path = public_path('images/') . $category->getRawOriginal('image');
+        unlink($image_path);
+      }
+      $category->delete();
+      return redirect()->route('category');
+    }
+
+    public function removeSubcategory(Request $request, $id) {
+      $sub_category = SubCategories::firstWhere('id', $id);
+      $questions = Questions::where('sub_categories_id', $id)->get();
+      if (count($questions) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Questions']);
+      }
+      $sub_category->delete();
+      return redirect()->route('subcategory');
+    }
+
+    public function removeImage($id) {
+
+    }
+
+    public function removePoint(Request $request, $id) {
+      $point = Points::firstWhere('id', $id);
+      $point->delete();
+      return redirect()->route('points');
+    }
+
+    public function removeOption(Request $request, $id) {
+      $option = Options::firstWhere('id', $id);
+      $selecteds = Selected::where('options_id', $id)->get();
+      if (count($selecteds) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Selected Options']);
+      }
+      $questions = Questions::where('correct_option_id', $id)->get();
+      if (count($questions) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Questions']);
+      }
+      $option->delete();
+      return redirect()->route('option');
+    }
+
+    public function removeQuestion(Request $request, $id) {
+      $question = Questions::firstWhere('id', $id);
+      $options = Options::where('questions_id', $id)->get();
+      if (count($options) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Options']);
+      }
+      $selecteds = Selected::where('questions_id', $id)->get();
+      if (count($selecteds) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Selected Options']);
+      }
+      if (!empty($question->getRawOriginal('image'))) {
+        $image_path = public_path('images/') . $question->getRawOriginal('image');
+        unlink($image_path);
+      }
+      $question->delete();
+      return redirect()->route('question');
+    }
+
+    public function removeRole(Request $request, $id) {
+      $role = Roles::firstWhere('id', $id);
+      $users = User::where('roles_id', $id)->get();
+      if (count($users) > 0) {
+        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Users']);
+      }
+      $role->delete();
+      return redirect()->route('role');
+    }
+
+    public function removeSelected(Request $request, $id) {
+      $selected = Selected::firstWhere('id', $id);
+      $selected->delete();
+      return redirect()->route('selected');
+    }
+
+
+
+
     public function editUser(Request $request, $id) {
       $user = User::firstWhere('id', $id);
       $validator = Validator::make($request->all(), [
@@ -353,7 +474,7 @@ class HomeController extends Controller
       $validator = Validator::make($request->all(), [
         'category_id' => 'required|integer|min:1',
         'subcategory_id' => 'required|integer|min:1',
-        'option_id' => 'required|integer|min:1',
+        'option' => 'required|string',
         'question' => 'required|string',
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
       ]);
@@ -363,13 +484,18 @@ class HomeController extends Controller
       $question = new Questions;
       $question->categories_id = $request->category_id;
       $question->sub_categories_id = $request->subcategory_id;
-      $question->correct_option_id = $request->option_id;
       $question->question = $request->question;
       if (!empty($request->image)) {
         $image_name = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('images'), $image_name);
         $question->image = $image_name;
       }
+      $question->save();
+      $option = new Options;
+      $option->option = $request->option;
+      $option->questions_id = $question->id;
+      $option->save();
+      $question->correct_option_id = $option->id;
       $question->save();
       return redirect()->route('question');
     }
