@@ -435,6 +435,14 @@ h6,
   line-height: 1.2;
 }
 
+.user{
+  border-radius: 100%;
+}
+
+.user:hover{
+  text-decoration: none;
+}
+
 .logout{
   color: black;
 }

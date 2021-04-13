@@ -110,7 +110,7 @@ function checkPage(page) {
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <a class="logout" href="{{ backpack_url('logout') }}">Logout</a>
-                        <a class="user" href="">{{backpack_user()['name'][0]}}</a>
+                        <a class="user" href=""><button class="btn btn-primary">{{backpack_user()['name'][0]}}</button></a>
 
                     </ul>
                 </div>

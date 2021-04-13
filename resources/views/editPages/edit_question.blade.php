@@ -29,7 +29,7 @@
       <label for="subcategory_id">Select Sub-Category ID</label>
       <select multiple class="form-control" name="subcategory_id" id="subcategory_id" style="height: 300px;">
         @foreach($sub_categories as $sub_category)
-        <option value="{{$sub_category->id}}" @if(!$new && $question->sub_categories_id == $sub_category->id) selected @endif>ID: {{$sub_category->id}}&#160;&#160;&#160; Category ID: {{$sub_category->categories_id}}&#160;&#160;&#160; Question: {{$sub_category->sub_category}}</option>
+        <option class="{{$sub_category->categories_id}}" value="{{$sub_category->id}}" @if(!$new && $question->sub_categories_id == $sub_category->id) selected @endif>ID: {{$sub_category->id}}&#160;&#160;&#160; Category ID: {{$sub_category->categories_id}}&#160;&#160;&#160; Question: {{$sub_category->sub_category}}</option>
         @endforeach
       </select>
     </div>
