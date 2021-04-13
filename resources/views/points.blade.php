@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+  @if($errors->any())
+  <div class="alert alert-danger" role="alert">
+    @foreach ($errors->all() as $error)
+      <h3>{{ $error }}</h3>
+    @endforeach
+  </div>
+  @endif
   <a href="{{route('addPointPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Points</h3>
   <table class="table table-striped">
