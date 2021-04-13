@@ -23,7 +23,7 @@
     </div>
     <div>
       @if(!$new && !empty($category->image))
-        <img src="{{asset($category->image)}}" width="100">
+        <img src="{{Storage::disk('s3')->url($category->image)}}" width="100">
       @endif
       <div class="form-group">
         <label for="image">Choose Image</label>
