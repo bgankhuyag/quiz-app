@@ -25,7 +25,7 @@ use App\Models\Options;
 
 Route::get('/', function () {
   // return view('welcome');
-  return redirect()->backpack_url('login');
+  return redirect()->guest(backpack_url('login'));
 });
 
 Route::group([
