@@ -19,7 +19,7 @@
     @endif
     <div class="form-group">
       <label for="question_id">Select Question ID</label>
-      <select multiple class="form-control" name="question_id" id="question_id" style="height: 300px;">
+      <select multiple class="form-control" name="question_id" id="question_id" style="height: 300px;" onchange="changeQuestion(this)">
         @foreach($questions as $question)
         <option value="{{$question->id}}" @if(!$new && $selected->questions_id == $question->id) selected @endif>ID: {{$question->id}}&#160;&#160;&#160; Question: {{$question->question}}</option>
         @endforeach
@@ -29,7 +29,7 @@
       <label for="option_id">Select Option ID</label>
       <select multiple class="form-control" name="option_id" id="option_id" style="height: 300px;">
         @foreach($options as $option)
-        <option value="{{$option->id}}" @if(!$new && $selected->options_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Question ID: {{$option->questions_id}}&#160;&#160;&#160; Option: {{$option->option}}</option>
+        <option class="{{$option->questions_id}}" value="{{$option->id}}" @if(!$new && $selected->options_id == $option->id) selected @endif>ID: {{$option->id}}&#160;&#160;&#160; Question ID: {{$option->questions_id}}&#160;&#160;&#160; Option: {{$option->option}}</option>
         @endforeach
       </select>
     </div>
@@ -47,5 +47,33 @@
 
 <script>
   checkPage('selecteds');
+
+  function changeQuestion(question) {
+    var options = document.getElementById('option_id');
+    for (var i = 0; i < options.length; i++) {
+      if (!options[i].classList.contains(question.value)) {
+        options[i].style.display = "none";
+      } else {
+        options[i].style.display = "block";
+      }
+    }
+  }
+
+  function checkQuestion() {
+    var question = document.getElementById('question_id');
+    // console.log(!question.value);
+    if (question.value) {
+      var options = document.getElementById('option_id');
+      for (var i = 0; i < options.length; i++) {
+        if (!options[i].classList.contains(question.value)) {
+          options[i].style.display = "none";
+        } else {
+          options[i].style.display = "block";
+        }
+      }
+    }
+  }
+
+  window.onload = checkQuestion();
 </script>
 @endsection
