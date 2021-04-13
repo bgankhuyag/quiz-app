@@ -32,4 +32,6 @@ class Categories extends Model
     public function questions() {
       return $this->hasMany(Questions::class);
     }
+
+    // public function poi
 }
