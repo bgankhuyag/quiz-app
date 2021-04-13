@@ -259,9 +259,12 @@ class HomeController extends Controller
           $image_path = public_path('images/') . $category->getRawOriginal('image');
           unlink($image_path);
         }
-        $image_name = time() . '.' . $request->image->getClientOriginalName();
-        $request->image->move(public_path('images'), $image_name);
-        $category->image = $image_name;
+        $file = $request->image;
+        $imageName= time() . $file->getClientOriginalName();
+        Storage::disk('s3')->put($imageName, file_get_contents($file));
+        // $image_name = time() . '.' . $request->image->getClientOriginalName();
+        // $request->image->move(public_path('images'), $image_name);
+        $category->image = $imageName;
       }
       $category->save();
       return redirect()->route('category');
