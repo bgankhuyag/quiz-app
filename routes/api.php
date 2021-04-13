@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::post('/select_category/{id}', [QuizController::class, 'selectCategory'])->name('selectCategory');
 
   Route::post('/get_categories', [QuizController::class, 'getCategories'])->name('getCategories');
-  Route::get('/check_get_categories', [Copy_QuizController::class, 'getCategories'])->name('checkGetCategories');
+  Route::post('/check_get_categories', [Copy_QuizController::class, 'getCategories'])->name('checkGetCategories');
 
   Route::post('/check_test', [Copy_QuizController::class, 'check']);
   Route::post('/check', [QuizController::class, 'check'])->name('check');
