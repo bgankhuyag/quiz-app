@@ -24,6 +24,10 @@
     <div>
       @if(!$new && !empty($category->image))
         <img src="{{Storage::disk('s3')->url($category->getRawOriginal('image'))}}" width="100">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+          <label class="form-check-label" for="inlineCheckbox2">2</label>
+        </div>
       @endif
       <div class="form-group">
         <label for="image">Choose Image</label>
