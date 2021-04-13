@@ -41,12 +41,12 @@
       @endforeach
     </tbody>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Question</th>
-      <th scope="col">Category ID</th>
-      <th scope="col">Sub Category ID</th>
-      <th scope="col">Correct Option ID</th>
-      <th scope="col">Image</th>
+      <th>ID</th>
+      <th>Question</th>
+      <th>Category ID</th>
+      <th>Sub Category ID</th>
+      <th>Correct Option ID</th>
+      <th>Image</th>
       <th></th>
     </tr>
     </table>
