@@ -257,6 +257,9 @@ class HomeController extends Controller
       }
       $category = Categories::firstWhere('id', $id);
       $category->category = $request->category;
+      if ($request->removeImage == true) {
+        dd("here");
+      }
       if (!empty($request->image)) {
         if (!empty($category->getRawOriginal('image'))){
           Storage::disk('s3')->delete($category->getRawOriginal('image'));
