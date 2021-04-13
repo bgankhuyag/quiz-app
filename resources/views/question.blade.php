@@ -11,6 +11,7 @@
   @endif
   <a href="{{route('addQuestionPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Questions</h3>
+  <div class="table-responsive">
   <table class="table table-striped">
   <thead>
     <tr>
@@ -49,6 +50,7 @@
     <th></th>
   </tr>
   </table>
+</div>
   {{ $questions->links() }}
 </div>
 
