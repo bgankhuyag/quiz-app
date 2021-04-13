@@ -97,7 +97,7 @@ class HomeController extends Controller
 
 
 
-    public function removeUser(Request $request, $id) {
+    public function removeUser($id) {
       $user = User::firstWhere('id', $id);
       $selecteds = Selected::where('users_id', $id)->get();
       if (count($selecteds) > 0) {
@@ -122,7 +122,7 @@ class HomeController extends Controller
       }
     }
 
-    public function removeCategory(Request $request, $id) {
+    public function removeCategory($id) {
       $category = Categories::firstWhere('id', $id);
       $questions = Questions::where('categories_id', $id)->get();
       if (count($questions) > 0) {
@@ -144,7 +144,7 @@ class HomeController extends Controller
       return redirect()->route('category');
     }
 
-    public function removeSubcategory(Request $request, $id) {
+    public function removeSubcategory($id) {
       $sub_category = SubCategories::firstWhere('id', $id);
       $questions = Questions::where('sub_categories_id', $id)->get();
       if (count($questions) > 0) {
@@ -158,13 +158,13 @@ class HomeController extends Controller
 
     }
 
-    public function removePoint(Request $request, $id) {
+    public function removePoint($id) {
       $point = Points::firstWhere('id', $id);
       $point->delete();
       return redirect()->route('points');
     }
 
-    public function removeOption(Request $request, $id) {
+    public function removeOption($id) {
       $option = Options::firstWhere('id', $id);
       $selecteds = Selected::where('options_id', $id)->get();
       if (count($selecteds) > 0) {
@@ -178,7 +178,7 @@ class HomeController extends Controller
       return redirect()->route('option');
     }
 
-    public function removeQuestion(Request $request, $id) {
+    public function removeQuestion($id) {
       $question = Questions::firstWhere('id', $id);
       $options = Options::where('questions_id', $id)->get();
       if (count($options) > 0) {
@@ -196,7 +196,7 @@ class HomeController extends Controller
       return redirect()->route('question');
     }
 
-    public function removeRole(Request $request, $id) {
+    public function removeRole($id) {
       $role = Roles::firstWhere('id', $id);
       $users = User::where('roles_id', $id)->get();
       if (count($users) > 0) {
@@ -206,7 +206,7 @@ class HomeController extends Controller
       return redirect()->route('role');
     }
 
-    public function removeSelected(Request $request, $id) {
+    public function removeSelected($id) {
       $selected = Selected::firstWhere('id', $id);
       $selected->delete();
       return redirect()->route('selected');
