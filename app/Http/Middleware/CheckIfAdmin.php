@@ -66,9 +66,9 @@ class CheckIfAdmin
         // dd(backpack_user()['roles_id'] != Roles::firstWhere('role', 'admin')['id']);
         if (! $this->checkIfUserIsAdmin(backpack_user())) {
           // dd('here');
-          return redirect()->guest(backpack_url('logout'))->withErrors(['User is not authorized']);
-          return response('Bad', 401);
-          return $this->respondToUnauthorizedRequest($request);
+          return redirect()->guest(backpack_url('logout'));
+          // return response('Bad', 401);
+          // return $this->respondToUnauthorizedRequest($request);
         }
         // dd("here");
         if (backpack_user()['roles_id'] != Roles::firstWhere('role', 'admin')['id']) {
