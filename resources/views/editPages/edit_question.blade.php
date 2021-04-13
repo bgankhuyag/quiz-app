@@ -73,7 +73,7 @@
   checkPage('questions');
 
   function changeCategory(category){
-    console.log(category);
+    console.log(category.value);
   }
 </script>
 @endsection
