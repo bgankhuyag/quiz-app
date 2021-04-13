@@ -436,11 +436,7 @@ h6,
 }
 
 .user{
-  border-radius: 100%;
-}
-
-.user:hover{
-  text-decoration: none;
+  margin: 0px 10px;
 }
 
 .logout{
