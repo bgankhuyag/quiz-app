@@ -54,7 +54,11 @@
     </div>
     <div>
       @if (!$new && !empty($question->image))
-        <img src="{{asset($question->image)}}" width="250">
+        <img src="{{$question->image}}" width="250" style="margin-right: 20px;">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="removeImage" name="removeImage" value="remove">
+          <label class="form-check-label" for="removeImage">Delete Image</label>
+        </div>
       @endif
       <div class="form-group">
         <label for="image">Choose Image</label>

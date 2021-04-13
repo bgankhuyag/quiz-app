@@ -23,10 +23,10 @@
     </div>
     <div>
       @if(!$new && !empty($category->image))
-        <img src="{{Storage::disk('s3')->url($category->getRawOriginal('image'))}}" width="100">
+        <img src="{{$category->image}}" width="100" style="margin-right: 20px;">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label" for="inlineCheckbox2">2</label>
+          <input class="form-check-input" type="checkbox" id="removeImage" name="removeImage" value="remove">
+          <label class="form-check-label" for="removeImage">Delete Image</label>
         </div>
       @endif
       <div class="form-group">
