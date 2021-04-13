@@ -11,15 +11,15 @@
   @endif
   <a href="{{route('addQuestionPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Questions</h3>
-  <div class="table-responsive-lg">
+  <div class="table-responsive-xl">
     <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col-sm">ID</th>
         <th scope="col">Question</th>
-        <th scope="col">Category ID</th>
-        <th scope="col">Sub-Category ID</th>
-        <th scope="col">Correct Option ID</th>
+        <th scope="col-sm">Category ID</th>
+        <th scope="col-sm">Sub-Category ID</th>
+        <th scope="col-sm">Correct Option ID</th>
         <th scope="col">Image</th>
         <th></th>
       </tr>
