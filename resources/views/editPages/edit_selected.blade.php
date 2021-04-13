@@ -37,7 +37,7 @@
       <label for="user_id">Select User ID</label>
       <select multiple class="form-control" name="user_id" id="user_id" style="height: 300px;">
         @foreach($users as $user)
-        <option value="{{$user->id}}" @if(!$new && $selected->users_id == $user->id) selected @endif>ID: {{$user->id}}&#160;&#160;&#160; Name: {{$user->name}}</option>
+        <option value="{{$user->id}}" @if(!$new && $selected->users_id == $user->id) selected @endif>ID: {{$user->id}}&#160;&#160;&#160; Name: {{$user->name}} &#160;&#160;&#160; Email: {{$user->email}}</option>
         @endforeach
       </select>
     </div>
