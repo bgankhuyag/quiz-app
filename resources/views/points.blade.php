@@ -30,7 +30,7 @@
       <td>{{$point->points}}</td>
       <td class="float-right">
         <a href="{{route('editPointPage', ['id' => $point->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
-        <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>
+        <a href="{{route('removePoint', ['id' => $point->id])}}"><button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button></a>
       </td>
     </tr>
     @endforeach
