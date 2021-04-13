@@ -16,6 +16,7 @@ use App\Models\Options;
 use Illuminate\Support\Facades\Schema;
 use Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -411,9 +412,13 @@ class HomeController extends Controller
       $category = new Categories;
       $category->category = $request->category;
       if (!empty($request->image)) {
-        $image_name = time() . '.' . $request->image->getClientOriginalName();
-        $request->image->move(public_path('images'), $image_name);
-        $category->image = $image_name;
+        $file = $request->image;
+        $imageName= time() . $file->getClientOriginalName();
+        $filePath = 'images/' . $imageName;
+        Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // $image_name = time() . '.' . $request->image->getClientOriginalName();
+        // $request->image->move(public_path('images'), $image_name);
+        // $category->image = $image_name;
       }
       $category->save();
       return redirect()->route('category');
