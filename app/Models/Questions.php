@@ -15,7 +15,8 @@ class Questions extends Model
 
     public function getImageAttribute() {
       if ($this->attributes['image'] != NULL) {
-        return url(asset('images')) . '/' . $this->attributes['image'];
+        // return url(asset('images')) . '/' . $this->attributes['image'];
+        return Storage::disk('s3')->url($this->attributes['image']);
       }
     }
 

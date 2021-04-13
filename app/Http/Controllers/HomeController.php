@@ -404,7 +404,6 @@ class HomeController extends Controller
     public function addCategory(Request $request) {
       $validator = Validator::make($request->all(), [
         'category' => 'required|string',
-        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
       ]);
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
