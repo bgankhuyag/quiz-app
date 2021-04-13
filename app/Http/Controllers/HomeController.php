@@ -101,11 +101,11 @@ class HomeController extends Controller
       $user = User::firstWhere('id', $id);
       $selecteds = Selected::where('users_id', $id)->get();
       if (count($selecteds) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Selected Options']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
       $points = Points::where('users_id', $id)->get();
       if (count($points) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Points']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Points']);
       }
       $user->delete();
       return redirect()->route('user');
@@ -126,15 +126,15 @@ class HomeController extends Controller
       $category = Categories::firstWhere('id', $id);
       $questions = Questions::where('categories_id', $id)->get();
       if (count($questions) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Questions']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Questions']);
       }
       $points = Points::where('categories_id', $id)->get();
       if (count($points) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Points']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Points']);
       }
       $sub_categories = SubCategories::where('categories_id', $id)->get();
       if (count($sub_categories) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Sub-Categories']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Sub-Categories']);
       }
       if (!empty($category->getRawOriginal('image'))){
         $image_path = public_path('images/') . $category->getRawOriginal('image');
@@ -148,7 +148,7 @@ class HomeController extends Controller
       $sub_category = SubCategories::firstWhere('id', $id);
       $questions = Questions::where('sub_categories_id', $id)->get();
       if (count($questions) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Questions']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Questions']);
       }
       $sub_category->delete();
       return redirect()->route('subcategory');
@@ -168,11 +168,11 @@ class HomeController extends Controller
       $option = Options::firstWhere('id', $id);
       $selecteds = Selected::where('options_id', $id)->get();
       if (count($selecteds) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Selected Options']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
       $questions = Questions::where('correct_option_id', $id)->get();
       if (count($questions) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Questions']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Questions']);
       }
       $option->delete();
       return redirect()->route('option');
@@ -180,17 +180,17 @@ class HomeController extends Controller
 
     public function removeQuestion($id) {
       $question = Questions::firstWhere('id', $id);
-      $options = Options::where('questions_id', $id)->get();
-      if (count($options) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Options']);
-      }
       $selecteds = Selected::where('questions_id', $id)->get();
       if (count($selecteds) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Selected Options']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
       if (!empty($question->getRawOriginal('image'))) {
         $image_path = public_path('images/') . $question->getRawOriginal('image');
         unlink($image_path);
+      }
+      $options = Options::where('questions_id', $id)->get();
+      foreach ($options as $option) {
+        $option->delete();
       }
       $question->delete();
       return redirect()->route('question');
@@ -200,7 +200,7 @@ class HomeController extends Controller
       $role = Roles::firstWhere('id', $id);
       $users = User::where('roles_id', $id)->get();
       if (count($users) > 0) {
-        return redirect()->back()->withErrors(['msg', 'Unable to delete row: foreign key contraint in Users']);
+        return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Users']);
       }
       $role->delete();
       return redirect()->route('role');
