@@ -490,9 +490,12 @@ class HomeController extends Controller
       $question->sub_categories_id = $request->subcategory_id;
       $question->question = $request->question;
       if (!empty($request->image)) {
-        $image_name = time() . '.' . $request->image->getClientOriginalName();
-        $request->image->move(public_path('images'), $image_name);
-        $question->image = $image_name;
+        $file = $request->image;
+        $imageName= time() . $file->getClientOriginalName();
+        Storage::disk('s3')->put($imageName, file_get_contents($file));
+        // $image_name = time() . '.' . $request->image->getClientOriginalName();
+        // $request->image->move(public_path('images'), $image_name);
+        $question->image = $imageName;
       }
       $question->save();
       $option = new Options;
