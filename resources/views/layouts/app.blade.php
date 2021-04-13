@@ -107,6 +107,14 @@ function checkPage(page) {
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+                    <div class="btn-group">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{auth()->user()}}
+                      </button>
+                      <div class="dropdown-menu">
+                        ...
+                      </div>
+                    </div>
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <a class="logout" href="{{ backpack_url('logout') }}">Logout</a>
