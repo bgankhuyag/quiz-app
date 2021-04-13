@@ -441,7 +441,7 @@ h6,
 
 .logout:hover{
   color: black;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .display-3 {
