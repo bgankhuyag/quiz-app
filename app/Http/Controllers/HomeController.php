@@ -256,8 +256,9 @@ class HomeController extends Controller
       $category->category = $request->category;
       if (!empty($request->image)) {
         if (!empty($category->getRawOriginal('image'))){
-          $image_path = public_path('images/') . $category->getRawOriginal('image');
-          unlink($image_path);
+          Storage::disk('s3')->delete($category->getRawOriginal('image'));
+          // $image_path = public_path('images/') . $category->getRawOriginal('image');
+          // unlink($image_path);
         }
         $file = $request->image;
         $imageName= time() . $file->getClientOriginalName();
@@ -339,12 +340,16 @@ class HomeController extends Controller
       $question->question = $request->question;
       if (!empty($request->image)) {
         if (!empty($question->getRawOriginal('image'))) {
-          $image_path = public_path('images/') . $question->getRawOriginal('image');
-          unlink($image_path);
+          Storage::disk('s3')->delete($question->getRawOriginal('image'));
+          // $image_path = public_path('images/') . $question->getRawOriginal('image');
+          // unlink($image_path);
         }
-        $image_name = time() . '.' . $request->image->getClientOriginalName();
-        $request->image->move(public_path('images'), $image_name);
-        $question->image = $image_name;
+        $file = $request->image;
+        $imageName= time() . $file->getClientOriginalName();
+        Storage::disk('s3')->put($imageName, file_get_contents($file));
+        // $image_name = time() . '.' . $request->image->getClientOriginalName();
+        // $request->image->move(public_path('images'), $image_name);
+        $question->image = $imageName;
       }
       $question->save();
       return redirect()->route('question');
