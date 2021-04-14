@@ -17,7 +17,7 @@ Route::group([
     // 'middleware' => 'checkIfAdmin',
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-  Route::get('/home', [HomeController::class, 'index'])->name('home');
+  // Route::get('/home', [HomeController::class, 'index'])->name('home');
   Route::get('dashboard', [HomeController::class, 'dashboard']);
   // Route::crud('user', 'UserCrudController');
   // Route::crud('answer', 'AnswerCrudController');

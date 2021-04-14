@@ -111,8 +111,8 @@ function checkPage(page) {
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <a class="logout" href="{{ backpack_url('logout') }}"><button type="button" class="user btn btn-outline-secondary">Logout</button></a>
-                        <a href="{{route('account')}}"><button class="user btn btn-primary"><i class="fas fa-user"></i>&nbsp;{{backpack_user()['name']}}</button></a>
+                        <a href="{{route('account')}}"><button class="float-right user btn btn-primary"><i class="fas fa-user"></i>&nbsp;{{backpack_user()['name']}}</button></a>
+                        <a class="logout" href="{{ backpack_url('logout') }}"><button type="button" class="float-right user btn btn-outline-secondary">Logout</button></a>
 
                     </ul>
                 </div>
