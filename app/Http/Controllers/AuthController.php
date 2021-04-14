@@ -62,11 +62,11 @@ class AuthController extends Controller
         $data = ['error' => $validator->errors()->toJson(), 'success' => false];
         return response()->json($data, 400);
       }
+      $role_id = Roles::firstWhere('role', 'guest');
+      $role_id = $role_id->id;
       $user = User::create(array_merge(
                   $validator->validated(),
-                  ['roles_id' => Roles::firstWhere('role', "guest")['id']],
-                  ['password' => bcrypt($request->password)],
-
+                  ['password' => bcrypt($request->password), 'roles_id' => $role_id],
               ));
       // $user->roles_id = Roles::firstWhere('role', "guest");
       return response()->json([
