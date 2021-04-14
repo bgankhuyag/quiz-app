@@ -17,16 +17,17 @@ Route::group([
     // 'middleware' => 'checkIfAdmin',
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
+  Route::get('/home', [HomeController::class, 'index'])->name('home');
   Route::get('dashboard', [HomeController::class, 'dashboard']);
-  Route::crud('user', 'UserCrudController');
-  Route::crud('answer', 'AnswerCrudController');
-  Route::crud('category', 'CategoryCrudController');
-  Route::crud('image', 'ImageCrudController');
-  Route::crud('option', 'OptionCrudController');
-  Route::crud('question', 'QuestionCrudController');
-  Route::crud('role', 'RoleCrudController');
-  Route::crud('selected', 'SelectedCrudController');
+  // Route::crud('user', 'UserCrudController');
+  // Route::crud('answer', 'AnswerCrudController');
+  // Route::crud('category', 'CategoryCrudController');
+  // Route::crud('image', 'ImageCrudController');
+  // Route::crud('option', 'OptionCrudController');
+  // Route::crud('question', 'QuestionCrudController');
+  // Route::crud('role', 'RoleCrudController');
+  // Route::crud('selected', 'SelectedCrudController');
   // Route::crud('subcategory', 'SubcategoryCrudController');
-  Route::crud('subcategory', 'SubCategoryCrudController');
+  // Route::crud('subcategory', 'SubCategoryCrudController');
   // Route::crud('selected', 'SelectedCrudController');
 }); // this should be the absolute last line of this file

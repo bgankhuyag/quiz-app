@@ -4,6 +4,14 @@
   margin: 20px;
 }
 
+@media only screen and (max-width: 1790px) {
+  .links{
+    float: none;
+    margin: auto;
+    width: 50%;
+  }
+}
+
 table{
   font-size: 14px;
 }
