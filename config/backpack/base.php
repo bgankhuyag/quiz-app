@@ -100,15 +100,15 @@ return [
     // ------
 
     // Footer element classes.
-    // 'footer_class' => 'app-footer d-print-none',
+    'footer_class' => 'app-footer d-print-none',
     // hide it with d-none
     // change background color with bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
 
     // Developer or company name. Shown in footer.
-    // 'developer_name' => 'Cristian Tabacitu',
+    'developer_name' => 'Cristian Tabacitu',
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    // 'developer_link' => 'http://tabacitu.ro',
+    'developer_link' => 'http://tabacitu.ro',
 
     // Show powered by Laravel Backpack in the footer? true/false
     'show_powered_by' => false,
@@ -191,7 +191,7 @@ return [
     // Set this to false if you would like to use your own AuthController and PasswordController
     // (you then need to setup your auth routes manually in your routes.php file)
     // Warning: if you disable this, the password recovery routes (below) will be disabled too!
-    'setup_auth_routes' => false,
+    'setup_auth_routes' => true,
 
     // Set this to false if you would like to skip adding the password recovery routes
     // (you then need to manually define the routes in your web.php)
