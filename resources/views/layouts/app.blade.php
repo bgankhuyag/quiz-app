@@ -119,10 +119,10 @@ function checkPage(page) {
             </div>
         </nav>
 
-        <nav id="links-navbar" class="navbar navbar-expand-lg navbar-light">
+        <nav id="links-navbar" class="navbar navbar-expand-xl navbar-light">
           <a class="navbar-brand" href="#"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fas fa-chevron-down"></i>&nbsp;Tables
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <div class="links" style="display: block;">
