@@ -70,6 +70,7 @@ class HomeController extends Controller
         $user->password = bcrypt($request->password);
       }
       $user->save();
+      return redirect()->route('account');
     }
 
     public function user() {

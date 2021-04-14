@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-  <a href="{{route('editAccountPage')}}"><button type="button" class="btn btn-outline-primary float-right">Edit Account</button></a>
-  <h3 style="margin-bottom:20px;">Account Information</h3>
+  <h3 style="margin-bottom:20px; display: inline-block; margin-right: 20px;">Account Information</h3>
+  <a href="{{route('editAccountPage')}}"><button type="button" class="btn btn-outline-primary">Edit Account</button></a>
   <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Name</label>
     <div class="col-sm-10">

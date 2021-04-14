@@ -2,9 +2,16 @@
 
 @section('content')
 <div class="container">
+  @if($errors->any())
+  <div class="alert alert-danger" role="alert">
+    @foreach ($errors->all() as $error)
+      <h3>{{ $error }}</h3>
+    @endforeach
+  </div>
+  @endif
   <a href="{{route('account')}}"><button type="button" style="margin-bottom: 20px;" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i>&nbsp;Back</button></a>
   <h3 style="margin-bottom:20px;">Edit Account</h3>
-  <form action="" method="post" style="width: 90%; margin: auto;">
+  <form action="{{route('editAccount')}}" method="post" style="width: 90%; margin: auto;">
     @csrf
     <h5 style="margin: 10px 0px;">Acount Information</h5>
     <div class="form-group row">
@@ -32,7 +39,7 @@
         <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
       </div>
     </div>
-    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary mb-2 float-right">Edit</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary mb-2 float-right">Save</button>
   </form>
 </div>
 @endsection
