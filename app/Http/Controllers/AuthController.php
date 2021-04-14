@@ -64,6 +64,7 @@ class AuthController extends Controller
       }
       $role_id = Roles::firstWhere('role', 'guest');
       $role_id = $role_id->id;
+      dd("here");
       $user = User::create(array_merge(
                   $validator->validated(),
                   ['password' => bcrypt($request->password), 'roles_id' => $role_id],
