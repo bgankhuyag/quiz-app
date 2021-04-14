@@ -12,7 +12,7 @@
   <a href="{{route('addSubcategoryPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Sub-Categories</h3>
   <div class="table-responsive-xl">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th scope="col">ID</th>

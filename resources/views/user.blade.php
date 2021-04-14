@@ -12,7 +12,7 @@
   <a href="{{route('addUserPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Users</h3>
   <div class="table-responsive-xl">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th scope="col">ID</th>

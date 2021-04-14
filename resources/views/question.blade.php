@@ -12,7 +12,7 @@
   <a href="{{route('addQuestionPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
   <h3>Questions</h3>
   <div class="table-responsive-xl">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col-sm-1">ID</th>
