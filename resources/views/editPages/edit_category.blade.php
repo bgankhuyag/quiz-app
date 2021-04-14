@@ -9,7 +9,7 @@
     @endforeach
   </div>
   @endif
-  <a href="{{route('category')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary">Back</button></a>
+  <a href="{{route('category')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i>&nbsp;Back</button></a>
   <form action="{{$action}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($new)

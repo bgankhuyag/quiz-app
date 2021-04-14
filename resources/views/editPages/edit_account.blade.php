@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <a href="{{route('account')}}"><button type="button" class="btn btn-outline-primary">Back</button></a>
+  <a href="{{route('account')}}"><button type="button" style="margin-bottom: 20px;" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i>&nbsp;Back</button></a>
   <h3 style="margin-bottom:20px;">Edit Account</h3>
   <form action="" method="post" style="width: 90%; margin: auto;">
     @csrf
