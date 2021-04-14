@@ -44,11 +44,11 @@ Route::group([
   Route::get('/category', [HomeController::class, 'category'])->name('category');
   Route::get('/image', [HomeController::class, 'image'])->name('image');
   Route::get('/points', [HomeController::class, 'points'])->name('points');
-  Route::get('option', [HomeController::class, 'option'])->name('option');
-  Route::get('question', [HomeController::class, 'question'])->name('question');
-  Route::get('role', [HomeController::class, 'role'])->name('role');
-  Route::get('selected', [HomeController::class, 'selected'])->name('selected');
-  Route::get('subcategory', [HomeController::class, 'subcategory'])->name('subcategory');
+  Route::get('/option', [HomeController::class, 'option'])->name('option');
+  Route::get('/question', [HomeController::class, 'question'])->name('question');
+  Route::get('/role', [HomeController::class, 'role'])->name('role');
+  Route::get('/selected', [HomeController::class, 'selected'])->name('selected');
+  Route::get('/subcategory', [HomeController::class, 'subcategory'])->name('subcategory');
 
   Route::post('/edit_user/{id}', [HomeController::class, 'editUser'])->name('editUser');
   Route::post('/edit_answer/{id}', [HomeController::class, 'editAnswer'])->name('editAnswer');
