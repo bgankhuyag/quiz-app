@@ -28,6 +28,10 @@ Route::get('/', function () {
   return redirect()->guest(backpack_url('login'));
 });
 
+Route::get('/home', function () {
+    dd(backpack_user());
+})->name('home');
+
 Route::group([
     'prefix'     => 'admin',
     'middleware' => array_merge(
@@ -105,7 +109,6 @@ Route::group([
   Route::get('/add_selected_page', [HomeController::class, 'addSelectedPage'])->name('addSelectedPage');
   Route::get('/add_subcategory_page', [HomeController::class, 'addSubcategoryPage'])->name('addSubcategoryPage');
 
-  Route::get('/home', [HomeController::class, 'index'])->name('home');
   Route::get('/account', [HomeController::class, 'account'])->name('account');
   Route::get('/account/edit_page', [HomeController::class, 'editAccountPage'])->name('editAccountPage');
   Route::post('/account/edit', [HomeController::class, 'editAccount'])->name('editAccount');

@@ -15,13 +15,13 @@
     @csrf
     <h5 style="margin: 10px 0px;">Acount Information</h5>
     <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label">Name</label>
+      <label for="name" class="col-sm-2 col-form-label">Name<span class="red">*</span></label>
       <div class="col-sm-10">
         <input type="text" class="form-control" name="name" id="name" value="{{backpack_user()->name}}" placeholder="firstname lastname" required>
       </div>
     </div>
     <div class="form-group row">
-      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <label for="email" class="col-sm-2 col-form-label">Email<span class="red">*</span></label>
       <div class="col-sm-10">
         <input type="email" class="form-control" name="email" id="email" value="{{backpack_user()->email}}" placeholder="example@example.com" required>
       </div>

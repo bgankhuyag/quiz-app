@@ -137,7 +137,7 @@ function checkPage(page) {
                 <a id="questions" class='list-group-item list-group-item-action' href='{{ route("question") }}'><i class="fas fa-question-circle"></i> Questions</a>
                 <a id="roles" class='list-group-item list-group-item-action' href='{{ route("role") }}'><i class="nav-icon fas fa-user-shield"></i> Roles</a>
                 <a id="selecteds" class='list-group-item list-group-item-action' href='{{ route("selected") }}'><i class="nav-icon fas fa-check-circle"></i> Selected Options</a>
-                <a id="points" class='list-group-item list-group-item-action' href='{{ route("points") }}'><i class="nav-icon fas fa-images"></i> Points</a>
+                <a id="points" class='list-group-item list-group-item-action' href='{{ route("points") }}'><i class="fas fa-clipboard-check"></i> Points</a>
               </div>
             </div>
           </div>

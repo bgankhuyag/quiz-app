@@ -19,7 +19,6 @@
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Role ID</th>
-          <th scope="col">Password</th>
           <th></th>
         </tr>
       </thead>
@@ -30,7 +29,6 @@
           <td>{{$user->name}}</td>
           <td>{{$user->email}}</td>
           <td>{{$user->roles_id}}</td>
-          <td>{{$user->password}}</td>
           <td class="float-right">
             <a href="{{route('editUserPage', ['id' => $user->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
             <a href="{{route('removeUser', ['id' => $user->id])}}"><button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button></a>
@@ -43,7 +41,6 @@
         <th scope="col">Name</th>
         <th scope="col">Email</th>
         <th scope="col">Role ID</th>
-        <th scope="col">Password</th>
         <th></th>
       </tr>
     </table>

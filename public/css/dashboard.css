@@ -32,6 +32,6 @@ a{
   text-decoration: none;
 }
 
-form{
-  margin-bottom: 20px;
+.red{
+  color: red;
 }
