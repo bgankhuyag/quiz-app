@@ -34,7 +34,7 @@
       <select multiple class="form-control" name="subcategory_id" id="subcategory_id" style="height: 300px;">
         <option value="0" @if($new) selected @endif>None</option>
         @foreach($sub_categories as $sub_category)
-        <option class="{{$sub_category->categories_id}}" value="{{$sub_category->id}}" @if(!$new && $question->sub_categories_id == $sub_category->id) selected @endif>ID: {{$sub_category->id}}&#160;&#160;&#160; Category ID: {{$sub_category->categories_id}}&#160;&#160;&#160; Question: {{$sub_category->sub_category}}</option>
+        <option onclick="changeSubcategory(this)" class="{{$sub_category->categories_id}}" value="{{$sub_category->id}}" @if(!$new && $question->sub_categories_id == $sub_category->id) selected @endif>ID: {{$sub_category->id}}&#160;&#160;&#160; Category ID: {{$sub_category->categories_id}}&#160;&#160;&#160; Question: {{$sub_category->sub_category}}</option>
         @endforeach
       </select>
     </div>
@@ -70,13 +70,42 @@
   </form>
 </div>
 
-<script>
-  checkPage('questions');
+@endsection
 
-  function changeCategory(category){
-    // console.log(category.value);
+@section('javascript')
+<script>
+checkPage('questions');
+
+function changeSubcategory(sub_category) {
+  console.log(sub_category.className);
+  var categories = document.getElementById('category_id');
+  for (var i = 0; i < categories.length; i++) {
+    if (categories[i].value == sub_category.className) {
+      categories[i].setAttribute("selected", true);
+    } else {
+      categories[i].removeAttribute("selected", true);
+    }
+  }
+}
+
+function changeCategory(category){
+  // console.log(category.value);
+  var sub_categories = document.getElementById('subcategory_id');
+  for (var i = 1; i < sub_categories.length; i++) {
+    sub_categories[i].removeAttribute("selected", true);
+    if (!sub_categories[i].classList.contains(category.value)) {
+      console.log(sub_categories[i]);
+      sub_categories[i].style.display = "none";
+    } else {
+      sub_categories[i].style.display = "block";
+    }
+  }
+}
+
+function checkCategory() {
+  var category = document.getElementById('category_id');
+  if (category.value) {
     var sub_categories = document.getElementById('subcategory_id');
-    // console.log(sub_categories.length);
     for (var i = 1; i <= sub_categories.length; i++) {
       if (!sub_categories[i].classList.contains(category.value)) {
         sub_categories[i].style.display = "none";
@@ -85,21 +114,8 @@
       }
     }
   }
+}
 
-  function checkCategory() {
-    var category = document.getElementById('category_id');
-    if (category.value) {
-      var sub_categories = document.getElementById('subcategory_id');
-      for (var i = 1; i <= sub_categories.length; i++) {
-        if (!sub_categories[i].classList.contains(category.value)) {
-          sub_categories[i].style.display = "none";
-        } else {
-          sub_categories[i].style.display = "block";
-        }
-      }
-    }
-  }
-
-  window.onload = checkCategory();
+window.onload = checkCategory();
 </script>
 @endsection
