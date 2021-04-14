@@ -36,7 +36,7 @@ Route::get('/home', function () {
     }
 })->name('home');
 
-Route::get('login', '\vendor\backpack\crud\src\Http\Controllers\Auth\LoginController@showLoginForm')->name('backpack.auth.login');
+Route::get('admin/login', '\vendor\backpack\crud\src\Http\Controllers\Auth\LoginController@showLoginForm')->name('backpack.auth.login');
 // Route::post('login', 'Auth\LoginController@login');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', 'Auth\LoginController@logout')->name('backpack.auth.logout');
