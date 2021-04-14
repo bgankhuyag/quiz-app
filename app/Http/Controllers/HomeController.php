@@ -50,6 +50,10 @@ class HomeController extends Controller
       return view('account');
     }
 
+    public function editAccountPage() {
+      return view('editPages.edit_account');
+    }
+
     public function editAccount(Request $request) {
       $validator = Validator::make($request->all(), [
         'name' => 'required|string|between:2,100',
@@ -59,6 +63,13 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
+      $user = User::firstWhere('id', backpack_user()->id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      if (!empty($request->password)) {
+        $user->password = bcrypt($request->password);
+      }
+      $user->save();
     }
 
     public function user() {
