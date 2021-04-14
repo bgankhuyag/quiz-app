@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-  <h4>Welcome, <strong>{{backpack_user()->name}}</strong>. Use the link to the left to view tables.</h4>
+  <h3>Welcome, <strong>{{backpack_user()->name}}</strong>.</h3>
+  <h5>Use the links to view tables.</h5>
 </div>
 
 <script>

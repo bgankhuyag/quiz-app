@@ -9,10 +9,10 @@
     @endforeach
   </div>
   @endif
-  <a href="{{route('addUserPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
-  <h3>Users</h3>
   <div class="table-responsive-xl">
     <table class="table table-striped">
+      <a href="{{route('addUserPage')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-primary">Add</button></a>
+      <h3>Users</h3>
       <thead>
         <tr>
           <th scope="col">ID</th>

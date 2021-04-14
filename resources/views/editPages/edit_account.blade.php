@@ -21,14 +21,14 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="email" class="col-sm-2 col-form-label">Eamil</label>
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
         <input type="email" class="form-control" name="email" id="email" value="{{backpack_user()->email}}" placeholder="example@example.com" required>
       </div>
     </div>
     <h5 style="margin: 10px 0px;">Change Password</h5>
     <div class="form-group row">
-      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <label for="password" class="col-sm-2 col-form-label">New Password</label>
       <div class="col-sm-10">
         <input type="password" class="form-control" name="password" id="password">
       </div>
