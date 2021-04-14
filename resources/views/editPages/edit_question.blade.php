@@ -81,9 +81,9 @@ function changeSubcategory(sub_category) {
   var categories = document.getElementById('category_id');
   for (var i = 0; i < categories.length; i++) {
     if (categories[i].value == sub_category.className) {
-      categories[i].setAttribute("selected", true);
+      categories[i].selected = true;
     } else {
-      categories[i].removeAttribute("selected", true);
+      categories[i].selected = false;
     }
   }
 }
@@ -92,7 +92,7 @@ function changeCategory(category){
   // console.log(category.value);
   var sub_categories = document.getElementById('subcategory_id');
   for (var i = 1; i < sub_categories.length; i++) {
-    sub_categories[i].removeAttribute("selected", true);
+    sub_categories[i].selected = false;
     if (!sub_categories[i].classList.contains(category.value)) {
       console.log(sub_categories[i]);
       sub_categories[i].style.display = "none";

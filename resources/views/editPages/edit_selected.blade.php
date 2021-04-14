@@ -55,9 +55,9 @@ function changeOption(option) {
   var questions = document.getElementById('question_id');
   for (var i = 0; i < questions.length; i++) {
     if (questions[i].value == option.className) {
-      questions[i].setAttribute("selected", true);
+      questions[i].selected = true;
     } else {
-      questions[i].removeAttribute("selected", true);
+      questions[i].selected = false;
     }
   }
 }
@@ -65,6 +65,7 @@ function changeOption(option) {
 function changeQuestion(question) {
   var options = document.getElementById('option_id');
   for (var i = 0; i < options.length; i++) {
+    options[i].selected = false;
     if (!options[i].classList.contains(question.value)) {
       options[i].style.display = "none";
     } else {
