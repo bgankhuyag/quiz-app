@@ -50,6 +50,17 @@ class HomeController extends Controller
       return view('account');
     }
 
+    public function editAccount(Request $request) {
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|string|between:2,100',
+        'password' => 'nullable|string|confirmed|min:6',
+        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore(backpack_user()->id)],
+      ]);
+      if($validator->fails()){
+        return redirect()->back()->withErrors($validator->errors());
+      }
+    }
+
     public function user() {
       $users = User::paginate(10);
       return view('user', ['users' => $users]);

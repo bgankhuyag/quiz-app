@@ -107,6 +107,7 @@ Route::group([
 
   Route::get('/home', [HomeController::class, 'index'])->name('home');
   Route::get('/account', [HomeController::class, 'account'])->name('account');
+  Route::post('/account/edit', [HomeController::class, 'editAccount'])->name('editAccount');
 
 });
 
