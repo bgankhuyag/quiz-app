@@ -154,8 +154,9 @@ class HomeController extends Controller
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Sub-Categories']);
       }
       if (!empty($category->getRawOriginal('image'))){
-        $image_path = public_path('images/') . $category->getRawOriginal('image');
-        unlink($image_path);
+        Storage::disk('s3')->delete($category->getRawOriginal('image'));
+        // $image_path = public_path('images/') . $category->getRawOriginal('image');
+        // unlink($image_path);
       }
       $category->delete();
       return redirect()->route('category');
@@ -202,8 +203,9 @@ class HomeController extends Controller
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
       if (!empty($question->getRawOriginal('image'))) {
-        $image_path = public_path('images/') . $question->getRawOriginal('image');
-        unlink($image_path);
+        Storage::disk('s3')->delete($question->getRawOriginal('image'));
+        // $image_path = public_path('images/') . $question->getRawOriginal('image');
+        // unlink($image_path);
       }
       $options = Options::where('questions_id', $id)->get();
       foreach ($options as $option) {
