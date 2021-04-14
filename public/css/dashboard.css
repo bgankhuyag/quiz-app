@@ -4,11 +4,15 @@
   margin: 20px;
 }
 
-@media only screen and (max-width: 1790px) {
-  .links{
-    float: none;
-    margin: auto;
-    width: 50%;
+/* main{
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+} */
+
+@media only screen and (min-width: 990px) {
+  #links-navbar{
+    float: left;
+    width: 300px;
   }
 }
 
