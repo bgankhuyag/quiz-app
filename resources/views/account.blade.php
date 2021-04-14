@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-  <h3>Edit Account</h3>
-  <form action="" method="post">
+  <h3 style="margin-bottom:20px;">Edit Account</h3>
+  <form action="" method="post" style="width: 90%; margin: auto;">
     @csrf
-    <h5>Acount Information</h5>
+    <h5 style="margin: 10px 0px;">Acount Information</h5>
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">Name</label>
       <div class="col-sm-10">
@@ -18,7 +18,7 @@
         <input type="email" class="form-control" name="email" id="email" value="{{backpack_user()->email}}" placeholder="example@example.com" required>
       </div>
     </div>
-    <h5>Change Password</h5>
+    <h5 style="margin: 10px 0px;">Change Password</h5>
     <div class="form-group row">
       <label for="password" class="col-sm-2 col-form-label">Password</label>
       <div class="col-sm-10">

@@ -89,7 +89,7 @@ function checkPage(page) {
 }
 </script>
 </head>
-<body>
+<body style="background-color: #f1f4f8;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
