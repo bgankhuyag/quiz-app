@@ -104,7 +104,10 @@ Route::group([
   Route::get('/add_role_page', [HomeController::class, 'addRolePage'])->name('addRolePage');
   Route::get('/add_selected_page', [HomeController::class, 'addSelectedPage'])->name('addSelectedPage');
   Route::get('/add_subcategory_page', [HomeController::class, 'addSubcategoryPage'])->name('addSubcategoryPage');
-  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+  Route::get('/home', [HomeController::class, 'index'])->name('home');
+  Route::get('/account', [HomeController::class, 'account'])->name('account');
+
 });
 
 Route::get('/test', function () {

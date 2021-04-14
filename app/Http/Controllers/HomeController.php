@@ -45,6 +45,10 @@ class HomeController extends Controller
       return view('dashboard');
     }
 
+    public function account() {
+      return view('account');
+    }
+
     public function user() {
       $users = User::paginate(10);
       return view('user', ['users' => $users]);
