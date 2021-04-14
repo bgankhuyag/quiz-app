@@ -29,7 +29,11 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    dd(backpack_user());
+    if (backpack_user() == null) {
+      return redirect()->guest(backpack_url('login'));
+    } else {
+      return redirect()->guest(backpack_url('dashboard'));
+    }
 })->name('home');
 
 Route::group([
