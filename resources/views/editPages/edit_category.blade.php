@@ -30,7 +30,7 @@
         <input type="file" name="image" class="form-control-file" id="image">
       </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Category</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Category</button>
   </form>
 </div>
 

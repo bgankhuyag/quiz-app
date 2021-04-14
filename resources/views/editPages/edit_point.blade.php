@@ -10,7 +10,7 @@
   </div>
   @endif
   <a href="{{route('points')}}"><button style="margin-bottom: 20px;" type="button" class="btn btn-outline-primary"><i class="fas fa-arrow-left"></i>&nbsp;Back</button></a>
-  <form action="{{$action}}" method="post">
+  <form action="{{$action}}" method="post" >
     @csrf
     @if ($new)
       <h3>Ad New Point</h3>
@@ -37,7 +37,7 @@
       <label for="point">Point</label>
       <input type="number" name="point" class="form-control" min="0" @if(!$new) value="{{$point->points}}" @endif id="point" aria-describedby="emailHelp" placeholder="Enter Point">
     </div>
-    <button type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Point</button>
+    <button style="margin-bottom: 40px;" type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Point</button>
   </form>
 </div>
 

@@ -32,7 +32,7 @@
         <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
       </div>
     </div>
-    <button type="submit" class="btn btn-primary mb-2 float-right">Edit</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary mb-2 float-right">Edit</button>
   </form>
 </div>
 @endsection
