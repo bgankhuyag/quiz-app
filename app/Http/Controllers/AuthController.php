@@ -64,10 +64,16 @@ class AuthController extends Controller
       }
       $role_id = Roles::firstWhere('role', 'guest');
       $role_id = $role_id->id;
-      $user = User::create(array_merge(
-                  $validator->validated(),
-                  ['roles_id' => $role_id, 'password' => bcrypt($request->password)],
-              ));
+      $user = new User;
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->roles_id = $role_id;
+      $user->password = bcrypt($request->password);
+      $user->save();
+      // $user = User::create(array_merge(
+      //             $validator->validated(),
+      //             ['roles_id' => $role_id, 'password' => bcrypt($request->password)],
+      //         ));
       // $user->roles_id = Roles::firstWhere('role', "guest");
       return response()->json([
         'message' => 'User successfully registered',
