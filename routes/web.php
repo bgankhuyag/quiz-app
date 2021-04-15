@@ -37,7 +37,12 @@ Route::get('/home', function () {
 })->name('home');
 
 // Route::get('admin/login', base_path() . 'vendor/BACKPACK/CRUD/src/app/Http/Controllers/Auth/LoginController@showLoginForm')->name('backpack.auth.login');
-Auth::routes(['register' => false]);
+Route::group(['prefix' => 'admin'], function() {
+  // Auth::routes();
+  Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+  Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+});
 // // Route::post('login', 'Auth\LoginController@login');
 // Route::post('login', [LoginController::class, 'login'])->name('login');
 // Route::get('logout', 'Auth\LoginController@logout')->name('backpack.auth.logout');
@@ -45,15 +50,15 @@ Auth::routes(['register' => false]);
 
 Route::group([
     'prefix'     => 'admin',
-    'middleware' => array_merge(
-        (array) config('backpack.base.web_middleware', 'web'),
-        (array) config('backpack.base.middleware_key', 'admin'),
-        // (array) 'checkAdmin'
-    ),
-    // 'middleware' => 'checkIfAdmin',
-    'namespace'  => 'App\Http\Controllers\Admin',
+    // 'middleware' => array_merge(
+    //     (array) config('backpack.base.web_middleware', 'web'),
+    //     (array) config('backpack.base.middleware_key', 'admin'),
+    //     // (array) 'checkAdmin'
+    // ),
+    'middleware' => 'checkIfAdmin:web',
 ], function () { // custom admin routes
-  // Route::get('dashboard', [HomeController::class, 'dashboard']);
+  Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+  // Auth::routes();
   Route::get('/user', [HomeController::class, 'user'])->name('user');
   Route::get('/answer', [HomeController::class, 'answer'])->name('answer');
   Route::get('/category', [HomeController::class, 'category'])->name('category');

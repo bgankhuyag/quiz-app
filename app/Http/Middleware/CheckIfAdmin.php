@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use App\Models\Roles;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class CheckIfAdmin
+class CheckIfAdmin extends Middleware
 {
     /**
      * Checked that the logged in user is an administrator.
@@ -29,25 +31,9 @@ class CheckIfAdmin
     private function checkIfUserIsAdmin($user)
     {
       // dd($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
-
+      // dd(Auth::guard('web')->user());
         return ($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
         return true;
-    }
-
-    /**
-     * Answer to unauthorized access request.
-     *
-     * @param [type] $request [description]
-     *
-     * @return [type] [description]
-     */
-    private function respondToUnauthorizedRequest($request)
-    {
-        if ($request->ajax() || $request->wantsJson()) {
-            return response(trans('backpack::base.unauthorized'), 401);
-        } else {
-            return redirect()->guest(backpack_url('login'));
-        }
     }
 
     /**
@@ -60,16 +46,12 @@ class CheckIfAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (backpack_auth()->guest()) {
-            return $this->respondToUnauthorizedRequest($request);
-        }
-        // dd(backpack_user()['roles_id'] != Roles::firstWhere('role', 'admin')['id']);
-        if (! $this->checkIfUserIsAdmin(backpack_user())) {
-          // dd('here');
-          return redirect()->guest(backpack_url('logout'))->with(['errors' => 'user unauthorized']);
-          // return response('Bad', 401);
-          // return $this->respondToUnauthorizedRequest($request);
-        }
-        return $next($request);
+      if (!Auth::guard('web')->check()) {
+        return redirect()->route('login');
+      }
+      if (! $this->checkIfUserIsAdmin(Auth::guard('web')->user())) {
+        return redirect()->guest(route('logout'))->with(['errors' => 'user unauthorized']);
+      }
+      return $next($request);
     }
 }
