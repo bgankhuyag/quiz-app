@@ -32,15 +32,6 @@ Route::get('/', function () {
   }
 });
 
-// Route::get('/home', function () {
-//     if (Auth::guard('web')->user() == null) {
-//       return redirect()->route('login');
-//     } else {
-//       return redirect()->route('dashboard');
-//     }
-// })->name('home');
-
-// Route::get('admin/login', base_path() . 'vendor/BACKPACK/CRUD/src/app/Http/Controllers/Auth/LoginController@showLoginForm')->name('backpack.auth.login');
 Route::group(['prefix' => 'admin'], function() {
   // Auth::routes();
   Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
@@ -53,10 +44,6 @@ Route::group(['prefix' => 'admin'], function() {
   Route::get('/password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
   Route::get('/password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
 });
-// // Route::post('login', 'Auth\LoginController@login');
-// Route::post('login', [LoginController::class, 'login'])->name('login');
-// Route::get('logout', 'Auth\LoginController@logout')->name('backpack.auth.logout');
-// Route::post('logout', 'Auth\LoginController@logout');
 
 Route::group([
     'prefix'     => 'admin',
@@ -141,41 +128,3 @@ Route::group([
   Route::post('/account/edit', [HomeController::class, 'editAccount'])->name('editAccount');
 
 });
-
-Route::get('/test', function () {
-  $users = User::all();
-  $answers = Answers::all();
-  $questions = Questions::all();
-  $selected = Selected::all();
-  $categories = Categories::all();
-  $sub_categories = SubCategories::all();
-  $images = Images::all();
-  $options = Options::all();
-  $data = [$users, $answers, $questions, $selected, $categories, $sub_categories, $images, $options];
-  // dd($data);
-  return view('test', ['users' => $users, 'answers' => $answers, 'questions' => $questions, 'selecteds' => $selected, 'categories' => $categories, 'sub_categories' => $sub_categories, 'images' => $images, 'options' => $options]);
-});
-
-
-// Route::get('/test', [Copy_QuizController::class, 'test'])->name('test');
-// Route::get('/home', [App\Http\Controllers\HHomeController::class, 'index']omeController::class, 'index'])->name('home');
-
-// Auth::routes();
-// Route::group([
-//     'prefix'     => config('backpack.base.route_prefix', 'admin'),
-//     'middleware' => array_merge(
-//         (array) config('backpack.base.web_middleware', 'web'),
-//         // (array) config('backpack.base.middleware_key', 'admin')
-//     ),
-//     // 'middleware' => 'checkAdmin',
-//     'namespace'  => 'App\Http\Controllers\Admin',
-// ], function () { // custom admin routes
-// }); // this should be the absolute last line of this file
-
-// Auth::routes();
-
-
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

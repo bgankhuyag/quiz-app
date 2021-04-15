@@ -7,8 +7,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<body>
-<div class="container">
+<body style="background-color: #f1f4f8;">
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="container" style="margin-top: 20vh;">
   <div class="col-lg-4" style="margin: auto; max-width: 380px">
     @if($errors->any())
@@ -90,11 +90,14 @@
       <div class="card-body" style="padding: 30px">
         <form method="POST" action="{{ route('password.update') }}">
           @csrf
+
+          <input type="hidden" name="token" value="{{ $token }}">
+
           <div class="form-group">
             <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
 
             <div class="">
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
               @error('email')
               <span class="invalid-feedback" role="alert">
