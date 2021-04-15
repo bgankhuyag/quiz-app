@@ -22,7 +22,7 @@
     <div class="card-head">
       Login
     </div>
-    <div class="card text-white bg-info mb-3">
+    <div class="card mb-3 border-primary">
       <!-- <div class="card-header">
         Login
       </div> -->
@@ -68,7 +68,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-dark w-100">
+          <button type="submit" class="btn btn-primary w-100">
             {{ __('Login') }}
           </button>
           <div class="form-group row mb-0">
