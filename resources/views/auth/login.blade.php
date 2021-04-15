@@ -12,20 +12,17 @@
 <body style="background-color: #f1f4f8;">
 <div class="container" style="margin-top: 20vh;">
   <div class="col-lg-4" style="margin: auto; max-width: 380px">
-    @if($errors->any())
-    @if($errors->has('message'))
-    <div class="alert alert-danger" role="alert">
-      <h3>{{ $errors->first() }}</h3>
-    </div>
-    @endif
-    @endif
     <div class="card-head">
       Login
     </div>
     <div class="card mb-3 border-primary">
-      <!-- <div class="card-header">
-        Login
-      </div> -->
+      @if($errors->any())
+        @if($errors->has('message'))
+          <div class="alert alert-danger" role="alert">
+            <h3>{{ $errors->first() }}</h3>
+          </div>
+        @endif
+      @endif
       <div class="card-body" style="padding: 30px">
         <form method="POST" action="{{ route('login') }}">
           @csrf
