@@ -11,14 +11,14 @@
 </head>
 <body style="background-color: #f1f4f8;">
 <div class="container" style="margin-top: 20vh;">
-  @if($errors->any())
+  <div class="col-sm-4" style="margin: auto;">
+    @if($errors->any())
     @if($errors->has('message'))
     <div class="alert alert-danger" role="alert">
       <h3>{{ $errors->first() }}</h3>
     </div>
     @endif
-  @endif
-  <div class="col-sm-4" style="margin: auto;">
+    @endif
     <div class="card-head">
       Login
     </div>
