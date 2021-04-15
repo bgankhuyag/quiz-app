@@ -47,7 +47,10 @@
   </form>
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('users');
+checkPage('users');
 </script>
 @endsection

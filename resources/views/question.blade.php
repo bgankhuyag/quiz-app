@@ -54,7 +54,10 @@
   {{ $questions->links() }}
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('questions');
+checkPage('questions');
 </script>
 @endsection

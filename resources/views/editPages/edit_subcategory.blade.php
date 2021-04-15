@@ -32,7 +32,9 @@
     <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Answer</button>
   </form>
 </div>
+@endsection
 
+@section('javascript')
 <script>
 checkPage('sub_categories');
 </script>

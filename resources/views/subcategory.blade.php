@@ -45,7 +45,10 @@
   {{ $sub_categories->links() }}
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('sub_categories');
+checkPage('sub_categories');
 </script>
 @endsection

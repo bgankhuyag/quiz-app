@@ -34,7 +34,10 @@
   </form>
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('categories');
+checkPage('categories');
 </script>
 @endsection

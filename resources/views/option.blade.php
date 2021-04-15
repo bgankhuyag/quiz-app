@@ -44,8 +44,10 @@
   </div>
   {{ $options->links() }}
 </div>
+@endsection
 
+@section('javascript')
 <script>
-  checkPage('options');
+checkPage('options');
 </script>
 @endsection

@@ -6,7 +6,10 @@
   <h5>Use the links to view tables.</h5>
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('dashboard');
+checkPage('dashboard');
 </script>
 @endsection

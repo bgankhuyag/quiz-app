@@ -106,7 +106,7 @@ function checkCategory() {
   var category = document.getElementById('category_id');
   if (category.value) {
     var sub_categories = document.getElementById('subcategory_id');
-    for (var i = 1; i <= sub_categories.length; i++) {
+    for (var i = 1; i < sub_categories.length; i++) {
       if (!sub_categories[i].classList.contains(category.value)) {
         sub_categories[i].style.display = "none";
       } else {

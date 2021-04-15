@@ -48,7 +48,10 @@
   {{ $selecteds->links() }}
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('selecteds');
+checkPage('selecteds');
 </script>
 @endsection

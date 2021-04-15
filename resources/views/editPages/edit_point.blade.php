@@ -41,7 +41,10 @@
   </form>
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('points');
+checkPage('points');
 </script>
 @endsection

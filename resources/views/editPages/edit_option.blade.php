@@ -33,7 +33,10 @@
   </form>
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('options');
+checkPage('options');
 </script>
 @endsection

@@ -42,7 +42,10 @@
   {{ $roles->links() }}
 </div>
 
+@endsection
+
+@section('javascript')
 <script>
-  checkPage('roles');
+checkPage('roles');
 </script>
 @endsection
