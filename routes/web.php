@@ -32,13 +32,13 @@ Route::get('/', function () {
   }
 });
 
-Route::get('/home', function () {
-    if (Auth::guard('web')->user() == null) {
-      return redirect()->route('login');
-    } else {
-      return redirect()->route('dashboard');
-    }
-})->name('home');
+// Route::get('/home', function () {
+//     if (Auth::guard('web')->user() == null) {
+//       return redirect()->route('login');
+//     } else {
+//       return redirect()->route('dashboard');
+//     }
+// })->name('home');
 
 // Route::get('admin/login', base_path() . 'vendor/BACKPACK/CRUD/src/app/Http/Controllers/Auth/LoginController@showLoginForm')->name('backpack.auth.login');
 Route::group(['prefix' => 'admin'], function() {
