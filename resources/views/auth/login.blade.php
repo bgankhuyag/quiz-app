@@ -6,8 +6,15 @@
 </head>
 <body>
 <div class="container">
+  @if($errors->any())
+    @if($errors->has('message'))
+    <div class="alert alert-danger" role="alert">
+      <h3>{{ $errors->first() }}</h3>
+    </div>
+    @endif
+  @endif
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 

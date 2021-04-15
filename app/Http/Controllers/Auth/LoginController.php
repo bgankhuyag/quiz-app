@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Roles;
 
 class LoginController extends Controller
 {
@@ -46,7 +47,14 @@ class LoginController extends Controller
     {
       $credentials = $request->only('email', 'password');
       if (Auth::guard('web')->attempt($credentials)) {
-        // dd(Auth::user());
+        if (Auth::guard('web')->user()->roles_id != Roles::firstWhere('role', 'admin')['id']) {
+          Auth::guard('web')->logout();
+          $request->session()->invalidate();
+          $request->session()->regenerateToken();
+          return back()->withErrors([
+              'message' => 'User does not have permission.',
+          ]);
+        }
           $request->session()->regenerate();
           return redirect()->route('dashboard');
       }

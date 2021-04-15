@@ -30,10 +30,7 @@ class CheckIfAdmin extends Middleware
      */
     private function checkIfUserIsAdmin($user)
     {
-      // dd($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
-      // dd(Auth::guard('web')->user());
-        return ($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
-        return true;
+      return ($user->roles_id == Roles::firstWhere('role', 'admin')['id']);
     }
 
     /**
@@ -49,8 +46,8 @@ class CheckIfAdmin extends Middleware
       if (!Auth::guard('web')->check()) {
         return redirect()->route('login');
       }
-      if (! $this->checkIfUserIsAdmin(Auth::guard('web')->user())) {
-        return redirect()->guest(route('logout'))->with(['errors' => 'user unauthorized']);
+      if (!$this->checkIfUserIsAdmin(Auth::guard('web')->user())) {
+        return redirect()->guest(route('logout'));
       }
       return $next($request);
     }
