@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Schema;
 use Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -37,7 +38,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-      dd("here");
       return view('home');
     }
 
@@ -58,12 +58,12 @@ class HomeController extends Controller
       $validator = Validator::make($request->all(), [
         'name' => 'required|string|between:2,100',
         'password' => 'nullable|string|confirmed|min:6',
-        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore(backpack_user()->id)],
+        'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore(Auth::guard('web')->user()->id)],
       ]);
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $user = User::firstWhere('id', backpack_user()->id);
+      $user = User::firstWhere('id', Auth::guard('web')->user()->id);
       $user->name = $request->name;
       $user->email = $request->email;
       if (!empty($request->password)) {
@@ -256,7 +256,7 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      if (backpack_user()->id == $user->id && $user->roles_id != $request->role_id) {
+      if (Auth::guard('web')->user()->id == $user->id && $user->roles_id != $request->role_id) {
         return redirect()->back()->withErrors(['Cannot change your own role']);
       }
       $user->name = $request->input('name');

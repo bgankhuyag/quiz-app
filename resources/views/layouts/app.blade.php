@@ -112,7 +112,10 @@ function checkPage(page) {
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <a href="{{route('account')}}"><button class="float-right user btn btn-primary"><i class="fas fa-user"></i>&nbsp;{{Auth::guard('web')->user()->name}}</button></a>
-                        <a class="logout" href="{{ route('logout') }}"><button type="button" class="float-right user btn btn-outline-secondary">Logout</button></a>
+                        <form action="{{ route('logout') }}" method="post">
+                          @csrf
+                          <button type="submit" class="float-right user btn btn-outline-secondary">Logout</button>
+                        </form>
                     </ul>
                 </div>
             </div>

@@ -11,7 +11,7 @@
 </head>
 <body style="background-color: #f1f4f8;">
 <div class="container" style="margin-top: 20vh;">
-  <div class="col-sm-4" style="margin: auto;">
+  <div class="col-lg-4" style="margin: auto; max-width: 380px">
     @if($errors->any())
     @if($errors->has('message'))
     <div class="alert alert-danger" role="alert">

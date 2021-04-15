@@ -11,6 +11,7 @@ use App\Models\SubCategories;
 use App\Models\Images;
 use App\Models\Options;
 // use App\Models\Options;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,15 +25,18 @@ use App\Models\Options;
 */
 
 Route::get('/', function () {
-  // return view('welcome');
-  return redirect()->guest(backpack_url('login'));
+  if (Auth::guard('web')->user() == null) {
+    return redirect()->route('login');
+  } else {
+    return redirect()->route('dashboard');
+  }
 });
 
 Route::get('/home', function () {
-    if (backpack_user() == null) {
-      return redirect()->guest(backpack_url('login'));
+    if (Auth::guard('web')->user() == null) {
+      return redirect()->route('login');
     } else {
-      return redirect()->guest(backpack_url('dashboard'));
+      return redirect()->route('dashboard');
     }
 })->name('home');
 
