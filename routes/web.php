@@ -54,12 +54,13 @@ Route::group(['prefix' => 'admin'], function() {
 
 Route::group([
     'prefix'     => 'admin',
-    // 'middleware' => array_merge(
-    //     (array) config('backpack.base.web_middleware', 'web'),
-    //     (array) config('backpack.base.middleware_key', 'admin'),
-    //     // (array) 'checkAdmin'
-    // ),
-    'middleware' => 'checkIfAdmin:web',
+    'middleware' => array_merge(
+        // (array) config('backpack.base.web_middleware', 'web'),
+        // (array) config('backpack.base.middleware_key', 'admin'),
+        (array) 'checkIfAdmin',
+        (array) 'cache.headers:public;max_age=3600'
+    ),
+    // 'middleware' => 'checkIfAdmin:web',
 ], function () { // custom admin routes
   Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
   // Auth::routes();
