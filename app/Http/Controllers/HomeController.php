@@ -151,17 +151,17 @@ class HomeController extends Controller
       }
     }
 
-    public function removeCategory($id) {
-      $category = Categories::firstWhere('id', $id);
-      $questions = Questions::where('categories_id', $id)->get();
+    public function removeCategory(Request $request) {
+      $category = Categories::firstWhere('id', $request->id);
+      $questions = Questions::where('categories_id', $request->id)->get();
       if (count($questions) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Questions']);
       }
-      $points = Points::where('categories_id', $id)->get();
+      $points = Points::where('categories_id', $request->id)->get();
       if (count($points) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Points']);
       }
-      $sub_categories = SubCategories::where('categories_id', $id)->get();
+      $sub_categories = SubCategories::where('categories_id', $request->id)->get();
       if (count($sub_categories) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Sub-Categories']);
       }
@@ -464,6 +464,7 @@ class HomeController extends Controller
       $file = $request->image;
       $imageName= time() . $file->getClientOriginalName();
       Storage::disk('s3')->put($imageName, file_get_contents($file));
+      dd("image");
       // $image_name = time() . '.' . $request->image->getClientOriginalName();
       // $request->image->move(public_path('images'), $image_name);
       $category->image = $imageName;

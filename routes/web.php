@@ -92,7 +92,7 @@ Route::group([
 
   Route::get('/remove_user/{id}', [HomeController::class, 'removeUser'])->name('removeUser');
   Route::get('/remove_answer/{id}', [HomeController::class, 'removeAnswer'])->name('removeAnswer');
-  Route::get('/remove_category/{id}', [HomeController::class, 'removeCategory'])->name('removeCategory');
+  Route::post('/remove_category', [HomeController::class, 'removeCategory'])->name('removeCategory');
   Route::get('/remove_image/{id}', [HomeController::class, 'removeImage'])->name('removeImage');
   Route::get('/remove_option/{id}', [HomeController::class, 'removeOption'])->name('removeOption');
   Route::get('/remove_question/{id}', [HomeController::class, 'removeQuestion'])->name('removeQuestion');

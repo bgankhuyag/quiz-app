@@ -29,7 +29,7 @@
           <td>{{$category->getRawOriginal('image')}}</td>
           <td class="float-right">
             <a href="{{route('editCategoryPage', ['id' => $category->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
-            <a href="#"><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="far fa-trash-alt"></i> Delete</button></a>
+            <a href="#"><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal(this)" data-whatever="{{$category->id}}"><i class="far fa-trash-alt"></i> Delete</button></a>
             <!-- {{route('removeCategory', ['id' => $category->id])}} -->
           </td>
         </tr>
@@ -48,18 +48,23 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        <form action="{{route('removeCategory')}}" method="post">
+          @csrf
+          <div class="modal-body">
+            <div class="form-group">
+              Do you want to delete Category ID <input type="text" readonly style="background-color: transparent;border: 0; font-size: 1em; font-weight: bold" name="id" id="id">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -71,5 +76,11 @@
 @section('javascript')
 <script>
 checkPage('categories');
+
+function clickModal(category) {
+  console.log(category.attributes['data-whatever'].value);
+  document.getElementById('id').value = category.attributes['data-whatever'].value;
+}
+
 </script>
 @endsection
