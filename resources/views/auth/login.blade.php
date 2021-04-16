@@ -11,7 +11,7 @@
 </head>
 <body style="background-color: #f1f4f8;">
 <div class="container" style="margin-top: 20vh;">
-  <div class="col-lg-4" style="margin: auto; max-width: 380px">
+  <div class="col-lg-4" style="margin: auto;">
     <div class="card-head">
       Login
     </div>
@@ -68,15 +68,12 @@
           <button type="submit" class="btn btn-primary w-100">
             {{ __('Login') }}
           </button>
-          <div class="form-group row mb-0">
-            <div class="col-md-8 offset-md-4">
-
-              @if (Route::has('password.request'))
-              <a class="btn btn-link" href="{{ route('password.request') }}">
-                {{ __('Forgot Your Password?') }}
-              </a>
-              @endif
-            </div>
+          <div class="text-center">
+            @if (Route::has('password.request'))
+            <a class="btn btn-link" href="{{ route('password.request') }}">
+              {{ __('Forgot Your Password?') }}
+            </a>
+            @endif
           </div>
         </form>
       </div>
