@@ -70,7 +70,7 @@
     </div>
 </div> -->
 <div class="container" style="margin-top: 20vh;">
-  <div class="col-lg-4" style="margin: auto; max-width: 380px">
+  <div class="col-lg-4" style="margin: auto; max-width: 500px">
     @if($errors->any())
     @if($errors->has('message'))
     <div class="alert alert-danger" role="alert">
