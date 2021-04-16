@@ -464,7 +464,6 @@ class HomeController extends Controller
       $file = $request->image;
       $imageName= time() . $file->getClientOriginalName();
       Storage::disk('s3')->put($imageName, file_get_contents($file));
-      dd("image");
       // $image_name = time() . '.' . $request->image->getClientOriginalName();
       // $request->image->move(public_path('images'), $image_name);
       $category->image = $imageName;
