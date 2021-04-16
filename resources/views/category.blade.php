@@ -29,7 +29,7 @@
           <td>{{$category->getRawOriginal('image')}}</td>
           <td class="float-right">
             <a href="{{route('editCategoryPage', ['id' => $category->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
-            <a href="#"><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal(this)" data-whatever="{{$category->id}}"><i class="far fa-trash-alt"></i> Delete</button></a>
+            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal({{$category->id}})"><i class="far fa-trash-alt"></i> Delete</button>
             <!-- {{route('removeCategory', ['id' => $category->id])}} -->
           </td>
         </tr>
@@ -77,9 +77,8 @@
 <script>
 checkPage('categories');
 
-function clickModal(category) {
-  console.log(category.attributes['data-whatever'].value);
-  document.getElementById('id').value = category.attributes['data-whatever'].value;
+function clickModal(id) {
+  document.getElementById('id').value = id;
 }
 
 </script>
