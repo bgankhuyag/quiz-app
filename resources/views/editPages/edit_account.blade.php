@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="email" class="col-sm-2 col-form-label">Email<span class="red">*</span></label>
+      <label for="email" class="col-sm-2 col-form-label">Email Address<span class="red">*</span></label>
       <div class="col-sm-10">
         <input type="email" class="form-control" name="email" id="email" value="{{Auth::guard('web')->user()->email}}" placeholder="example@example.com" required>
       </div>
