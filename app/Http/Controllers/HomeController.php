@@ -126,13 +126,13 @@ class HomeController extends Controller
 
 
 
-    public function removeUser($id) {
-      $user = User::firstWhere('id', $id);
-      $selecteds = Selected::where('users_id', $id)->get();
+    public function removeUser(Request $request) {
+      $user = User::firstWhere('id', $request->id);
+      $selecteds = Selected::where('users_id', $request->id)->get();
       if (count($selecteds) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
-      $points = Points::where('users_id', $id)->get();
+      $points = Points::where('users_id', $request->id)->get();
       if (count($points) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Points']);
       }
@@ -174,9 +174,9 @@ class HomeController extends Controller
       return redirect()->route('category');
     }
 
-    public function removeSubcategory($id) {
-      $sub_category = SubCategories::firstWhere('id', $id);
-      $questions = Questions::where('sub_categories_id', $id)->get();
+    public function removeSubcategory(Request $request) {
+      $sub_category = SubCategories::firstWhere('id', $request->id);
+      $questions = Questions::where('sub_categories_id', $request->id)->get();
       if (count($questions) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Questions']);
       }
@@ -188,19 +188,19 @@ class HomeController extends Controller
 
     }
 
-    public function removePoint($id) {
-      $point = Points::firstWhere('id', $id);
+    public function removePoint(Request $request) {
+      $point = Points::firstWhere('id', $request->id);
       $point->delete();
       return redirect()->route('points');
     }
 
-    public function removeOption($id) {
-      $option = Options::firstWhere('id', $id);
-      $selecteds = Selected::where('options_id', $id)->get();
+    public function removeOption(Request $request) {
+      $option = Options::firstWhere('id', $request->id);
+      $selecteds = Selected::where('options_id', $request->id)->get();
       if (count($selecteds) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
-      $questions = Questions::where('correct_option_id', $id)->get();
+      $questions = Questions::where('correct_option_id', $request->id)->get();
       if (count($questions) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Questions']);
       }
@@ -208,9 +208,9 @@ class HomeController extends Controller
       return redirect()->route('option');
     }
 
-    public function removeQuestion($id) {
-      $question = Questions::firstWhere('id', $id);
-      $selecteds = Selected::where('questions_id', $id)->get();
+    public function removeQuestion(Request $request) {
+      $question = Questions::firstWhere('id', $request->id);
+      $selecteds = Selected::where('questions_id', $request->id)->get();
       if (count($selecteds) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Selected Options']);
       }
@@ -219,7 +219,7 @@ class HomeController extends Controller
         // $image_path = public_path('images/') . $question->getRawOriginal('image');
         // unlink($image_path);
       }
-      $options = Options::where('questions_id', $id)->get();
+      $options = Options::where('questions_id', $request->id)->get();
       foreach ($options as $option) {
         $option->delete();
       }
@@ -227,9 +227,9 @@ class HomeController extends Controller
       return redirect()->route('question');
     }
 
-    public function removeRole($id) {
-      $role = Roles::firstWhere('id', $id);
-      $users = User::where('roles_id', $id)->get();
+    public function removeRole(Request $request) {
+      $role = Roles::firstWhere('id', $request->id);
+      $users = User::where('roles_id', $request->id)->get();
       if (count($users) > 0) {
         return redirect()->back()->withErrors(['Unable to delete row: foreign key contraint in Users']);
       }
@@ -237,8 +237,8 @@ class HomeController extends Controller
       return redirect()->route('role');
     }
 
-    public function removeSelected($id) {
-      $selected = Selected::firstWhere('id', $id);
+    public function removeSelected(Request $request) {
+      $selected = Selected::firstWhere('id', $request->id);
       $selected->delete();
       return redirect()->route('selected');
     }
@@ -346,7 +346,7 @@ class HomeController extends Controller
         'option' => 'required|string',
       ]);
       if($validator->fails()){
-        return redirect()->back()->withErrors($validator->errors());
+        return redirect()->back()->withInput()->withErrors($validator->errors());
       }
       $option = Options::firstWhere('id', $id);
       $option->questions_id = $request->question_id;

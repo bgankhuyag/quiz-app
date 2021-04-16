@@ -90,6 +90,14 @@ class QuizController extends Controller
       return response()->json($result);
     }
 
+    public function leaderboard($id) {
+      $points = Points::where('categories_id', $id)->orderBy('points', 'desc')->join('users', 'points.users_id', '=', 'users.id')->take(5)->get(['name', 'points.id', 'points']);
+      // dd("here");
+      $user_point = Points::where('categories_id', $id)->where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->first(['name', 'points.id', 'points']);
+      $result = ['data' => $points, 'user' => $user_point];
+      return response()->json($result);
+    }
+
     public function addCategories(Request $request) {
       $validator = Validator::make($request->all(), [
         // 'question' => 'required|string|between:1,255',
