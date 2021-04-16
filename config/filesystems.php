@@ -49,8 +49,8 @@ return [
             'region' => 'ap-southeast-1',
             // 'bucket' => env('AWS_BUCKET', 'quiz-app-files-images'),
             'bucket' => 'quiz-app-files-images',
-            'url' => env('AWS_URL'),
-            // 'url' => 'http://s3.amazonaws.com/quiz-app-files-images',
+            // 'url' => env('AWS_URL'),
+            'url' => 'http://quiz-app-files-images.s3.amazonaws.com',
             // 'endpoint' => env('AWS_ENDPOINT'),
             'curl.options' => [
                 CURLOPT_CONNECTTIMEOUT => 5,
