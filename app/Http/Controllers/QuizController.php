@@ -90,9 +90,16 @@ class QuizController extends Controller
       return response()->json($result);
     }
 
-    public function leaderboard($id) {
+    public function leaderboard(Request $request, $id) {
       $points = Points::where('categories_id', $id)->orderBy('points', 'desc')->join('users', 'points.users_id', '=', 'users.id')->take(5)->get(['name', 'points.id', 'points']);
       $user_point = Points::where('categories_id', $id)->where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->first(['name', 'points.id', 'points']);
+      $result = ['data' => $points, 'user' => $user_point];
+      return response()->json($result);
+    }
+
+    public function total(Request $request) {
+      $points = Points::join('users', 'points.users_id', '=', 'users.id')->groupBy('users_id')->selectRaw('users_id, name, sum(points) as total')->get();
+      $user_point = Points::where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->sum('points');
       $result = ['data' => $points, 'user' => $user_point];
       return response()->json($result);
     }
