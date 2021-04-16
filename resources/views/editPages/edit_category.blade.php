@@ -23,7 +23,7 @@
     </div>
     <div>
       @if(!$new && !empty($category->image))
-        <img src="{{$category->image}}" width="100" style="margin-right: 20px;">
+        <img src="{{$category->image}}" width="150" style="margin-bottom: 10px;">
       @endif
       <div class="form-group">
         <label for="image">Choose Image</label>
