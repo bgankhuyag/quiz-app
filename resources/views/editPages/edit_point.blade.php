@@ -37,7 +37,7 @@
       <label for="point">Point</label>
       <input type="number" name="point" class="form-control" min="0" @if(!$new) value="{{$point->points}}" @endif id="point" aria-describedby="emailHelp" placeholder="Enter Point">
     </div>
-    <button style="margin-bottom: 40px;" type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Point</button>
+    <button style="margin-bottom: 40px;" type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Save @endif Point</button>
   </form>
 </div>
 

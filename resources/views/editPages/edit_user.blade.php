@@ -43,7 +43,7 @@
       <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" aria-describedby="emailHelp" placeholder="Enter Password">
     </div>
     @endif
-    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Answer</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Save @endif User</button>
   </form>
 </div>
 

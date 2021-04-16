@@ -21,7 +21,7 @@
       <label for="role">Role</label>
       <input type="text" name="role" class="form-control" @if(!$new) value="{{$role->role}}" @endif id="role" aria-describedby="emailHelp" placeholder="Enter Role">
     </div>
-    <button style="margin-bottom: 40px;" type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Role</button>
+    <button style="margin-bottom: 40px;" type="submit" class="btn btn-primary btn-sm float-right">@if($new) Add @else Save @endif Role</button>
   </form>
 </div>
 

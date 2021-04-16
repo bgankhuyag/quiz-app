@@ -29,7 +29,7 @@
       <label for="option">Option</label>
       <input type="text" name="option" class="form-control" @if(!$new) value="{{$option->option}}" @endif id="option" aria-describedby="emailHelp" placeholder="Enter Option">
     </div>
-    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add Option @else Edit Option @endif</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add Option @else Save Option @endif</button>
   </form>
 </div>
 

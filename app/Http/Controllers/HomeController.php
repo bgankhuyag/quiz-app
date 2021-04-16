@@ -499,11 +499,14 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $point = new Points;
-      $point->categories_id = $request->category_id;
-      $point->users_id = $request->user_id;
-      $point->points = $request->point;
-      $point->save();
+      $point = Points::updateOrCreate(
+        ['users_id' => $request->user_id, 'categories_id' => $request->category_id],
+        ['points' => $request->point]
+      );
+      // $point->categories_id = $request->category_id;
+      // $point->users_id = $request->user_id;
+      // $point->points = $request->point;
+      // $point->save();
       return redirect()->route('points');
     }
 
@@ -579,11 +582,14 @@ class HomeController extends Controller
       if($validator->fails()){
         return redirect()->back()->withErrors($validator->errors());
       }
-      $selected = new Selected;
-      $selected->questions_id = $request->question_id;
-      $selected->options_id = $request->option_id;
-      $selected->users_id = $request->user_id;
-      $selected->save();
+      $selected = Selected::updateOrCreate(
+        ['users_id' => $request->user_id, 'questions_id' => $request->question_id],
+        ['options_id' => $request->option_id]
+      );
+      // $selected->questions_id = $request->question_id;
+      // $selected->options_id = $request->option_id;
+      // $selected->users_id = $request->user_id;
+      // $selected->save();
       return redirect()->route('selected');
     }
 

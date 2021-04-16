@@ -41,7 +41,7 @@
         @endforeach
       </select>
     </div>
-    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Question</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Save @endif Selected</button>
   </form>
 </div>
 

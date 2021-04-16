@@ -29,7 +29,7 @@
       <label for="subcategory">Sub-Category</label>
       <input type="text" name="subcategory" class="form-control" @if (!$new) value="{{$sub_category->sub_category}}" @endif id="subcategory" aria-describedby="emailHelp" placeholder="Enter Sub-Category">
     </div>
-    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Edit @endif Answer</button>
+    <button type="submit" style="margin-bottom: 40px;" class="btn btn-primary btn-sm float-right">@if($new) Add @else Save @endif Sub-Category</button>
   </form>
 </div>
 @endsection
