@@ -124,7 +124,7 @@ function checkPage(page) {
         <nav id="links-navbar" class="navbar navbar-expand-lg navbar-light">
           <a class="navbar-brand" href="#"></a>
           <button class="navbar-toggler hidden-lg-up" style="border: none;" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="btn btn-outline-secondary">Tables&nbsp;<i class="fas fa-chevron-down"></i></span>
+            <span class="btn btn-secondary">Tables&nbsp;<i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <div class="links" style="display: block;">
