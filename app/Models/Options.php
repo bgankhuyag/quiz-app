@@ -14,7 +14,7 @@ class Options extends Model
 
     protected $guarded = ['id'];
 
-    public function answer() {
-      return $this->hasOne(Answers::class);
+    public function question() {
+      return $this->belongsTo(Questions::class, 'questions_id');
     }
 }

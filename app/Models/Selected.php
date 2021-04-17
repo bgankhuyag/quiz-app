@@ -18,4 +18,12 @@ class Selected extends Model
     public function question() {
       return $this->belongsTo(Questions::class, 'questions_id');
     }
+
+    public function user() {
+      return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function option() {
+      return $this->belongsTo(Options::class, 'options_id');
+    }
 }

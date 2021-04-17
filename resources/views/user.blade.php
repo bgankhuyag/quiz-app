@@ -18,7 +18,7 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Role ID</th>
+          <th scope="col">Role</th>
           <th></th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
           <td>{{$user->id}}</td>
           <td>{{$user->name}}</td>
           <td>{{$user->email}}</td>
-          <td>{{$user->roles_id}}</td>
+          <td>{{$user->role->role}}</td>
           <td class="float-right">
             <a href="{{route('editUserPage', ['id' => $user->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
             <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal({{$user->id}})"><i class="far fa-trash-alt"></i> Delete</button>
@@ -40,7 +40,7 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">Role ID</th>
+        <th scope="col">Role</th>
         <th></th>
       </tr>
     </table>

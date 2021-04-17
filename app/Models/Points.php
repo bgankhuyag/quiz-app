@@ -11,4 +11,12 @@ class Points extends Model
     protected $table = 'points';
 
     protected $fillable = ['users_id', 'points', 'categories_id'];
+
+    public function user() {
+      return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function category() {
+      return $this->belongsTo(Categories::class, 'categories_id');
+    }
 }

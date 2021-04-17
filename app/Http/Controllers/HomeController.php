@@ -74,7 +74,7 @@ class HomeController extends Controller
     }
 
     public function user() {
-      $users = User::paginate(10);
+      $users = User::with('role')->paginate(10);
       return view('user', ['users' => $users]);
     }
 
@@ -94,17 +94,17 @@ class HomeController extends Controller
     }
 
     public function points() {
-      $points = Points::paginate(10);
+      $points = Points::with('user', 'category')->paginate(10);
       return view('points', ['points' => $points]);
     }
 
     public function option() {
-      $options = Options::paginate(10);
+      $options = Options::with('question')->paginate(10);
       return view('option', ['options' => $options]);
     }
 
     public function question() {
-      $questions = Questions::paginate(10);
+      $questions = Questions::with('category', 'subcategory', 'correct_option')->paginate(10);
       return view('question', ['questions' => $questions]);
     }
 
@@ -114,12 +114,13 @@ class HomeController extends Controller
     }
 
     public function selected() {
-      $selecteds = Selected::paginate(10);
+      $selecteds = Selected::with('question.category', 'user', 'option')->paginate(10);
       return view('selected', ['selecteds' => $selecteds]);
     }
 
     public function subcategory() {
-      $sub_categories = SubCategories::paginate(10);
+      $sub_categories = SubCategories::with('category')->paginate(10);
+      // dd($sub_categories);
       return view('subcategory', ['sub_categories' => $sub_categories]);
     }
 

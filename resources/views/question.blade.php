@@ -16,12 +16,12 @@
     <thead>
       <tr>
         <th scope="col-sm-1">ID</th>
-        <th scope="col">Question</th>
-        <th scope="col-sm-1">Category ID</th>
-        <th scope="col-sm-1">Sub Category ID</th>
-        <th scope="col-sm-1">Correct Option ID</th>
+        <th scope="col" style="min-width: 300px;">Question</th>
+        <th scope="col-sm-1">Category</th>
+        <th scope="col-sm-1">Sub Category</th>
+        <th scope="col-sm-1" style="min-width: 150px;">Correct Option</th>
         <th scope="col">Image</th>
-        <th></th>
+        <th style="min-width: 140px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -29,10 +29,14 @@
       <tr>
         <td>{{$question->id}}</td>
         <td>{{$question->question}}</td>
-        <td>{{$question->categories_id}}</td>
-        <td>{{$question->sub_categories_id}}</td>
-        <td>{{$question->correct_option_id}}</td>
-        <td>{{$question->getRawOriginal('image')}}</td>
+        <td>{{$question->category->category}}</td>
+        @if ($question->subcategory)
+          <td>{{$question->subcategory->sub_category}}</td>
+        @else
+          <td></td>
+        @endif
+        <td>{{$question->correct_option->option}}</td>
+        <td><img src="{{$question->image}}" width="100"></td>
         <td class="float-right">
           <a href="{{route('editQuestionPage', ['id' => $question->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
           <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal({{$question->id}})"><i class="far fa-trash-alt"></i> Delete</button>
@@ -43,9 +47,9 @@
     <tr>
       <th>ID</th>
       <th>Question</th>
-      <th>Category ID</th>
-      <th>Sub Category ID</th>
-      <th>Correct Option ID</th>
+      <th>Category</th>
+      <th>Sub Category</th>
+      <th>Correct Option</th>
       <th>Image</th>
       <th></th>
     </tr>

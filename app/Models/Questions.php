@@ -43,4 +43,8 @@ class Questions extends Model
     public function subcategory() {
       return $this->belongsTo(SubCategories::class, 'sub_categories_id');
     }
+
+    public function correct_option() {
+      return $this->belongsTo(Options::class, 'correct_option_id');
+    }
 }

@@ -16,19 +16,21 @@
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">User ID</th>
-          <th scope="col">Question ID</th>
-          <th scope="col">Option ID</th>
-          <th></th>
+          <th scope="col">User</th>
+          <th scope="col" style="min-width: 300px;">Question</th>
+          <th scope="col">Category</th>
+          <th scope="col" style="min-width: 200px;">Selected Option</th>
+          <th style="min-width: 140px;"></th>
         </tr>
       </thead>
       <tbody>
         @foreach($selecteds as $selected)
         <tr>
           <td>{{$selected->id}}</td>
-          <td>{{$selected->users_id}}</td>
-          <td>{{$selected->questions_id}}</td>
-          <td>{{$selected->options_id}}</td>
+          <td>{{$selected->user->email}}</td>
+          <td>{{$selected->question->question}}</td>
+          <td>{{$selected->question->category->category}}</td>
+          <td>{{$selected->option->option}}</td>
           <td class="float-right">
             <a href="{{route('editSelectedPage', ['id' => $selected->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
             <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal({{$selected->id}})"><i class="far fa-trash-alt"></i> Delete</button>
@@ -38,9 +40,10 @@
       </tbody>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">User ID</th>
-        <th scope="col">Question ID</th>
-        <th scope="col">Option ID</th>
+        <th scope="col">User</th>
+        <th scope="col">Question</th>
+        <th scope="col">Category</th>
+        <th scope="col">Selected Option</th>
         <th></th>
       </tr>
     </table>

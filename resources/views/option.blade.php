@@ -17,8 +17,9 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Question ID</th>
-          <th scope="col">Option</th>
-          <th></th>
+          <th scope="col" style="min-width: 300px;">Question</th>
+          <th scope="col" style="min-width: 200px;">Option</th>
+          <th style="min-width: 140px;"></th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
         <tr>
           <td>{{$option->id}}</td>
           <td>{{$option->questions_id}}</td>
+          <td>{{$option->question->question}}</td>
           <td>{{$option->option}}</td>
           <td class="float-right">
             <a href="{{route('editOptionPage', ['id' => $option->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
@@ -37,6 +39,7 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Question ID</th>
+        <th scope="col">Question</th>
         <th scope="col">Option</th>
         <th></th>
       </tr>

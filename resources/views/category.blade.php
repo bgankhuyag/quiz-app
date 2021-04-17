@@ -26,7 +26,7 @@
         <tr>
           <td>{{$category->id}}</td>
           <td>{{$category->category}}</td>
-          <td>{{$category->getRawOriginal('image')}}</td>
+          <td><img src="{{$category->image}}" width="50"></td>
           <td class="float-right">
             <a href="{{route('editCategoryPage', ['id' => $category->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
             <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" onclick="clickModal({{$category->id}})"><i class="far fa-trash-alt"></i> Delete</button>

@@ -1,6 +1,7 @@
 .links{
-  float: left;
-  width: 300px;
+  /* float: left; */
+  width: 250px;
+  margin: auto;
   margin-top: 20px;
 }
 
@@ -13,7 +14,7 @@
 @media only screen and (min-width: 1800px) {
   #links-navbar{
     float: left;
-    width: 300px;
+    width: calc((100vw - 1140px)/2);
     margin: auto;
   }
 }
@@ -39,6 +40,7 @@
   }
   .links{
     width: 15vw;
+    margin: auto;
   }
 }
 
@@ -58,13 +60,4 @@ a{
   text-align: center;
   font-size: 1.75rem;
   margin-bottom: 20px;
-}
-
-.collapsing {
-  position: relative;
-  height: 0;
-  overflow: hidden;
-  -webkit-transition: height .35s ease;
-       -o-transition: height .35s ease;
-          transition: height .35s ease;
 }

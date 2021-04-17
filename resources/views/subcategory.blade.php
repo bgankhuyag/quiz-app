@@ -16,7 +16,7 @@
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">Category ID</th>
+          <th scope="col">Category</th>
           <th scope="col">Sub-Category</th>
           <th></th>
         </tr>
@@ -25,7 +25,7 @@
         @foreach($sub_categories as $sub_category)
         <tr>
           <td>{{$sub_category->id}}</td>
-          <td>{{$sub_category->categories_id}}</td>
+          <td>{{$sub_category->category->category}}</td>
           <td>{{$sub_category->sub_category}}</td>
           <td class="float-right">
             <a href="{{route('editSubcategoryPage', ['id' => $sub_category->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
@@ -36,7 +36,7 @@
       </tbody>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Category ID</th>
+        <th scope="col">Category</th>
         <th scope="col">Sub-Category</th>
         <th></th>
       </tr>

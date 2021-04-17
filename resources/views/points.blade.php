@@ -16,18 +16,20 @@
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">User ID</th>
-          <th scope="col">Category ID</th>
+          <th scope="col">User Name</th>
+          <th scope="col">User Email</th>
+          <th scope="col">Category</th>
           <th scope="col">Point</th>
-          <th></th>
+          <th style="min-width: 140px;"></th>
         </tr>
       </thead>
       <tbody>
         @foreach($points as $point)
         <tr>
           <td>{{$point->id}}</td>
-          <td>{{$point->users_id}}</td>
-          <td>{{$point->categories_id}}</td>
+          <td>{{$point->user->name}}</td>
+          <td>{{$point->user->email}}</td>
+          <td>{{$point->category->category}}</td>
           <td>{{$point->points}}</td>
           <td class="float-right">
             <a href="{{route('editPointPage', ['id' => $point->id])}}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a>
@@ -38,8 +40,9 @@
       </tbody>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Category ID</th>
-        <th scope="col">Sub-Category</th>
+        <th scope="col">User Name</th>
+        <th scope="col">User Email</th>
+        <th scope="col">Category</th>
         <th scope="col">Point</th>
         <th></th>
       </tr>
