@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+: Account
+@endsection
+
 @section('content')
 <div class="container">
   <h3 style="margin-bottom:20px; display: inline-block; margin-right: 20px;">Account Information</h3>

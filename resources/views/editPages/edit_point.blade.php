@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+@if ($new)
+: Add Point
+@else
+: Edit Point
+@endif
+@endsection
+
 @section('content')
 <div class="container">
   @if($errors->any())

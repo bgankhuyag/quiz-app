@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+@if ($new)
+: Add Role
+@else
+: Edit Role
+@endif
+@endsection
+
 @section('content')
 <div class="container">
   @if($errors->any())

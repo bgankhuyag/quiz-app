@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-::Edit User
+@if ($new)
+: Add User
+@else
+: Edit User
+@endif
 @endsection
 
 @section('content')

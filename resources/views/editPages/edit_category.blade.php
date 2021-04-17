@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+@if ($new)
+: Add Category
+@else
+: Edit Category
+@endif
+@endsection
+
 @section('content')
 <div class="container">
   @if($errors->any())

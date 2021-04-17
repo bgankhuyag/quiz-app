@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+: Users
+@endsection
+
 @section('content')
 <div class="container">
   @if($errors->any())

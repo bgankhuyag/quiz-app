@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+@if ($new)
+: Add Selected Option
+@else
+: Edit Selected Option
+@endif
+@endsection
+
 @section('content')
 <div class="container">
   @if($errors->any())

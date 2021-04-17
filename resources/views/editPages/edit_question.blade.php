@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('title')
+@if ($new)
+: Add Question
+@else
+: Edit Question
+@endif
+@endsection
+
 @section('content')
 <div class="container">
   @if($errors->any())
@@ -19,7 +27,7 @@
     @endif
     <div class="form-group">
       <label for="question">Question</label>
-      <input type="text" name="question" class="form-control" @if(!$new) value="{{$question->question}}" @endif id="question" aria-describedby="emailHelp" placeholder="Enter Question">
+      <textarea name="question" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter Question" rows="3">@if(!$new) {{$question->question}} @endif</textarea>
     </div>
     <div class="form-group">
       <label for="category_id">Select Category ID</label>
