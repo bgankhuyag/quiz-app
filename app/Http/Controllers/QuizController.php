@@ -100,14 +100,15 @@ class QuizController extends Controller
     public function total(Request $request) {
       $points = Points::join('users', 'points.users_id', '=', 'users.id')->groupBy('users_id')->selectRaw('users_id, name, sum(points) as total')->orderBy('total', 'desc')->take(5)->get();
       $user_point = Points::where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->selectRaw('users_id, name, sum(points) as total')->get();
+      $all_points = Points::groupBy('users_id')->selectRaw('users_id, sum(points) as total')->orderBy('total', 'desc')->get();
       $rank = 1;
-      foreach ($points as $point) {
+      foreach ($all_points as $point) {
         if ($point->users_id == auth()->id()) {
           break;
         }
         $rank++;
       }
-      if ($rank > sizeof($points)) {
+      if ($rank > sizeof($all_points)) {
         $rank = "unranked";
       }
       // echo(gettype((array)$points));
