@@ -93,7 +93,7 @@ class QuizController extends Controller
     public function leaderboard(Request $request, $id) {
       $points = Points::where('categories_id', $id)->orderBy('points', 'desc')->join('users', 'points.users_id', '=', 'users.id')->take(5)->get(['name', 'points.id', 'points']);
       $user_point = Points::where('categories_id', $id)->where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->get(['users_id', 'name', 'points.id', 'points']);
-      $all_points = Points::where('categories_id', $id)->orderBy('points', 'desc')->join('users', 'points.users_id', '=', 'users.id')->get(['name', 'points.id', 'points']);
+      $all_points = Points::where('categories_id', $id)->orderBy('points', 'desc')->join('users', 'points.users_id', '=', 'users.id')->get(['users_id']);
       $rank = 1;
       foreach ($all_points as $point) {
         if ($point->users_id == auth()->id()) {
