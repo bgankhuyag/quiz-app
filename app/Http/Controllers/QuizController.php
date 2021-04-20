@@ -95,7 +95,7 @@ class QuizController extends Controller
       $user_point = Points::where('categories_id', $id)->where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->get(['users_id', 'name', 'points.id', 'points']);
       if ($user_point == null) {
         // $user_point = [{'users_id' => auth()->id(), 'points' => 0}];
-        $user_point[] = (object) array('users_id' => auth()->id(), 'points' => 0)
+        $user_point[] = (object) array('users_id' => auth()->id(), 'points' => 0);
       }
       $result = ['data' => $points, 'user' => $user_point];
       return response()->json($result);
