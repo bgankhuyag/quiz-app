@@ -115,6 +115,9 @@ class QuizController extends Controller
       $points = Points::join('users', 'points.users_id', '=', 'users.id')->groupBy('users_id')->selectRaw('users_id, name, sum(points) as points')->orderBy('points', 'desc')->take(5)->get();
       $user_point = Points::where('users_id', auth()->id())->join('users', 'points.users_id', '=', 'users.id')->selectRaw('users_id, name, sum(points) as points')->get();
       $all_points = Points::groupBy('users_id')->selectRaw('users_id, sum(points) as total')->orderBy('total', 'desc')->get();
+      // $json = json_encode($user_rank);
+      // $user_rank = json_decode($json);
+      // $position = array_search(auth()->id(), array_column($user_rank, 'id'));
       $rank = 1;
       foreach ($all_points as $point) {
         if ($point->users_id == auth()->id()) {
